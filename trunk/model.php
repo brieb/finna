@@ -32,6 +32,8 @@ class DBO
     {
         $sth = $this->dbh->prepare($sql);
 	$res = $sth->execute($data);
+	if (strtolower(substr($sql,0,6))=="select")
+	    return $sth->fetchAll();
         return $res;
     }
     

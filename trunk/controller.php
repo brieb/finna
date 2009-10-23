@@ -33,6 +33,11 @@ class AppController
     {
         set('page_title','First Finna page');
     }
+
+    public function courses()
+    {
+        set('courses',$this->Course->getCourses());
+    }
     
 }
 
