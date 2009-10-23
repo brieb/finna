@@ -2,7 +2,7 @@
 
 class AppController
 {
-    public $uses = array('Trip','Place');
+    public $uses = array('Course');
     public $config = null;
     /*
      *   Load the models
