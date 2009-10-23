@@ -35,7 +35,7 @@ function dispatch($url)
 	}
 
     } catch (Exception $e) {
-        $stack_trace = $e->getFile().' on line '.$e->getLine().'<br>'.Debug::parseTrace($e->getTrace());
+        $stack_trace = $e->getFile().' on line '.$e->getLine().'<br>';
         if ($config->isAjax){
             global $json;
             $json['msg'] = 'Initialization Error: '.$e->getMessage();
@@ -44,8 +44,7 @@ function dispatch($url)
             $json['stack_trace'] = $stack_trace;
             echo json_encode($json);
         } else {
-	    //Debug::toFile('('.$e->getCode().') '.$e->getMessage());
-            header('Location: '.ROOT_URL);
+	    echo '('.$e->getCode().') '.$e->getMessage();
             exit;
         }
     }
