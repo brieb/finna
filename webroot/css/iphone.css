@@ -1,0 +1,115 @@
+
+/* Quickie Reset */
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-family: Helvetica;
+}
+
+#header, #footer {
+	position: relative;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 44px;
+	z-index: 200;
+}
+/* Header */
+#header h1 {
+	color: #fff;
+	text-shadow: rgba(0, 0, 0, 0.6) 0px -1px 0px;
+	font-size: 20px;
+	text-align: center;
+	line-height: 44px;
+background-image: -webkit-gradient(linear, left top, left bottom, from(#b0bccd), color-stop(0.5,#889bb3), color-stop(0.5,#8195AF), to(#6d84A2));
+}
+
+/* Footer */
+#footer {
+	background-image: -webkit-gradient(linear, 25% 70%, 100% 100%,	from(#572f0c), to(#f78632) );
+background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e), color-stop(0.5,#151515), color-stop(0.5,#000), to(#000));
+	position: absolute;
+	top: 500px;
+	height: 59px;
+	background-position: center bottom;
+}
+
+#content {
+	position: relative;
+}
+
+
+#footer ul {
+	margin: 0 auto;
+	padding: 3px 0 0;
+	list-style: none;
+	display: block;
+	height: 56px;
+	width: 320px;
+	text-align: center;
+	overflow: hidden;
+}
+
+#footer li {
+	margin: 0 2px;
+	float: left;
+	position: relative;
+}
+
+#footer li.active {
+	border: 3px solid;
+	border-width: 0 3px;
+	-webkit-border-image: url("/finna/img/footer-hover.png") 0 3;
+}
+
+#footer span {
+	padding: 39px 3px 3px;
+	float: left;
+	width: 70px;
+	color: #bbb;
+	font-weight: bold;
+	font-size: 10px;
+	text-decoration: none;
+	background: url("/finna/img/footer-buttons-gray.png") no-repeat -2px -50px;
+}
+
+#footer li.active span {
+	padding-left: 0;
+	padding-right: 0;
+	color: #fff;
+}
+
+#footer .due.active span {
+	background-position: -5px top;
+}
+
+#footer .priority span {
+	background-position: -66px -50px;
+}
+
+#footer .priority.active span {
+	background-position: -69px top;
+}
+
+#footer .courses span {
+	background-position: -130px -50px;
+}
+
+#footer .courses.active span {
+	background-position: -133px top;
+}
+
+#footer .trash span {
+	background-position: -194px -50px;
+}
+
+#footer .trash.active span {
+	background-position: -197px top;
+}
+
+/* Container */
+#container {
+	height: 304px;
+}
