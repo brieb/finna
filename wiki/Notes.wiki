@@ -1,0 +1,3 @@
+#summary A page to keep track of general progress, ideas, and issues.
+
+Hi guys! Thought a wiki page would be a convenient place to discuss new ideas, keep track of project todo, etc.
