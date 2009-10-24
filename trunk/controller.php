@@ -36,7 +36,7 @@ class AppController
 
     public function courses()
     {
-        set('courses',$this->Course->getCourses());
+        set('courses',$this->Course->findCoursesByNumber('%CS 14%'));
     }
     
 }
