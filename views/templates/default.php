@@ -7,43 +7,82 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="viewport" content="user-scalable=false,initial-scale=1.0" />
 <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<!--
+
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript"> google.load("jquery", "1.3.2"); </script>
-    <script src="jqtouch/jqtouch.min.js" type="application/x-javascript" charset="utf-8"></script>
-    <style type="text/css" media="screen">@import "jqtouch/jqtouch.min.css";</style>
-    <style type="text/css" media="screen">@import "themes/jqt/theme.min.css";</style>-->
-    
-<!--    <script src="jquery.js" type="text/javascript" charset="utf-8"></script>
-	<script src="jqt/jqtouch.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" charset="utf-8">
-		jQT = new $.jQTouch();
-	</script>-->
-<!--	<style type="text/css" media="screen">@import "jqt/jqtouch.css";</style>
-	<style type="text/css" media="screen">@import "jqt/theme.css";</style>-->
-	
+
 
 
 <script src="js/fixed.js" type="text/javascript" charset="utf-8"></script>
+
+<style>
+
+#container {
+	min-height: 600px;
+	width: 320px;
+	overflow: hidden;
+}
+
+
+#due-content {
+	-webkit-transition: left 0.5s ease;
+	position: absolute;
+	left: 10px;
+	width: 310px;
+	height: 500px;
+}
+
+#priority-content {
+	position: absolute;
+	left: 10px;
+	-webkit-transition: left 0.5s ease;
+}
+
+#due-content.hidden {
+	left: -330px;
+}
+
+#priority-content.hidden {
+	left: 330px;
+	width: 320px;
+}
+</style>
+
+<script>
+    function setupTouchEvents() {
+        var listEntries = document.getElementsByTagName('li');
+        var currentPage = 1;
+        
+        var onTouchEnd = function(){
+            this.className = "";                
+            if (currentPage == 1) {
+                document.getElementById('due-content').className = "hidden";
+                document.getElementById('priority-content').className = "";
+                currentPage = 2;
+            } else {
+                document.getElementById('due-content').className = "";
+                document.getElementById('priority-content').className = "hidden";
+                currentPage = 1;
+            }
+        }
+        for(var i = 0; i < listEntries.length; i++){
+            listEntries[i].addEventListener("touchend", onTouchEnd, true); 
+        }
+    }
+</script>
+
 
 <link rel="stylesheet" type="text/css" href="css/iphone.css">
 
 
 </head>
 
-<body onload="Load()" style="margin:0px; width:320px;" onorientationchange="updateOrientation()">
+
+<body onload='setupTouchEvents()' style="margin:0px; width:320px;" onorientationchange="updateOrientation()">
 
 <div id="debug" style="position:absolute; z-index:999; top:0; left:0;
   background:black; color:white; display:none;"></div>
   
-<script type="text/javascript">
-function Load(){
-    jQT.addAnimation({
-        name: 'slideback',
-        selector: '.slideback'
-    });
-}
-</script>
 
 <div id="header">
 	<ul>
@@ -55,8 +94,8 @@ function Load(){
 		<div id="container">
 			<div id="content">
 			       <!-- <?php require_once $view ?>-->
-				<div id="due_content">
-					<ul class="edgetoedge slideback">
+				<div id="due-content">
+					<ul>
 						<li class="sep">Overdue</li>
 						<li>A1</li>
 						<li>A2</li>
@@ -65,8 +104,8 @@ function Load(){
 						<li>A4</li>
 					</ul>
 				</div>
-				<div id="priority_content">
-					<ul class="edgetoedge slideback">
+				<div id="priority-content" class="hidden">
+					<ul>
 						<li class="sep">High</li>
 						<li>A1</li>
 						<li>A2</li>
@@ -84,7 +123,7 @@ function Load(){
 						<li>A6</li>
 					</ul>
 				</div>
-				<div id="course_content">
+				<div id="course_content" class="hidden">
 					<ul class="edgetoedge slideback">
 						<li class="sep">CS147</li>
 						<li>A1</li>
@@ -94,7 +133,7 @@ function Load(){
 						<li>A4</li>
 					</ul>
 				</div>
-				<div id="done_content">
+				<div id="done_content" class="hidden">
 					<ul class="edgetoedge slideback">
 						<li>A1</li>
 						<li>A2</li>
