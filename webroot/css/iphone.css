@@ -25,6 +25,38 @@
 	line-height: 44px;
 background-image: -webkit-gradient(linear, left top, left bottom, from(#b0bccd), color-stop(0.5,#889bb3), color-stop(0.5,#8195AF), to(#6d84A2));
 }
+#header{
+background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e), color-stop(0.5,#151515), color-stop(0.5,#000), to(#000));
+}
+#header li{
+	-webkit-border-radius:8px;-webkit-box-shadow:rgba(0,0,0,.3) 1px 1px 3px;
+	margin-top: 2px;
+	width: 43%;
+	text-align: center;
+	color:#666;
+	border-top:1px solid #333;
+	border-bottom:#555858;
+	list-style-type:none;
+	padding:10px 10px 10px 10px;
+	background:-webkit-gradient(linear,0% 0,0% 100%,from(#4c4d4e),to(#404142));
+	overflow:hidden;
+}
+#assignments_tab{
+	float: left;
+	position: absolute;
+}
+/*#assignments_tab.active{
+	color: #fffeff;
+}*/
+#courses_tab{
+	float: right;
+}
+/*#courses_tab.active{
+	color: #fffeff;
+}*/
+#header li.active{
+	color: #fffeff;
+}
 
 /* Footer */
 #footer {
@@ -38,6 +70,19 @@ background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e),
 
 #content {
 	position: relative;
+}
+
+#due_content{
+	display: block;
+}
+#priority_content{
+	display: none;
+}
+#course_content{
+	display: none;
+}
+#done_content{
+	display: none;
 }
 
 
@@ -113,3 +158,42 @@ background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e),
 #container {
 	height: 304px;
 }
+
+
+    /*.reveal.in {
+        -webkit-animation-name: dontmove;
+        z-index: 0;
+    }
+
+    .reveal.out {
+        -webkit-animation-name: revealout;
+        z-index: 10;
+    }
+
+    .reveal.out.reverse {
+        z-index: 0;
+        -webkit-animation-name: dontmove;
+    }
+
+    .reveal.in.reverse {
+        z-index: 10;
+        -webkit-animation-name: revealin;
+    }
+
+
+    @-webkit-keyframes revealin {
+        from { -webkit-transform: translateX(100%); }
+        to { -webkit-transform: translateX(0); }
+    }
+
+    @-webkit-keyframes revealout {
+        from { -webkit-transform: translateX(0); }
+        to { -webkit-transform: translateX(100%); }
+    }*/
+    
+.slideback.in{ 
+	-webkit-animation-name: slideinfromleft;
+}
+.slideback.out                  { -webkit-animation-name: slideouttoright; }
+.slideback.in.reverse   { -webkit-animation-name: slideouttoright; }
+.slideback.out.reverse  { -webkit-animation-name: slideinfromleft; }

@@ -309,6 +309,42 @@ window.iPhone = window.iPhone || {};
 						
 						// Add active to self
 						$i.utils.addClass(this, "active");
+						
+				switch(this.id){
+					case "duedate_sort":
+						//display selected division, hide others
+						$("#due_content").css("display", "block");
+						$("#priority_content").css("display", "none");
+						$("#course_content").css("display", "none");
+						$("#done_content").css("display", "none");
+					break;
+					case "priority_sort":
+						//display selected division, hide others
+						$("#priority_content").css("display", "block");
+						$("#due_content").css("display", "none");
+						$("#course_content").css("display", "none");
+						$("#done_content").css("display", "none");
+					break;
+					case "course_sort":
+						//display selected division, hide others
+						$("#course_content").css("display", "block");
+						$("#due_content").css("display", "none");
+						$("#priority_content").css("display", "none");
+						$("#done_content").css("display", "none");
+					break;
+					case "done_sort":
+						//display selected division, hide others
+						$("#done_content").css("display", "block");
+						$("#due_content").css("display", "none");
+						$("#priority_content").css("display", "none");
+						$("#course_content").css("display", "none");
+					break;
+				}
+				//alert(e.target.id);
+				return false;			
+						
+						
+						
 					}, false);
 				}
 			}
