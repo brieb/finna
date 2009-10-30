@@ -39,7 +39,8 @@ window.iPhone = window.iPhone || {};
 
 				var debug = document.querySelector("#debug");
 				document.querySelector("#footer").style.top = (window.innerHeight-58)+"px";
-				document.querySelector("#container").style.height = (window.innerHeight-46*2)+"px";
+				$("#container").css('height', (window.innerHeight-102)+"px");
+				$("#content").css('min-height', (window.innerHeight-102)+"px");
 			}, 0);
 		},
 		
@@ -247,7 +248,8 @@ window.iPhone = window.iPhone || {};
 					var posY = parseFloat(this.style.top);
 					
 					// Set boundary
-					var boundary = (container.offsetHeight - this.offsetHeight);
+					var boundary = container.offsetHeight - this.offsetHeight;
+					//alert(container.offsetHeight+" "+this.offsetHeight);
 					//document.querySelector("#debug").innerHTML = boundary+this.id+posY;
 						
 					// Make sure y does not exceed boundaries
@@ -257,8 +259,6 @@ window.iPhone = window.iPhone || {};
 						
 						// Scroll to 0
 						$i.utils.scrollToY(0);
-					} else if (posY <= boundary){
-					        $i.utils.scrollToY(boundary);
 					} else {
 						
 						// Do all the math
@@ -309,98 +309,43 @@ window.iPhone = window.iPhone || {};
 						
 						// Add active to self
 						$i.utils.addClass(this, "active");
-						
-				switch(this.id){
-					case "duedate_sort":
-						//display selected division, hide others
-						$("#due_content").css("display", "block");
-						$("#priority_content").css("display", "none");
-						$("#course_content").css("display", "none");
-						$("#done_content").css("display", "none");
-					break;
-					case "priority_sort":
-						//display selected division, hide others
-						$("#priority_content").css("display", "block");
-						$("#due_content").css("display", "none");
-						$("#course_content").css("display", "none");
-						$("#done_content").css("display", "none");
-					break;
-					case "course_sort":
-						//display selected division, hide others
-						$("#course_content").css("display", "block");
-						$("#due_content").css("display", "none");
-						$("#priority_content").css("display", "none");
-						$("#done_content").css("display", "none");
-					break;
-					case "done_sort":
-						//display selected division, hide others
-						$("#done_content").css("display", "block");
-						$("#due_content").css("display", "none");
-						$("#priority_content").css("display", "none");
-						$("#course_content").css("display", "none");
-					break;
-				}
-				//alert(e.target.id);
-				return false;			
-						
+							
+						switch(this.id){
+							case "duedate-sort":
+            				    currentPage = $("#due-content");
+								currentPage.css("display", "block");
+								$("#priority-content").css("display", "none");
+								$("#course-content").css("display", "none");
+								$("#done-content").css("display", "none");
+							break;
+							case "priority-sort":
+            				    currentPage = $("#priority-content");
+								currentPage.css("display", "block");
+								$("#due-content").css("display", "none");
+								$("#course-content").css("display", "none");
+								$("#done-content").css("display", "none");
+							break;
+							case "course-sort":
+            				    currentPage = $("#course-content");
+								currentPage.css("display", "block");
+								$("#due-content").css("display", "none");
+								$("#priority-content").css("display", "none");
+								$("#done-content").css("display", "none");
+							break;
+							case "done-sort":
+            				    currentPage = $("#done-content");
+								currentPage.css("display", "block");
+								$("#due-content").css("display", "none");
+								$("#priority-content").css("display", "none");
+								$("#course-content").css("display", "none");
+							break;
+						}
+						//alert(e.target.id);
+						return false;			
 						
 						
 					}, false);
 				}
-			}
-		},
-		
-		// Links need special treatment so as not to interfere with scroll
-		enableLinksOnTap : function() {
-			
-			// Target nodes
-			var items = document.querySelectorAll("#content ul li");
-			for (var i = 0, j = items.length; i < j; i++) {
-				var item = items[i];
-				
-				// On touch
-				item.addEventListener("touchstart", function(e) {
-					var _this = this;
-					
-					// Add active class after a short timeout
-					// (timeout removes interference with scroll)
-					this.timeout = setTimeout(function() {
-						$i.utils.addClass(_this, "active");
-					}, 150);
-					
-					// Prevent default
-					e.preventDefault();
-				}, false);
-				
-				// On finger scroll
-				item.addEventListener("touchmove", function(e) {
-					
-					// Clear timeout
-					clearTimeout(this.timeout);
-					
-					// Remove active class
-					$i.utils.removeClass(this, "active");
-					
-					// User has canceled event
-					this.cancel = true;
-				}, false);
-				
-				// On finger up
-				item.addEventListener("touchend", function(e) {
-					
-					// If event has not been canceled
-					if (!this.cancel) {
-						
-						// Remove active class
-						$i.utils.removeClass(this, "active");
-						
-						// Go to URL
-						location.href = this.getElementsByTagName("span")[0].getAttribute("rel");
-					}
-					
-					// Reset flag
-					this.cancel = false;
-				}, false);
 			}
 		}
 	};

@@ -1,4 +1,9 @@
 
+.hidden {
+	display: none;
+}
+
+
 /* Quickie Reset */
 * {
 	margin: 0;
@@ -153,47 +158,3 @@ background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e),
 #footer .trash.active span {
 	background-position: -197px top;
 }
-
-/* Container */
-#container {
-	height: 304px;
-}
-
-
-    /*.reveal.in {
-        -webkit-animation-name: dontmove;
-        z-index: 0;
-    }
-
-    .reveal.out {
-        -webkit-animation-name: revealout;
-        z-index: 10;
-    }
-
-    .reveal.out.reverse {
-        z-index: 0;
-        -webkit-animation-name: dontmove;
-    }
-
-    .reveal.in.reverse {
-        z-index: 10;
-        -webkit-animation-name: revealin;
-    }
-
-
-    @-webkit-keyframes revealin {
-        from { -webkit-transform: translateX(100%); }
-        to { -webkit-transform: translateX(0); }
-    }
-
-    @-webkit-keyframes revealout {
-        from { -webkit-transform: translateX(0); }
-        to { -webkit-transform: translateX(100%); }
-    }*/
-    
-.slideback.in{ 
-	-webkit-animation-name: slideinfromleft;
-}
-.slideback.out                  { -webkit-animation-name: slideouttoright; }
-.slideback.in.reverse   { -webkit-animation-name: slideouttoright; }
-.slideback.out.reverse  { -webkit-animation-name: slideinfromleft; }
