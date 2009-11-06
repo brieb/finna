@@ -50,43 +50,6 @@
     var currentPage;
     var prevPage;
         
-    function setupTouchEvents() {
-    	currentPage = $('#due-content');
-        
-        var onTouchEnd = function(){
-            var loc = this.getAttribute('loc');
-            if (loc=="BACK"){
-            	loc = prevPage;
-            } else {
-            	loc = $('#'+loc);
-            }
-            
-            loc.removeClass("hidden");
-            currentPage.addClass("hidden");
-            if (currentPage.hasClass("parent-page")){
-            	$('#header').addClass("hidden");
-            	$('#footer').addClass("hidden");
-            	
-				$("#container").css('top', "-"+$('#header').height()+"px");
-				$("#container").css('height', (window.innerHeight)+"px");
-				$("#content").css('min-height', (window.innerHeight)+"px");
-            }
-            prevPage = currentPage;
-            currentPage = loc;
-            
-            if (currentPage.hasClass("parent-page")){
-            	$('#header').removeClass("hidden");
-            	$('#footer').removeClass("hidden");
-				$("#container").css('top', "0px");
-				$("#container").css('height', (window.innerHeight-102)+"px");
-				$("#content").css('min-height', (window.innerHeight-102)+"px");
-            }
-        }
-        var listEntries = $('a[loc]');
-        for(var i = 0; i < listEntries.length; i++){
-            listEntries[i].addEventListener("touchend", onTouchEnd, true); 
-        }
-    }
 </script>
 
 
@@ -94,7 +57,7 @@
 </head>
 
 
-<body onload='setupTouchEvents()' style="margin:0px; width:320px;" onorientationchange="updateOrientation()">
+<body style="margin:0px; width:320px;" onorientationchange="updateOrientation()">
 
 	<div id="debug" style="position:absolute; z-index:999; top:0; left:0;
 	  background:black; color:white; display:none;"></div>
@@ -108,11 +71,12 @@
 	</div> 
 
 	<div id="container" style="border:0px solid red; overflow:hidden;">
-		<div id="content" style="margin:0px;">
+		<div id="content" style="margin:0px; background-color:rgba(200,200,100,.2);">
 		       <!-- <?php require_once $view ?>-->
 		       
 			<div id="due-content" class="parent-page" style="background-color:#ffd; display:block;">
 				<a class="link" loc="task-info">Sort by due</a>
+			        <img src="img/iDo.png"/>
 			</div>
 			
 			<div id="priority-content" class="parent-page" style="display:none;  background-color:#fdd;">

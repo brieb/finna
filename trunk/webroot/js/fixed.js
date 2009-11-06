@@ -6,6 +6,8 @@ window.iPhone = window.iPhone || {};
 	// Local shorthand variable
 	var $i = this;
 
+	var menuHeights = 102;
+
 	// Shared variables
 	$i.vars = {};
 
@@ -130,6 +132,41 @@ window.iPhone = window.iPhone || {};
 			// Point to the updateOrientation function when iPhone switches between portrait and landscape modes.
 			$i.utils.updateOrientation();
 			window.addEventListener("orientationchange", $i.utils.updateOrientation, false);
+
+			currentPage = $('#due-content');
+        
+			var onTouchEnd = function(){
+			  var loc = this.getAttribute('loc');
+			  if (loc=="BACK"){
+			    loc = prevPage;
+			  } else {
+			    loc = $('#'+loc);
+			  }
+			
+			  loc.removeClass("hidden");
+			  currentPage.addClass("hidden");
+			  if (currentPage.hasClass("parent-page")){
+			    $('#header').addClass("hidden");
+			    $('#footer').addClass("hidden");
+			    $("#container").css('top', "-"+$('#header').height()+"px");
+			    $("#container").css('height', (window.innerHeight)+"px");
+			    $("#content").css('min-height', (window.innerHeight)+"px");
+			  }
+			  prevPage = currentPage;
+			  currentPage = loc;
+            
+			  if (currentPage.hasClass("parent-page")){
+			    $('#header').removeClass("hidden");
+			    $('#footer').removeClass("hidden");
+			    $("#container").css('top', "0px");
+			    $("#container").css('height', (window.innerHeight-menuHeights)+"px");
+			    $("#content").css('min-height', (window.innerHeight-menuHeights)+"px");
+			  }
+			}
+			var listEntries = $('a[loc]');
+			for(var i = 0; i < listEntries.length; i++){
+			  listEntries[i].addEventListener("touchend", onTouchEnd, true); 
+			}
 		}
 	};
 	
@@ -174,6 +211,7 @@ window.iPhone = window.iPhone || {};
 				// Scroll on finger drag
 				content.addEventListener("touchmove", function(e) {
 					
+					scrolling = true;
 					// Current Y-point
 					var posY = e.touches[0].pageY;
 					
@@ -237,6 +275,7 @@ window.iPhone = window.iPhone || {};
 				
 				// Ease movement when finger is removed
 				content.addEventListener("touchend", function(e) {
+				    setTimeout("scrolling = false;",100);
 					
 					// Log current Y-point
 					endY = e.changedTouches[0].clientY;
@@ -248,12 +287,16 @@ window.iPhone = window.iPhone || {};
 					var posY = parseFloat(this.style.top);
 					
 					// Set boundary
-					var boundary = container.offsetHeight - this.offsetHeight;
-					//alert(container.offsetHeight+" "+this.offsetHeight);
-					//document.querySelector("#debug").innerHTML = boundary+this.id+posY;
-						
-					// Make sure y does not exceed boundaries
-					
+					//alert(currentPage.attr('id') + currentPage.height());
+					//var scrollContent = document.querySelector("#due-content");
+					var contentHeight;
+					if (currentPage.hasClass("parent-page")){
+					  contentHeight = currentPage.height() > window.innerHeight-menuHeights ? currentPage.height() : window.innerHeight-menuHeights;
+					} else {
+					  contentHeight = currentPage.height() > window.innerHeight ? currentPage.height() : window.innerHeight;
+					}
+					var boundary = container.offsetHeight - contentHeight;
+
 					// If offset is greater than 0
 					if (posY > 0) {
 						
@@ -312,35 +355,36 @@ window.iPhone = window.iPhone || {};
 							
 						switch(this.id){
 							case "duedate-sort":
-            				    currentPage = $("#due-content");
+							        currentPage = $("#due-content");
 								currentPage.css("display", "block");
 								$("#priority-content").css("display", "none");
 								$("#course-content").css("display", "none");
 								$("#done-content").css("display", "none");
 							break;
 							case "priority-sort":
-            				    currentPage = $("#priority-content");
+							        currentPage = $("#priority-content");
 								currentPage.css("display", "block");
 								$("#due-content").css("display", "none");
 								$("#course-content").css("display", "none");
 								$("#done-content").css("display", "none");
 							break;
 							case "course-sort":
-            				    currentPage = $("#course-content");
+							        currentPage = $("#course-content");
 								currentPage.css("display", "block");
 								$("#due-content").css("display", "none");
 								$("#priority-content").css("display", "none");
 								$("#done-content").css("display", "none");
 							break;
 							case "done-sort":
-            				    currentPage = $("#done-content");
+							        currentPage = $("#done-content");
 								currentPage.css("display", "block");
 								$("#due-content").css("display", "none");
 								$("#priority-content").css("display", "none");
 								$("#course-content").css("display", "none");
 							break;
 						}
-						//alert(e.target.id);
+
+						content.style.top = "0px";
 						return false;			
 						
 						
@@ -352,5 +396,6 @@ window.iPhone = window.iPhone || {};
 	
 	// Fire on load
 	window.addEventListener("load", $i.init, false);
+	scrollRef = $i;
 	
 }).call(window.iPhone); // Initialize
