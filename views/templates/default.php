@@ -52,6 +52,97 @@
         
 </script>
 
+<style>
+
+body {
+    margin: 0px;
+    font-family: Helvetica;
+    opacity: 1;
+    background-repeat: no-repeat;
+    //background-image: url(img/wallpaper.jpg);
+    background-position: 0% 0%;
+}
+
+#assignmentsNavTab, #coursesNavTab {
+    border-left-width: 12px;
+    border-right-width: 12px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    -webkit-margin-top-collapse: separate;
+    -webkit-margin-bottom-collapse: separate;
+    position: relative;
+    height: 35px;
+    margin-top: 5px;
+    width: 133px;
+    margin-right: 1px;
+    margin-left: 2px;
+    -webkit-border-image: url(img/navTab.png) 0 12 0 12 stretch stretch;
+}
+
+#coursesNavTab {
+    opacity: 0.5;
+}
+
+#columnLayout {
+    display: table;
+    overflow: hidden;
+    -webkit-margin-top-collapse: separate;
+    -webkit-margin-bottom-collapse: separate;
+    margin-top: 0px;
+    position: absolute;
+    bottom: 420px;
+    height: 40px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+}
+
+#text8, #text7 {
+    color: black;
+    font-family: Helvetica;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    position: relative;
+    margin-left: 0px;
+    -webkit-margin-top-collapse: separate;
+    -webkit-margin-bottom-collapse: separate;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 0px;
+    margin-top: 6px;
+    width: auto;
+    min-height: 21px;
+    height: auto;
+}
+
+.selected #text8 {
+    color: white;
+}
+
+.selected #text7 {
+    color: white;
+}
+</style>
+
+
+<script>
+function switchToAssignmentsView (){
+    $('#assignments').css('display','block');
+    $('#courses').css('display','none');
+    $('#coursesNavTab').css('opacity','0.5');
+    $('#assignmentsNavTab').css('opacity','1');
+}
+
+function switchToCoursesView (){
+    $('#assignments').css('display','none');
+    $('#courses').css('display','block');
+    $('#coursesNavTab').css('opacity','1');
+    $('#assignmentsNavTab').css('opacity','0.5');
+}
+</script>
+
 
 <link rel="stylesheet" type="text/css" href="css/iphone.css">
 </head>
@@ -61,22 +152,34 @@
 
 	<div id="debug" style="position:absolute; z-index:999; top:0; left:0;
 	  background:black; color:white; display:none;"></div>
-	  
+
+	  <div id="wallpaper">
 	
 	<div id="header">
-		<ul>
-			<li id="assignments_tab" class="active">Assignments</li>
-			<li id="courses_tab">Courses</li>
-		</ul>
+	  
+	<div id="columnLayout">
+        <div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 51%; "><div id="assign_col">
+                <div id="assignmentsNavTab" class="navTab" onclick="switchToAssignmentsView()">
+                    <div id="text7">Assignments</div>
+                </div>
+            </div>
+	</div>
+	<div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 49%; "><div id="courses_col">
+                <div id="coursesNavTab" class="navTab" onclick="switchToCoursesView()">
+                    <div id="text8">Courses</div>
+                </div>
+            </div>
+	</div>
+	</div>
 	</div> 
 
 	<div id="container" style="border:0px solid red; overflow:hidden;">
-		<div id="content" style="margin:0px; background-color:rgba(200,200,100,.2);">
+		<div id="content" style="margin:0px;">
 		       <!-- <?php require_once $view ?>-->
+		    <div id="assignments">
 		       
 			<div id="due-content" class="parent-page" style="background-color:#ffd; display:block;">
 				<a class="link" loc="task-info">Sort by due</a>
-			        <img src="img/iDo.png"/>
 			</div>
 			
 			<div id="priority-content" class="parent-page" style="display:none;  background-color:#fdd;">
@@ -95,6 +198,16 @@
 				<a loc="BACK">My task information</a>
 			</div>
 			
+		    </div>
+	            <div id="courses">
+			<div id="course-list" class="parent-page" style="background-color:#dff;">
+				<a loc="course-info">course list</a>
+			</div>
+			
+			<div id="course-info" class="hidden" style="background-color:#ddf;">
+				<a loc="BACK">Course information</a>
+			</div>
+		    </div>
 			
 		</div>
 	</div>
@@ -106,6 +219,8 @@
 			<li class="courses" id="course-sort"><span>Courses</span></li>
 			<li class="trash" id="done-sort"><span>Trash</span></li>
 		</ul>
+	</div>
+
 	</div>
 	
 </body>
