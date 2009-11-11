@@ -8,39 +8,9 @@
 <meta name="viewport" content="user-scalable=false,initial-scale=1.0" />
 <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<link rel = "stylesheet" href = "css/EdgeToEdge.css" />
-
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript"> google.load("jquery", "1.3.2"); </script>
 <script src="js/fixed.js" type="text/javascript" charset="utf-8"></script>
-
-
-<script type="text/javascript">
-    var currentPage;
-    var prevPage;
-    
-    function switchToAssignmentsView (){
-        $('#assignments').removeClass('hidden');
-        $('#courses').addClass('hidden');
-        $('#add-course-button').addClass('hidden');
-        $('#assignment-sort-buttons').removeClass('hidden');
-        $('#coursesNavTab').css('opacity','0.5');
-        $('#assignmentsNavTab').css('opacity','1');
-        prevPage = currentPage;
-        currentPage = $('#due-content');
-    }
-    
-    function switchToCoursesView (){
-        $('#assignments').addClass('hidden');
-        $('#courses').removeClass('hidden');
-        $('#add-course-button').removeClass('hidden');
-        $('#assignment-sort-buttons').addClass('hidden');
-        $('#coursesNavTab').css('opacity','1');
-        $('#assignmentsNavTab').css('opacity','0.5');
-        prevPage = currentPage;
-        currentPage = $('#course-list');
-    }
-</script>
 
 <link rel="stylesheet" type="text/css" href="css/iphone.css">
 </head>
@@ -118,7 +88,7 @@
         		<div id="course-list" class="parent-page">
         		    <ul>
         		        <?php foreach ($userCourses as $course): ?>
-            			    <li loc="course-info" class="assignDetail_template">
+            			    <li loc="course-info-<?= $course['id'] ?>" id="course-li-<?= $course['id'] ?>" class="assignDetail_template">
                 			    <div class="row-selection-BG" style="position: absolute; right: 0pt; left: 0pt; top: 0pt; bottom: 0pt; opacity: 1; display:none;"></div>
                                 <div class="label_template">
                                     <?= $course['number'] ?>
@@ -129,16 +99,19 @@
         		    </ul>
         		</div>
         		
-        		<div id="course-info" class="hidden child-page" style="background-color:#ddf;">
-        			<a loc="BACK">Back</a>
-        			<h1>Course Title</h1>
-        			<h1 id="time">Time:</h1>
-        			<h2>MWF 11:00am-11:50am</h2>
-        			<h1 id="location">Location:</h1>
-        			<h2>Gates 100</h2>
-        			<h1>Office Hours:</h1>
-        		    <h2>TTh 3:00pm-4:30pm</h2>
-        		</div>
+		        <?php foreach ($userCourses as $course): ?>
+		        	<div id="course-info-<?= $course['id'] ?>" class="hidden child-page">
+		        	     <a loc="BACK" style="display:block; background:#248; color:white;">
+		        	     	Return to course list
+		        	     </a><br/>
+                         Number: <?= $course['number'] ?><br/><br/>
+                         Title: <?= $course['title'] ?><br/><br/>
+                         Description: <?= $course['description'] ?><br/><br/>
+                         <a onclick="dropUserCourse(<?= $course['id'] ?>)" style="display:block; background:#842; color:white;">
+		        	     	Drop course
+		        	     </a><br/>
+                    </div>
+		        <?php endforeach; ?>
         
         		<div id="add-course" class="hidden child-page">
         			<a loc="BACK">Back</a>
@@ -154,14 +127,26 @@
 	</div>
 
     <script type="text/javascript">
+    function dropUserCourse(id){
+    	$.getJSON("dropUserCourse", { cid: id }, function(json){
+        	if (json.result == "success"){
+                $("#course-li-"+json.courseId).remove();
+        	    gotoPage("BACK");
+        	} else {
+            	// failed
+        	}
+        });
+    }
+
     function addUserCourse(id){
     	$.getJSON("addUserCourse", { cid: id }, function(json){
         	if (json.result == "success"){
-                $("#add-course-results").html("course added");
+                $("#course-info").html("course added");
                 var template = $("#course-list-element-template").clone();
                 template.children(".label_template").html(json.course.number);
-        	
+        		
         	    $("#course-list ul").append(template);
+        	    gotoPage("BACK");
         	} else {
         	    $("#add-course-results").html("failed to add course");
         	}

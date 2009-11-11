@@ -56,6 +56,13 @@ class AppController
         echo json_encode( array("result"=>$result, "course"=>$this->Course->getCourse($_REQUEST['cid']) ) );
     }
 
+    public function dropUserCourse()
+    {
+        $result = "success";
+        $this->User->dropCourse(1, $_REQUEST['cid']);
+        echo json_encode( array("result"=>$result, "courseId"=>$_REQUEST['cid'] ) );
+    }
+
     public function courses()
     {
         set('courses',$this->Course->findCoursesByNumber('%CS 14%'));
