@@ -1,13 +1,45 @@
 // Set a namespace for our code
 window.iPhone = window.iPhone || {};
 
-	var scrolling = false;
+
+var currentPage;
+var prevPage;
+var scrolling = false;
+var gotoPage;
+
+function switchToAssignmentsView (){
+    $('#assignments').removeClass('hidden');
+    $('#courses').addClass('hidden');
+    $('#add-course-button').addClass('hidden');
+    $('#assignment-sort-buttons').removeClass('hidden');
+    $('#coursesNavTab').css('opacity','0.5');
+    $('#assignmentsNavTab').css('opacity','1');
+    prevPage = currentPage;
+    currentPage = $('#due-content');
+}
+
+function switchToCoursesView (){
+    $('#assignments').addClass('hidden');
+    $('#courses').removeClass('hidden');
+    $('#add-course-button').removeClass('hidden');
+    $('#assignment-sort-buttons').addClass('hidden');
+    $('#coursesNavTab').css('opacity','1');
+    $('#assignmentsNavTab').css('opacity','0.5');
+    prevPage = currentPage;
+    currentPage = $('#course-list');
+}
+
+
+
+
 (function() {
 
 	// Local shorthand variable
 	var $i = this;
 
 	var menuHeights = 102;
+	
+	$i.testit = "hello world";
 
 	// Shared variables
 	$i.vars = {};
@@ -143,49 +175,11 @@ window.iPhone = window.iPhone || {};
 			  }
 			  if (scrolling) return;
 			  var loc = this.getAttribute('loc');
-			  if (loc=="BACK"){
-			    loc = prevPage;
-			  } else {
-			    loc = $('#'+loc);
-			  }
-			
-			  loc.removeClass("hidden");
-			  currentPage.addClass("hidden");
-			  if (currentPage.hasClass("parent-page")){
-			    $('#header').addClass("hidden");
-			    $('#footer').addClass("hidden");
-			    var currentTop = currentPage.css('top');
-			    currentTop = currentTop.substr(0, currentTop.length-2);
-			    currentPage.css('top', currentTop+$('#header').height()+"px");
-			    loc.css('top', "0px");
-			    $("#container").css('top', "-"+$('#header').height()+"px");
-			    $("#container").css('height', (window.innerHeight)+"px");
-			    $("#content").css('min-height', (window.innerHeight)+"px");
-			  }
-			  prevPage = currentPage;
-			  currentPage = loc;
-            
-			  if (currentPage.hasClass("parent-page")){
-			    $('#header').removeClass("hidden");
-			    $('#footer').removeClass("hidden");
-			    var currentTop = currentPage.css('top');
-			    currentTop = currentTop.substr(0, currentTop.length-2);
-			    currentPage.css('top', (currentTop-$('#header').height())+"px");
-
-			    var prevTop = prevPage.css('top');
-			    prevTop = prevTop.substr(0, prevTop.length-2);
-			    prevPage.css('top', (prevTop-$('#header').height())+"px");
-			    $("#container").css('top', "0px");
-			    $("#container").css('height', (window.innerHeight-menuHeights)+"px");
-			    $("#content").css('min-height', (window.innerHeight-menuHeights)+"px");
-			  }
-			  
+			  $i.gotoPage(loc);
 			}
 
 			document.getElementById('assignmentsNavTab').onclick = switchToAssignmentsView;
 			document.getElementById('coursesNavTab').onclick = switchToCoursesView;
-			switchToCoursesView();
-
 
 			var onTouchStart = function(){
 			  $(this).addClass('selected');
@@ -204,6 +198,47 @@ window.iPhone = window.iPhone || {};
 			}
 		}
 	};
+	
+	
+	$i.gotoPage	= function (loc){
+	    if (loc=="BACK"){
+		    loc = prevPage;
+		} else {
+		    loc = $('#'+loc);
+		}
+		
+	    loc.removeClass("hidden");
+	    currentPage.addClass("hidden");
+	    if (currentPage.hasClass("parent-page")){
+			$('#header').addClass("hidden");
+			$('#footer').addClass("hidden");
+			var currentTop = currentPage.css('top');
+			currentTop = currentTop.substr(0, currentTop.length-2);
+			currentPage.css('top', currentTop+$('#header').height()+"px");
+			loc.css('top', "0px");
+			$("#container").css('top', "-"+$('#header').height()+"px");
+			$("#container").css('height', (window.innerHeight)+"px");
+			$("#content").css('min-height', (window.innerHeight)+"px");
+		}
+		prevPage = currentPage;
+		currentPage = loc;
+	  
+		if (currentPage.hasClass("parent-page")){
+			$('#header').removeClass("hidden");
+			$('#footer').removeClass("hidden");
+			var currentTop = currentPage.css('top');
+			currentTop = currentTop.substr(0, currentTop.length-2);
+			currentPage.css('top', (currentTop-$('#header').height())+"px");
+			
+			var prevTop = prevPage.css('top');
+			prevTop = prevTop.substr(0, prevTop.length-2);
+			prevPage.css('top', (prevTop-$('#header').height())+"px");
+			$("#container").css('top', "0px");
+			$("#container").css('height', (window.innerHeight-menuHeights)+"px");
+			$("#content").css('min-height', (window.innerHeight-menuHeights)+"px");
+	    }
+	};
+	gotoPage = $i.gotoPage;
 	
 	$i.onload = {
 		// Disable flick events
@@ -390,28 +425,28 @@ window.iPhone = window.iPhone || {};
 							
 						switch(this.id){
 							case "duedate-sort":
-							        currentPage = $("#due-content");
+							    currentPage = $("#due-content");
 								currentPage.css("display", "block");
 								$("#priority-content").css("display", "none");
 								$("#course-content").css("display", "none");
 								$("#done-content").css("display", "none");
 							break;
 							case "priority-sort":
-							        currentPage = $("#priority-content");
+							    currentPage = $("#priority-content");
 								currentPage.css("display", "block");
 								$("#due-content").css("display", "none");
 								$("#course-content").css("display", "none");
 								$("#done-content").css("display", "none");
 							break;
 							case "course-sort":
-							        currentPage = $("#course-content");
+							    currentPage = $("#course-content");
 								currentPage.css("display", "block");
 								$("#due-content").css("display", "none");
 								$("#priority-content").css("display", "none");
 								$("#done-content").css("display", "none");
 							break;
 							case "done-sort":
-							        currentPage = $("#done-content");
+							    currentPage = $("#done-content");
 								currentPage.css("display", "block");
 								$("#due-content").css("display", "none");
 								$("#priority-content").css("display", "none");
