@@ -8,6 +8,16 @@
 <meta name="viewport" content="user-scalable=false,initial-scale=1.0" />
 <meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
+<!-- <script id="DC_baseScript">if(navigator.userAgent.indexOf('AppleWebKit/') == -1) document.write('<base href="' + location.protocol + '//' + location.host + location.pathname.replace(/\/[^\/]*$/, '/mobile/') + '"/>')</script> -->
+<!-- <link rel="stylesheet" href="mobile/main.css">
+<link rel="stylesheet" type="text/css" href="Parts/Transitions.css">
+<script type="text/javascript" src="mobile/Parts/parts.js" charset="utf-8"></script>
+<script type="text/javascript" src="mobile/main.js" charset="utf-8"></script> -->
+
+
+<link rel = "stylesheet" href = "css/EdgeToEdge.css" />
+
+
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript"> google.load("jquery", "1.3.2"); </script>
 <script src="js/fixed.js" type="text/javascript" charset="utf-8"></script>
@@ -123,6 +133,34 @@ body {
 
 .selected #text7 {
     color: white;
+
+}
+
+.backButton {
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    text-shadow: rgba(0, 0, 0, 0.574219) 0px -1px 0px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 30px;
+    -webkit-dashboard-region: dashboard-region(control rectangle);
+    width: 70px;
+   /* position: absolute;*/
+    right: auto;
+    bottom: auto;
+    top: 7px;
+    left: 5px;
+	background-color: black;
+	padding: 2px;
+/*	background-image: url(img/backNavButton.png) no-repeat;
+	background-image: url(img/backNavButton__mid.png) repeat-x;
+	-webkit-background-size: 100% 100%;*/
+}
+ul{
+	list-style-type: none;
 }
 </style>
 
@@ -131,6 +169,9 @@ body {
 function switchToAssignmentsView (){
     $('#assignments').css('display','block');
     $('#courses').css('display','none');
+
+	// $("#course-list").css("display", "none");
+	
     $('#coursesNavTab').css('opacity','0.5');
     $('#assignmentsNavTab').css('opacity','1');
 }
@@ -139,8 +180,17 @@ function switchToCoursesView (){
     $('#assignments').css('display','none');
     $('#courses').css('display','block');
     $('#coursesNavTab').css('opacity','1');
+
+	// $("#course-list").css("display", "block");
+	
     $('#assignmentsNavTab').css('opacity','0.5');
 }
+
+// function switchToAssignmentsDetailView (){
+//     $('#assignments').css('display','none');
+//     $('#courses').css('display','none');
+// 	$('#assignmentsDetail').css('display','block');
+// }
 </script>
 
 
@@ -148,65 +198,144 @@ function switchToCoursesView (){
 </head>
 
 
-<body style="margin:0px; width:320px;" onorientationchange="updateOrientation()">
+<body style="margin:0px; width:320px;" onorientationchange="updateOrientation()" onload="load();">
 
 	<div id="debug" style="position:absolute; z-index:999; top:0; left:0;
 	  background:black; color:white; display:none;"></div>
 
-	  <div id="wallpaper">
+	<div id="wallpaper">
 	
 	<div id="header">
 	  
 	<div id="columnLayout">
-        <div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 51%; "><div id="assign_col">
+        <div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 51%; ">
+			<div id="assign_col">
                 <div id="assignmentsNavTab" class="navTab" onclick="switchToAssignmentsView()">
                     <div id="text7">Assignments</div>
                 </div>
             </div>
-	</div>
-	<div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 49%; "><div id="courses_col">
+		</div>
+		<div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 49%; ">
+			<div id="courses_col">
                 <div id="coursesNavTab" class="navTab" onclick="switchToCoursesView()">
                     <div id="text8">Courses</div>
                 </div>
-            </div>
+           </div>
+		</div>
 	</div>
-	</div>
+	
 	</div> 
 
 	<div id="container" style="border:0px solid red; overflow:hidden;">
 		<div id="content" style="margin:0px;">
 		       <!-- <?php require_once $view ?>-->
+		
 		    <div id="assignments">
 		       
-			<div id="due-content" class="parent-page" style="background-color:#ffd; display:block;">
-				<a class="link" loc="task-info">Sort by due</a>
+			<div id="due-content" class="parent-page list" style="background-color:#ffd; display:block;">
+				<ul>
+				    <li><a loc="task-info">Due Date Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+	            </ul>
 			</div>
 			
-			<div id="priority-content" class="parent-page" style="display:none;  background-color:#fdd;">
-				<a loc="task-info">testing 123</a>
+			<div id="priority-content" class="parent-page list" style="display:none;  background-color:#fdd;">
+				<ul>
+				    <li><a loc="task-info">Priority Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+	            </ul>
 			</div>
 			
-			<div id="course-content" class="parent-page" style="display:none; background-color:#dfd;">
-				<a loc="task-info">Course content</a>
+			<div id="course-content" class="parent-page list" style="display:none; background-color:#dfd;">
+				<ul>
+				    <li><a loc="task-info">Courses Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+	            </ul>
 			</div>
 			
-			<div id="done-content" class="parent-page" style="display:none; background-color:#dff;">
-				<a loc="task-info">Done content</a>
+			<div id="done-content" class="parent-page list" style="display:none; background-color:#dff;">
+				<ul>
+				    <li><a loc="task-info">Done Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+					<li><a loc="task-info">Assignment Label</a></li>
+	            </ul>
 			</div>
 			
-			<div id="task-info" class="hidden" style="background-color:#ddf;">
-				<a loc="BACK">My task information</a>
+			<div id="task-info" class="hidden" style="background-color:#dff;">
+				<a class="backButton" loc="BACK">Back</a>
+				<h1 id="titleText">Title:</h1>
+					<h2>Math 51 Problem Set</h2>
+				<h1 id="dueText">Due:</h1>
+					<h2>Monday 3pm</h2>
+				<ul id="priority">
+					<li>High</li>
+					<li>Normal</li>
+					<li>Low</li>
+				</ul>
+				<ul id="status">
+					<li>Complete</li>
+					<li>Incomplete</li>
+				</ul>
+				<ul>
+					<li>Announcements</li>
+					<li>Course Info</li>
+				</ul>
+				<div id="assignInfoBottomWindow" style="background-color:red;">
+					<div id="announce" style="display:block;">
+						Announcements Pane
+					</div>
+					<div id="course-info" style="display:none;">
+						Course Info Pane
+					</div>
+				</div>
+				
 			</div>
 			
-		    </div>
-	            <div id="courses">
-			<div id="course-list" class="parent-page" style="background-color:#dff;">
-				<a loc="course-info">course list</a>
-			</div>
+	       	<div id="courses">
+				
+				<div id="course-list" class="parent-page list" style="background-color:#dff;">
+					<ul>
+						<li><a loc="course-info">Course Label</a></li>
+						<li><a loc="course-info">Course Label</a></li>
+						<li><a loc="course-info">Course Label</a></li>
+						<li><a loc="course-info">Course Label</a></li>
+					</ul>
+				</div>
+	
+				<div id="course-info" class="hidden" style="background-color:#ddf;">
+					<a loc="BACK" class="backButton">Course information</a>
+					<h1>Course Title</h1>
+					<h1 id="time">Time:</h1>
+						<h2>MWF 11:00am-11:50am</h2>
+					<h1 id="location">Location:</h1>
+						<h2>Gates 100</h2>
+					<h1>Office Hours:</h1>
+						<h2>TTh 3:00pm-4:30pm</h2>
+					<ul>
+						<li>Announcements</li>
+						<li>Handouts</li>
+					</ul>
+					<div>
+						<div>
+							Announcements Content
+						</div>
+						<div>
+							Handouts Content
+						</div>
+					</div>
+				</div>
 			
-			<div id="course-info" class="hidden" style="background-color:#ddf;">
-				<a loc="BACK">Course information</a>
-			</div>
 		    </div>
 			
 		</div>

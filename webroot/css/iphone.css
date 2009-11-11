@@ -50,15 +50,9 @@ background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e),
 	float: left;
 	position: absolute;
 }
-/*#assignments_tab.active{
-	color: #fffeff;
-}*/
 #courses_tab{
 	float: right;
 }
-/*#courses_tab.active{
-	color: #fffeff;
-}*/
 #header li.active{
 	color: #fffeff;
 }
