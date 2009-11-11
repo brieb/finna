@@ -30,17 +30,17 @@ class AppController
     public function index()
     {
         set('page_title','First Finna page');
-	set('userCourses', $this->User->getCourses(1));
-	$assignments = $this->Assignment->getAssignments(1);
-	set('assignmentsByDue', $assignments);
-	$byPriority = Array( Array(), Array(), Array() );
-	foreach ($assignments as $assign){
-	  if ($assign['complete']==1) continue;
-	  $assign['complete'] =  0 | $assign['complete'];
-	  $assign['priority'] =  1 | $assign['priority'];
-	  $byPriority[$assign['priority']][] = $assign;
-	}
-	set('assignmentsByPriority', array_merge($byPriority[2],$byPriority[1],$byPriority[0]));
+    	set('userCourses', $this->User->getCourses(1));
+    	$assignments = $this->Assignment->getAssignments(1);
+    	set('assignmentsByDue', $assignments);
+    	$byPriority = Array( Array(), Array(), Array() );
+    	foreach ($assignments as $assign){
+            if ($assign['complete']==1) continue;
+            $assign['complete'] =  0 | $assign['complete'];
+            $assign['priority'] =  1 | $assign['priority'];
+            $byPriority[$assign['priority']][] = $assign;
+    	}
+    	set('assignmentsByPriority', array_merge($byPriority[2],$byPriority[1],$byPriority[0]));
 	
     }
 
@@ -51,9 +51,9 @@ class AppController
 
     public function addUserCourse()
     {
-      $result = "success";
-      $this->User->addCourse(1, $_REQUEST['cid']);
-      echo json_encode( array("result"=>$result, "course"=>$this->Course->getCourse($_REQUEST['cid']) ) );
+        $result = "success";
+        $this->User->addCourse(1, $_REQUEST['cid']);
+        echo json_encode( array("result"=>$result, "course"=>$this->Course->getCourse($_REQUEST['cid']) ) );
     }
 
     public function courses()
