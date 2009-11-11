@@ -45,16 +45,7 @@
 #task-info.hidden {
 	left: 330px;
 }
-</style>
 
-<script type="text/javascript">
-
-    var currentPage;
-    var prevPage;
-        
-</script>
-
-<style>
 
 body {
     margin: 0px;
@@ -128,19 +119,85 @@ body {
 
 }
 
-ul{
+#task-info li, #course-info li{
+	background-color: #4c4c4c;
+	display: inline;
 	list-style-type: none;
 }
+
+.titleText{
+	margin: 6px;
+	font-size: 20px;
+	color: white;
+	text-shadow: 0px 0px;
+	background-color: #000;
+	padding: 4px;
+	
+}
+
+.subTitleText{
+	font-size: 16px;
+	color: black;
+	text-shadow: 0px 0px;
+	background-color: white;
+	padding: 2px;
+	vertical-align: middle;
+}
+
+#task-info{
+	text-align: center;
+}
+
+#assignInfoBottomWindow{
+	background-color: white;
+	margin-right: auto;
+	margin-left: auto;
+	border-color: black;
+	border-style: solid;
+	border-width: 3px;
+	height: 300px;
+	width: 300px;
+}
+
+#tabBarAssignBottomWindow{
+	margin-right: auto;
+	margin-left: auto;
+	background-color: black;
+	width: 300px;
+	height: 40px;
+}
+
+#tabBarAssignBottomWindow li{
+	margin-top: 8px;
+	border-style: solid;
+	border-color: white;
+	border-width: 3px;
+	width: 140px;
+	background-color: black;
+	color: white;
+	display: inline-block;
+	list-style-type: none;
+}
+
+ul{
+	margin: 4px;
+}
+
 </style>
+
+<script type="text/javascript">
+
+    var currentPage;
+    var prevPage;
+        
+</script>
+
 
 
 <script>
 function switchToAssignmentsView (){
     $('#assignments').css('display','block');
     $('#courses').css('display','none');
-
-	// $("#course-list").css("display", "none");
-	
     $('#coursesNavTab').css('opacity','0.5');
     $('#assignmentsNavTab').css('opacity','1');
 }
@@ -149,17 +206,16 @@ function switchToCoursesView (){
     $('#assignments').css('display','none');
     $('#courses').css('display','block');
     $('#coursesNavTab').css('opacity','1');
-
-	// $("#course-list").css("display", "block");
-	
     $('#assignmentsNavTab').css('opacity','0.5');
 }
 
-// function switchToAssignmentsDetailView (){
-//     $('#assignments').css('display','none');
-//     $('#courses').css('display','none');
-// 	$('#assignmentsDetail').css('display','block');
-// }
+/*
+function switchToCourseDetailView(){
+	$('#course-info').css('display','block');
+	$('#courses').css('display','none');
+}
+*/
+
 </script>
 
 
@@ -200,74 +256,8 @@ function switchToCoursesView (){
 		       <!-- <?php require_once $view ?>-->
 		
 		    <div id="assignments">
-		       
-			<!--
-<div id="due-content" class="parent-page" style="background-color:#ffd; display:block;">
-				<a class="link" loc="task-info">Sort by due</a>
-			</div>
-			
-			<div id="priority-content" class="parent-page list" style="display:none;  background-color:#fdd;">
-				<ul>
-				    <li><a loc="task-info">Priority Assignment Label</a></li>
-					<li><a loc="task-info">Assignment Label</a></li>
-					<li><a loc="task-info">Assignment Label</a></li>
-					<li><a loc="task-info">Assignment Label</a></li>
-					<li><a loc="task-info">Assignment Label</a></li>
-	            </ul>
-			</div>
-			
-			<div id="course-content" class="parent-page list" style="display:none; background-color:#dfd;">
-				<ul>
-				    <li><a loc="task-info">Courses Assignment Label</a></li>
-					<li><a loc="task-info">Assignment Label</a></li>
-					<li><a loc="task-info">Assignment Label</a></li>
-					<li><a loc="task-info">Assignment Label</a></li>
-					<li><a loc="task-info">Assignment Label</a></li>
-	            </ul>
-			</div>
-			
-			<div id="done-content" class="parent-page list" style="display:none; background-color:#dff;">
-				<ul>
-				    <li><a loc="task-info">Done Assignment Label</a></li>
-					<li><a loc="task-info">Assignment Label</a></li>
-					<li><a loc="task-info">Assignment Label</a></li>
-					<li><a loc="task-info">Assignment Label</a></li>
-					<li><a loc="task-info">Assignment Label</a></li>
-	            </ul>
-			</div>
-			
-			<div id="task-info" class="hidden" style="background-color:#dff;">
-				<a class="backButton" loc="BACK">Back</a>
-				<h1 id="titleText">Title:</h1>
-					<h2>Math 51 Problem Set</h2>
-				<h1 id="dueText">Due:</h1>
-					<h2>Monday 3pm</h2>
-				<ul id="priority">
-					<li>High</li>
-					<li>Normal</li>
-					<li>Low</li>
-				</ul>
-				<ul id="status">
-					<li>Complete</li>
-					<li>Incomplete</li>
-				</ul>
-				<ul>
-					<li>Announcements</li>
-					<li>Course Info</li>
-				</ul>
-				<div id="assignInfoBottomWindow" style="background-color:red;">
-					<div id="announce" style="display:block;">
-						Announcements Pane
-					</div>
-					<div id="course-info" style="display:none;">
-						Course Info Pane
-					</div>
-				</div>
-				
-			</div>
--->
-
-<div id="due-content" class="parent-page list" style="background-color:#ffd; display:block;">
+		    
+			<div id="due-content" class="parent-page list" style="background-color:#ffd; display:block;">
 				<ul>
 				    <li><a loc="task-info">Due Date Assignment Label</a></li>
 					<li><a loc="task-info">Assignment Label</a></li>
@@ -309,36 +299,40 @@ function switchToCoursesView (){
 			
 			<div id="task-info" class="hidden" style="background-color:#dff;">
 				<a class="backButton" loc="BACK">Back</a>
-				<h1 id="titleText">Title:</h1>
-					<h2>Math 51 Problem Set</h2>
-				<h1 id="dueText">Due:</h1>
-					<h2>Monday 3pm</h2>
+				<div class="titleText">Title: <span class="subTitleText">Math 51 Problem Set</span></div>
+				<div class="titleText">Due:<span class="subTitleText">Monday 3pm</span></div>				
+			<div>
 				<ul id="priority">
-					<li>High</li>
-					<li>Normal</li>
-					<li>Low</li>
+					<li style="background-color:red;">High</li>
+					<li style="background-color:blue;">Normal</li>
+					<li style="background-color:green;">Low</li>
 				</ul>
+			</div>
+			<div>
 				<ul id="status">
 					<li>Complete</li>
 					<li>Incomplete</li>
 				</ul>
-				<ul>
+				<ul id="tabBarAssignBottomWindow">
 					<li>Announcements</li>
 					<li>Course Info</li>
 				</ul>
-				<div id="assignInfoBottomWindow" style="background-color:red;">
-					<div id="announce" style="display:block;">
+				<div id="assignInfoBottomWindow">
+					<div id="announcePane" style="display:block;">
 						Announcements Pane
 					</div>
-					<div id="course-info" style="display:none;">
+					<div id="coursePane" style="display:none;">
 						Course Info Pane
 					</div>
 				</div>
+			</div>
+				
 				
 			</div>
 			
 			
 		    </div>
+		    
 	            <div id="courses">
 			<div id="course-list" class="parent-page list" style="background-color:#dff;">
 				<ul>
@@ -349,7 +343,7 @@ function switchToCoursesView (){
 				</ul>
 			</div>
 			
-			<div id="course-info" class="hidden" style="background-color:#ddf;">
+			<div id="course-info" style="background-color:#ddf; display:none;">
 				<a loc="BACK">Course information</a>
 				<h1>Course Title</h1>
 					<h1 id="time">Time:</h1>
