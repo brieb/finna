@@ -1,4 +1,157 @@
 
+#container {
+	width: 320px;
+	position: relative;
+}
+
+div.parent-page, #header, #footer {
+	-webkit-transition: left 0.5s ease;
+	position: absolute;
+	display: block;
+	left: 0px;
+	width: 100%;
+}
+
+div.parent-page.hidden, #header.hidden, #footer.hidden {
+	left: -330px;
+}
+
+div.child-page {
+	-webkit-transition: left 0.5s ease;
+	position: absolute;
+	display: block;
+	left: 0px;
+	width: 100%;
+}
+
+#task-info.hidden, #course-info.hidden, div.child-page.hidden {
+	left: 330px;
+}
+
+
+body {
+    margin: 0px;
+    font-family: Helvetica;
+    opacity: 1;
+    background-repeat: no-repeat;
+    background-position: 0% 0%;
+}
+
+#assignmentsNavTab, #coursesNavTab {
+    border-left-width: 12px;
+    border-right-width: 12px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    -webkit-margin-top-collapse: separate;
+    -webkit-margin-bottom-collapse: separate;
+    position: relative;
+    height: 35px;
+    margin-top: 5px;
+    width: 133px;
+    margin-right: 1px;
+    margin-left: 2px;
+    -webkit-border-image: url(/finna/img/navTab.png) 0 12 0 12 stretch stretch;
+}
+
+#coursesNavTab {
+    opacity: 0.5;
+}
+
+#columnLayout {
+    display: table;
+    overflow: hidden;
+    -webkit-margin-top-collapse: separate;
+    -webkit-margin-bottom-collapse: separate;
+    margin-top: 0px;
+    position: absolute;
+    bottom: 420px;
+    height: 40px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+}
+
+.main-header-tab {
+    color: black;
+    font-family: Helvetica;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    position: relative;
+    margin-left: 0px;
+    -webkit-margin-top-collapse: separate;
+    -webkit-margin-bottom-collapse: separate;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 0px;
+    margin-top: 6px;
+    width: auto;
+    min-height: 21px;
+    height: auto;
+}
+
+
+.assignDetail_template {
+    position: relative;
+    list-style-type: none;
+    height: 47px;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(224, 224, 224);
+}
+
+.label_template {
+    position: absolute;
+    top: 12px;
+    height: 22px;
+    color: black;
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 20px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: auto;
+    right: 30px;
+    left: 10px;
+}
+
+.arrow_template {
+    position: absolute;
+    width: 8px;
+    height: 13px;
+    right: 11px;
+    top: 17px;
+    background-image: url(/finna/img/chevron.png);
+    background-repeat: no-repeat;
+}
+
+
+.assignDetail_template .row-selection-BG {
+    background-image: url(/finna/img/selectedRowiPhone.png);
+    background-repeat: initial;
+    background-attachment: initial;
+    -webkit-background-clip: initial;
+    -webkit-background-origin: initial;
+    background-color: rgb(38, 127, 239);
+    -webkit-background-size: 100% 100%;
+}
+
+.assignDetail_template.selected .label_template {
+    color: white;
+}
+
+.assignDetail_template.selected .arrow_template {
+    background-image: url(/finna/img/chevron_white.png);
+}
+
+
+
+
 .hidden {
 	display: none;
     top:0px;
