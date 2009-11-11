@@ -1,6 +1,7 @@
 // Set a namespace for our code
 window.iPhone = window.iPhone || {};
 
+	var scrolling = false;
 (function() {
 
 	// Local shorthand variable
@@ -136,6 +137,11 @@ window.iPhone = window.iPhone || {};
 			currentPage = $('#due-content');
         
 			var onTouchEnd = function(){
+			  if (this.tagName.toLowerCase()=='li'){
+			     $(this).removeClass('selected');
+			     $(this).children('.row-selection-BG').css('display','none');
+			  }
+			  if (scrolling) return;
 			  var loc = this.getAttribute('loc');
 			  if (loc=="BACK"){
 			    loc = prevPage;
@@ -148,6 +154,10 @@ window.iPhone = window.iPhone || {};
 			  if (currentPage.hasClass("parent-page")){
 			    $('#header').addClass("hidden");
 			    $('#footer').addClass("hidden");
+			    var currentTop = currentPage.css('top');
+			    currentTop = currentTop.substr(0, currentTop.length-2);
+			    currentPage.css('top', currentTop+$('#header').height()+"px");
+			    loc.css('top', "0px");
 			    $("#container").css('top', "-"+$('#header').height()+"px");
 			    $("#container").css('height', (window.innerHeight)+"px");
 			    $("#content").css('min-height', (window.innerHeight)+"px");
@@ -158,14 +168,39 @@ window.iPhone = window.iPhone || {};
 			  if (currentPage.hasClass("parent-page")){
 			    $('#header').removeClass("hidden");
 			    $('#footer').removeClass("hidden");
+			    var currentTop = currentPage.css('top');
+			    currentTop = currentTop.substr(0, currentTop.length-2);
+			    currentPage.css('top', (currentTop-$('#header').height())+"px");
+
+			    var prevTop = prevPage.css('top');
+			    prevTop = prevTop.substr(0, prevTop.length-2);
+			    prevPage.css('top', (prevTop-$('#header').height())+"px");
 			    $("#container").css('top', "0px");
 			    $("#container").css('height', (window.innerHeight-menuHeights)+"px");
 			    $("#content").css('min-height', (window.innerHeight-menuHeights)+"px");
 			  }
+			  
 			}
+
+			document.getElementById('assignmentsNavTab').onclick = switchToAssignmentsView;
+			document.getElementById('coursesNavTab').onclick = switchToCoursesView;
+			switchToCoursesView();
+
+
+			var onTouchStart = function(){
+			  $(this).addClass('selected');
+			  $(this).children('.row-selection-BG').css('display','block');
+			}
+
 			var listEntries = $('a[loc]');
 			for(var i = 0; i < listEntries.length; i++){
 			  listEntries[i].addEventListener("touchend", onTouchEnd, true); 
+			}
+
+			var listEntries = $('li[loc]');
+			for(var i = 0; i < listEntries.length; i++){
+			  listEntries[i].addEventListener("touchend", onTouchEnd, true);
+			  listEntries[i].addEventListener("touchstart", onTouchStart, true); 
 			}
 		}
 	};
