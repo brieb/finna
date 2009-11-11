@@ -1,8 +1,10 @@
 
 .hidden {
 	display: none;
+    top:0px;
 }
 
+.parent-page { top:0px; }
 
 /* Quickie Reset */
 * {
@@ -30,9 +32,11 @@
 	line-height: 44px;
 background-image: -webkit-gradient(linear, left top, left bottom, from(#b0bccd), color-stop(0.5,#889bb3), color-stop(0.5,#8195AF), to(#6d84A2));
 }
+
 #header{
 background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e), color-stop(0.5,#151515), color-stop(0.5,#000), to(#000));
 }
+
 #header li{
 	-webkit-border-radius:8px;-webkit-box-shadow:rgba(0,0,0,.3) 1px 1px 3px;
 	margin-top: 2px;
