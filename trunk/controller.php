@@ -63,9 +63,9 @@ class AppController
         echo json_encode( array("result"=>$result, "courseId"=>$_REQUEST['cid'] ) );
     }
 
-    public function courses()
+    public function login()
     {
-        set('courses',$this->Course->findCoursesByNumber('%CS 14%'));
+        
     }
     
 }
