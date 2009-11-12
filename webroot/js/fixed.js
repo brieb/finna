@@ -6,6 +6,7 @@ var currentPage;
 var prevPage;
 var scrolling = false;
 var gotoPage;
+var assignmentsViewPage;
 
 function switchToAssignmentsView (){
     $('#assignments').removeClass('hidden');
@@ -15,7 +16,7 @@ function switchToAssignmentsView (){
     $('#coursesNavTab').css('opacity','0.5');
     $('#assignmentsNavTab').css('opacity','1');
     prevPage = currentPage;
-    currentPage = $('#due-content');
+    currentPage = assignmentsViewPage;
 }
 
 function switchToCoursesView (){
@@ -26,6 +27,7 @@ function switchToCoursesView (){
     $('#coursesNavTab').css('opacity','1');
     $('#assignmentsNavTab').css('opacity','0.5');
     prevPage = currentPage;
+    assignmentsViewPage = currentPage;
     currentPage = $('#course-list');
 }
 
