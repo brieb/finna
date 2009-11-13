@@ -135,17 +135,17 @@
 			<div id="due-content" class="parent-page" style="display:block;">
                 <ul>
                     <?php foreach ($assignmentsByDue as $assignment): ?>
-                        <li loc="assignment-info-<?= $assignment['id'] ?>" header="assignment-header" class="assignDetail_template" style="font-family:Helvetica">
+                        <li loc="assignment-info-<?= $assignment['id'] ?>" header="assignment-header" class="scrollable" style="font-family:Helvetica">
                         	<div class="row-selection-BG">
                         	</div>
                             <img src="/finna/img/<?= $priorityImages[$assignment['priority']] ?>" style="position:absolute; <?= $priorityPositions[$assignment['priority']] ?>"/>
-                            <div style="position:absolute; top:6px; left:35px; font-weight:bold; font-size:16px; text-overflow:ellipsis;">
+                            <div class="li-assignment-name">
                                 <?= $assignment['title'] ?>
                             </div>
-            				<div style="position:absolute; top:26px; left:35px; font-size:15px; color:#444">
+            				<div class="li-course-number">
             					<?= $assignment['course_number'] ?>
             				</div>
-            				<div style="position:absolute; top:26px; right:35px; font-size:15px; color:#444">
+            				<div class="li-due-date">
             					Tue Apr 31
             				</div>
                             <div class="li-arrow-template"></div>
@@ -157,16 +157,22 @@
 			<div id="priority-content" class="parent-page" style="display:none;">
 			    <ul>
 			        <?php foreach ($assignmentsByPriority as $assignment): ?>
-        			    <li loc="assignment-info-<?= $assignment['id'] ?>" class="assignDetail_template">
-        			        <div class="row-selection-BG" style="position: absolute; right: 0pt; left: 0pt; top: 0pt; bottom: 0pt; opacity: 1; display:none;"></div>
-                            <div class="label_template">
-                                <a>
-                                    <?= $assignment['title'] ?>
-                                </a>
+                        <li loc="assignment-info-<?= $assignment['id'] ?>" header="assignment-header" class="scrollable" style="font-family:Helvetica">
+                        	<div class="row-selection-BG">
+                        	</div>
+                            <img src="/finna/img/<?= $priorityImages[$assignment['priority']] ?>" style="position:absolute; <?= $priorityPositions[$assignment['priority']] ?>"/>
+                            <div class="li-assignment-name">
+                                <?= $assignment['title'] ?>
                             </div>
-                            <div class="arrow_template"></div>
+            				<div class="li-course-number">
+            					<?= $assignment['course_number'] ?>
+            				</div>
+            				<div class="li-due-date">
+            					Tue Apr 31
+            				</div>
+                            <div class="li-arrow-template"></div>
                         </li>
-			        <?php endforeach; ?>
+                    <?php endforeach; ?>
 			    </ul>
 			</div>
 			
@@ -190,7 +196,7 @@
     		<div id="course-list" class="parent-page" style="display:none">
     		    <ul>
     		        <?php foreach ($userCourses as $course): ?>
-        			    <li loc="course-info-<?= $course['id'] ?>" header="course-header" id="course-li-<?= $course['id'] ?>" class="assignDetail_template">
+        			    <li loc="course-info-<?= $course['id'] ?>" header="course-header" id="course-li-<?= $course['id'] ?>" class="scrollable">
             			    <div class="row-selection-BG" style="position: absolute; right: 0pt; left: 0pt; top: 0pt; bottom: 0pt; opacity: 1; display:none;"></div>
                             <div class="label_template">
                                 <?= $course['number'] ?>
