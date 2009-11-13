@@ -38,7 +38,7 @@ class AppController
             if ($assign['complete']==1) continue;
             $byPriority[$assign['priority']][] = $assign;
     	}
-    	set('assignmentsByPriority', array_merge($byPriority[2],$byPriority[1],$byPriority[0]));
+    	set('assignmentsByPriority', array_merge($byPriority[3],$byPriority[2],$byPriority[1]));
 	
     }
 

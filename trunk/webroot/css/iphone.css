@@ -92,7 +92,7 @@ body {
 }
 
 
-.assignDetail_template {
+li.scrollable {
     position: relative;
     list-style-type: none;
     height: 47px;
@@ -131,7 +131,7 @@ body {
 }
 
 
-.assignDetail_template .row-selection-BG {
+li.scrollable .row-selection-BG {
     background-image: url(/finna/img/selectedRowiPhone.png);
     background-repeat: initial;
     background-attachment: initial;
@@ -144,12 +144,33 @@ body {
 	position: absolute; right: 0pt; left: 0pt; top: 0pt; bottom: 0pt; opacity: 1; display:none;
 }
 
-.assignDetail_template.selected .label_template {
+.li-assignment-name {
+	position:absolute; 
+	top:6px; 
+	left:35px; 
+	font-weight:bold; 
+	font-size:16px; 
+	text-overflow:ellipsis;
+}
+
+.li-course-number {
+	position:absolute; top:26px; left:35px; font-size:15px; color:#444;
+}
+
+.li-due-date {
+	position:absolute; top:26px; right:35px; font-size:15px; color:#444;
+}
+
+li.scrollable.selected {
     color: white;
 }
 
-.assignDetail_template.selected .arrow_template {
+li.scrollable.selected .arrow_template {
     background-image: url(/finna/img/chevron_white.png);
+}
+
+li.scrollable.selected .li-course-number, li.scrollable.selected .li-due-date {
+	color:white;
 }
 
 
