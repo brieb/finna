@@ -8,66 +8,6 @@
 
 
 <head>
-<style type="text/css">
-
-#task-info li {
-	display: inline;
-	list-style-type: none;
-}
-
-.title {
-  /* use absolute positioning and transforms as these will be subject to hardware transitions */
-  position: absolute;
-  -webkit-transform: translate(80px, 0px);
-  /* base metrics */
-  height: 31px;
-  margin-top: 3px;
-  /* the titles should be displayed below the button so that they don't receive touches */
-  z-index: 0;
-  /* set up the font appearance */
-  font-size: 16pt;
-  font-weight: bold;
-  color: white;
-  text-shadow: rgba(0, 0, 0, .6) 0px -1px 0px;
-  /* enfore trimming if the label is too long */
-  white-space : nowrap;
-  overflow : hidden;
-  text-overflow: ellipsis;
-}
-
-.navbutton {
-  /* use absolute positioning and transforms as these will be subject to hardware transitions */
-  position: absolute;
-  -webkit-transform: translate(250px, 6px);
-  /* the buttons should be displayed on top of the titles so that they can always receive touches */
-  z-index: 1;
-  /* set up the font appearance */
-  font-size: 12px;
-  font-weight: bold;
-  text-align: center;
-  color: white;
-  text-shadow: rgba(0, 0, 0, .6) 0px -1px 0px;
-  /* set up the chrome background */
-  -webkit-border-image : url(/finna/img/navbutton.png) 0 4 0 13;
-  border-width : 0 4px 0 13px;
-  padding-top: 7px;
-  padding-right: 4px;
-  /* base metrics used to ensure a minumum size and specify a max size that can be used to trim the contents */
-  min-width: 40px;
-  max-width: 60px;
-  height: 23px; 
-  /* enfore trimming if the label is too long */
-  white-space : nowrap;
-  overflow : hidden;
-  text-overflow: ellipsis;
-}
-
-/* touched state for the buttons */
-.navbutton:active {
-  -webkit-border-image : url(/finna/img/navbutton_clicked.png) 0 4 0 13;
-}
-
-</style>
 <title><?= $page_title ?></title>
 
 <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -100,7 +40,7 @@
     	</div>
     	
     	<div id="assignment-header" class="child-page hidden">
-        	<div id="first_button" class="navbutton">Back</div>
+        	<a loc="BACK" class="backButton" >Back</a>
         	<div id="columnLayout">
                 <div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 51%; ">
         			<div id="assign_col">
@@ -181,13 +121,31 @@
 			</div>
 			
 	        <?php foreach ($assignmentsByDue as $assignment): ?>
-	        	<div id="assignment-info-<?= $assignment['id'] ?>" class="hidden child-page">
-	        	     <a loc="BACK" style="display:block; background:#248; color:white;">
-	        	     	Return to assignments list
-	        	     </a><br/>
-                     Title: <?= $assignment['title'] ?><br/><br/>
-                     Due: <?= $assignment['due_date'] ?><br/><br/>
-                     Course: <?= $assignment['course_number'] ?><br/><br/>
+	        	<div id="assignment-info-<?= $assignment['id'] ?>" class="hidden child-page detialContent">
+                     <span class="detailTitleLabel">Title:</span><span class="detailText"><?= $assignment['title'] ?></span><br/><br/>
+                     <span class="detailTitleLabel">Due:</span><span class="detailText"><?= $assignment['due_date'] ?></span><br/><br/>
+                     <span class="detailTitleLabel">Course:</span><span class="detailText"><?= $assignment['course_number'] ?></span><br/><br/>
+		             <ul id="priority" class="inlineButtonList">
+						<li id="priorityHigh">High</li>
+						<li id="priorityNormal">Normal</li>
+						<li id="priorityLow">Low</li>
+					</ul>
+					<ul id="status" class="inlineButtonList">
+						<li id="completeButton">Complete</li>
+						<li id="incompleteButton">Incomplete</li>
+					</ul>
+					<ul id="tabBarAssignBottomWindow" class="inlineButtonList">
+						<li id="announceButton">Announcements</li>
+						<li id="courseInfoButton">Course Info</li>
+					</ul>
+					<div id="assignBottomWindow">
+						<div id="announcePane" style="display:block;">
+							Announcements Pane
+						</div>
+						<div id="coursePane" style="display:none;">
+							Course Info Pane
+						</div>
+					</div>
                 </div>
 	        <?php endforeach; ?>
 			
