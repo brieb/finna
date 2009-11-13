@@ -50,7 +50,7 @@ body {
     width: 133px;
     margin-right: 1px;
     margin-left: 2px;
-    -webkit-border-image: url(/finna/img/navTab.png) 0 12 0 12 stretch stretch;
+/*     -webkit-border-image: url(/finna/img/navTab.png) 0 12 0 12 stretch stretch; */
 }
 
 #coursesNavTab {
@@ -187,7 +187,11 @@ background-image: -webkit-gradient(linear, left top, left bottom, from(#b0bccd),
 }
 
 #header{
-background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e), color-stop(0.5,#151515), color-stop(0.5,#000), to(#000));
+/* background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e), color-stop(0.5,#151515), color-stop(0.5,#000), to(#000)); */
+background-image: url(/finna/img/header_middle.png);
+border-bottom: 1px solid rgb(45, 54, 66);
+position: relative;
+height: 40px;
 }
 
 #header li{
