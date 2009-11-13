@@ -6,30 +6,30 @@ var currentPage;
 var prevPage;
 var scrolling = false;
 var gotoPage;
-var assignmentsViewPage;
-
-function switchToAssignmentsView (){
-    $('#assignments').removeClass('hidden');
-    $('#courses').addClass('hidden');
-    $('#add-course-button').addClass('hidden');
-    $('#assignment-sort-buttons').removeClass('hidden');
-    $('#coursesNavTab').css('opacity','0.5');
-    $('#assignmentsNavTab').css('opacity','1');
-    prevPage = currentPage;
-    currentPage = assignmentsViewPage;
-}
-
-function switchToCoursesView (){
-    $('#assignments').addClass('hidden');
-    $('#courses').removeClass('hidden');
-    $('#add-course-button').removeClass('hidden');
-    $('#assignment-sort-buttons').addClass('hidden');
-    $('#coursesNavTab').css('opacity','1');
-    $('#assignmentsNavTab').css('opacity','0.5');
-    prevPage = currentPage;
-    assignmentsViewPage = currentPage;
-    currentPage = $('#course-list');
-}
+//var assignmentsViewPage;
+//
+//function switchToAssignmentsView (){
+//    $('#assignments').removeClass('hidden');
+//    $('#courses').addClass('hidden');
+//    $('#add-course-button').addClass('hidden');
+//    $('#assignment-sort-buttons').removeClass('hidden');
+//    $('#coursesNavTab').css('opacity','0.5');
+//    $('#assignmentsNavTab').css('opacity','1');
+//    prevPage = currentPage;
+//    currentPage = assignmentsViewPage;
+//}
+//
+//function switchToCoursesView (){
+//    $('#assignments').addClass('hidden');
+//    $('#courses').removeClass('hidden');
+//    $('#add-course-button').removeClass('hidden');
+//    $('#assignment-sort-buttons').addClass('hidden');
+//    $('#coursesNavTab').css('opacity','1');
+//    $('#assignmentsNavTab').css('opacity','0.5');
+//    prevPage = currentPage;
+//    assignmentsViewPage = currentPage;
+//    currentPage = $('#course-list');
+//}
 
 
 
@@ -180,8 +180,8 @@ function switchToCoursesView (){
 			  $i.gotoPage(loc);
 			}
 
-			document.getElementById('assignmentsNavTab').onclick = switchToAssignmentsView;
-			document.getElementById('coursesNavTab').onclick = switchToCoursesView;
+//			document.getElementById('assignmentsNavTab').onclick = switchToAssignmentsView;
+//			document.getElementById('coursesNavTab').onclick = switchToCoursesView;
 
 			var onTouchStart = function(){
 			  $(this).addClass('selected');
@@ -430,18 +430,18 @@ function switchToCoursesView (){
 							    currentPage = $("#due-content");
 								currentPage.css("display", "block");
 								$("#priority-content").css("display", "none");
-								$("#course-content").css("display", "none");
+								$("#course-list").css("display", "none");
 								$("#done-content").css("display", "none");
 							break;
 							case "priority-sort":
 							    currentPage = $("#priority-content");
 								currentPage.css("display", "block");
 								$("#due-content").css("display", "none");
-								$("#course-content").css("display", "none");
+								$("#course-list").css("display", "none");
 								$("#done-content").css("display", "none");
 							break;
 							case "course-sort":
-							    currentPage = $("#course-content");
+							    currentPage = $("#course-list");
 								currentPage.css("display", "block");
 								$("#due-content").css("display", "none");
 								$("#priority-content").css("display", "none");
@@ -452,7 +452,7 @@ function switchToCoursesView (){
 								currentPage.css("display", "block");
 								$("#due-content").css("display", "none");
 								$("#priority-content").css("display", "none");
-								$("#course-content").css("display", "none");
+								$("#course-list").css("display", "none");
 							break;
 						}
 
