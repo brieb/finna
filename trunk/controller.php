@@ -33,7 +33,7 @@ class AppController
     	set('userCourses', $this->User->getCourses(1));
     	$assignments = $this->User->getAssignments(1);
     	set('assignmentsByDue', $assignments);
-    	$byPriority = Array( Array(), Array(), Array() );
+    	$byPriority = Array( Array(), Array(), Array(), Array() );
     	foreach ($assignments as $assign){
             if ($assign['complete']==1) continue;
             $byPriority[$assign['priority']][] = $assign;

@@ -120,7 +120,7 @@ body {
     left: 10px;
 }
 
-.arrow_template {
+.li-arrow-template {
     position: absolute;
     width: 8px;
     height: 13px;
@@ -139,6 +139,9 @@ body {
     -webkit-background-origin: initial;
     background-color: rgb(38, 127, 239);
     -webkit-background-size: 100% 100%;
+}
+.row-selection-BG {
+	position: absolute; right: 0pt; left: 0pt; top: 0pt; bottom: 0pt; opacity: 1; display:none;
 }
 
 .assignDetail_template.selected .label_template {
