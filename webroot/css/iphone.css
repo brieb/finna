@@ -1,4 +1,3 @@
-
 #container {
 	width: 320px;
 	position: relative;
@@ -50,7 +49,6 @@ body {
     width: 133px;
     margin-right: 1px;
     margin-left: 2px;
-/*     -webkit-border-image: url(/finna/img/navTab.png) 0 12 0 12 stretch stretch; */
 }
 
 #coursesNavTab {
@@ -238,9 +236,6 @@ height: 40px;
 #courses_tab{
 	float: right;
 }
-#header li.active{
-	color: #fffeff;
-}
 
 /* Footer */
 #footer {
@@ -250,6 +245,10 @@ background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e),
 	top: 500px;
 	height: 59px;
 	background-position: center bottom;
+}
+
+#header li.active{
+	color: #fffeff;
 }
 
 #content {
@@ -336,4 +335,263 @@ background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e),
 
 #footer .trash.active span {
 	background-position: -197px top;
+}
+
+
+/* Brie's Style Stuff*/
+
+/*HEADER*/
+
+
+
+.title {
+  /* use absolute positioning and transforms as these will be subject to hardware transitions */
+  position: absolute;
+  -webkit-transform: translate(80px, 0px);
+  /* base metrics */
+  height: 31px;
+  margin-top: 3px;
+  /* the titles should be displayed below the button so that they don't receive touches */
+  z-index: 0;
+  /* set up the font appearance */
+  font-size: 16pt;
+  font-weight: bold;
+  color: white;
+  text-shadow: rgba(0, 0, 0, .6) 0px -1px 0px;
+  /* enfore trimming if the label is too long */
+  white-space : nowrap;
+  overflow : hidden;
+  text-overflow: ellipsis;
+}
+
+.navbutton {
+  /* use absolute positioning and transforms as these will be subject to hardware transitions */
+  position: absolute;
+  -webkit-transform: translate(250px, 6px);
+  /* the buttons should be displayed on top of the titles so that they can always receive touches */
+  z-index: 1;
+  /* set up the font appearance */
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  text-shadow: rgba(0, 0, 0, .6) 0px -1px 0px;
+  /* set up the chrome background */
+  -webkit-border-image : url(/finna/img/navbutton.png) 0 4 0 13;
+  border-width : 0 4px 0 13px;
+  padding-top: 7px;
+  padding-right: 4px;
+  /* base metrics used to ensure a minumum size and specify a max size that can be used to trim the contents */
+  min-width: 40px;
+  max-width: 60px;
+  height: 23px; 
+  /* enfore trimming if the label is too long */
+  white-space : nowrap;
+  overflow : hidden;
+  text-overflow: ellipsis;
+}
+
+/* touched state for the buttons */
+.navbutton:active {
+  -webkit-border-image : url(/finna/img/navbutton_clicked.png) 0 4 0 13;
+}
+
+.backButton {
+ /* use absolute positioning and transforms as these will be subject to hardware transitions */
+  position: absolute;
+  -webkit-transform: translate(6px, 6px);
+  /* the buttons should be displayed on top of the titles so that they can always receive touches */
+  z-index: 1;
+  /* set up the font appearance */
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  text-shadow: rgba(0, 0, 0, .6) 0px -1px 0px;
+  /* set up the chrome background */
+  -webkit-border-image : url(/finna/img/backButton.png) 0 4 0 13;
+  border-width : 0 4px 0 13px;
+  padding-top: 7px;
+  padding-right: 4px;
+  /* base metrics used to ensure a minumum size and specify a max size that can be used to trim the contents */
+  min-width: 40px;
+  max-width: 60px;
+  height: 23px; 
+  /* enfore trimming if the label is too long */
+  white-space : nowrap;
+  overflow : hidden;
+  text-overflow: ellipsis;
+}
+.backButton:active {
+	-webkit-border-image : url(/finna/img/backButton_clicked.png) 0 4 0 13;
+}
+
+/*ASSIGNMENT DETAIL PAGE*/
+.detialContent {
+	margin-top: 5px;
+}
+.detailTitleLabel {
+    overflow: hidden;
+    text-align: center;
+    opacity: 1;
+    -webkit-border-top-left-radius: 8px 8px;
+    -webkit-border-top-right-radius: 8px 8px;
+    -webkit-border-bottom-left-radius: 8px 8px;
+    -webkit-border-bottom-right-radius: 8px 8px;
+    color: rgb(255, 255, 255);
+    cursor: default;
+    -webkit-user-select: none;
+    text-shadow: none;
+    width: auto;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.445312);
+	padding: 3px;
+	margin-right: 5px;
+	margin-left: 5px;
+	font: bold 17px Helvetica;
+}
+
+.detailText {
+    color: black;
+    overflow: hidden;
+    text-align: center;
+	font: 17px Helvetica;
+}
+
+.inlineButtonList li{
+	display: inline;
+	list-style-type: none;
+	font-family: Helvetica;
+    font-weight: bold;
+    font-size: 17px;
+    color: rgb(255, 255, 255);
+    text-shadow: rgba(0, 0, 0, 0) 0px -1px 0px;
+    text-align: center;
+    text-overflow: ellipsis;
+}
+
+#priority li{
+	margin-top: -10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 12px;
+	padding-right: 12px;
+	border-left-width: 8px;
+    border-right-width: 8px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+}
+
+#priorityHigh {
+	position: absolute;
+	left: 5px;
+	width: 60px;
+    -webkit-border-image: url(/finna/img/highPriorityButton.png) 2 12 2 12 stretch stretch;
+}
+#priorityHigh:active {
+    -webkit-border-image: url(/finna/img/highPriorityButton_clicked.png) 2 12 2 12 stretch stretch;
+}
+
+#priorityNormal {
+	position: absolute;
+	left: 109px;
+	width: 60px;
+    -webkit-border-image: url(/finna/img/normalPriorityButton.png) 2 12 2 12 stretch stretch;
+}
+#priorityNormal:active {
+    -webkit-border-image: url(/finna/img/normalPriorityButton_clicked.png) 2 12 2 12 stretch stretch;
+}
+
+#priorityLow {
+	position: absolute;
+	left: 213px;
+	width: 60px;
+    -webkit-border-image: url(/finna/img/lowPriorityButton.png) 2 12 2 12 stretch stretch;
+	
+}
+#priorityLow:active {
+    -webkit-border-image: url(/finna/img/lowPriorityButton_clicked.png) 2 12 2 12 stretch stretch;
+}
+
+#status {
+	/*position: relative;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	margin-right: 5px;
+	margin-left: 5px;*/
+}
+#status li{
+	/*padding-top: 3px;
+	padding-bottom: 3px;*/
+	margin-top: 30px;
+	/*padding-left: 12px;
+	padding-right: 12px;*/
+}
+#completeButton {
+	position: absolute;
+	width: 115px;
+	left: 5px;
+	border-left-width: 20px;
+    border-right-width: 20px;
+    border-top-width: 12px;
+    border-bottom-width: 12px;
+    -webkit-border-image: url(/finna/img/completeButton.png) 12 20 12 20 stretch stretch;
+}
+#completeButton:active {
+	-webkit-border-image: url(/finna/img/completeButton_clicked.png) 12 20 12 20 stretch stretch;
+}
+
+#incompleteButton {
+	position: absolute;
+	right: 5px;
+	width: 115px;
+	border-left-width: 20px;
+    border-right-width: 20px;
+    border-top-width: 12px;
+    border-bottom-width: 12px;
+    -webkit-border-image: url(/finna/img/incompleteButton.png) 12 20 12 20 stretch stretch;
+}
+#incompleteButton:active {
+	-webkit-border-image: url(/finna/img/incompleteButton_clicked.png) 12 20 12 20 stretch stretch;
+}
+
+#tabBarAssignBottomWindow li{
+	position: absolute;
+	width: 130px;
+	margin-top: 80px;
+	border-left-width: 12px;
+    border-right-width: 12px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    -webkit-border-image: url(/finna/img/tabShape.png) 0 12 0 12 stretch stretch;
+    padding-top: 3px;
+    padding-bottom: 3px;
+	text-align: center;
+	color: #424242;
+}
+#tabBarAssignBottomWindow li:active{
+	-webkit-border-image: url(/finna/img/tabShape_clicked.png) 0 12 0 12 stretch stretch;
+}
+#announceButton{
+	left: 5px;
+}
+
+#courseInfoButton{
+	right: 5px;
+}
+
+#assignBottomWindow{
+	position: absolute;
+	margin-top: 105px;
+	margin-left: 5px;
+	margin-right: 5px;
+	width: 306px;
+	height: 160px;
+	-webkit-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+    -webkit-border-top-left-radius: 0;
+   	-webkit-border-top-right-radius: 0;
+	border-left: 2px solid #797979;
+	border-right: 2px solid #797979;
+	border-bottom: 2px solid #797979;
 }
