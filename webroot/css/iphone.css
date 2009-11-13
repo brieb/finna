@@ -32,7 +32,8 @@ body {
     margin: 0px;
     font-family: Helvetica;
     opacity: 1;
-    background-repeat: no-repeat;
+    background-image: url(/finna/img/background_stripes.png);
+  	background-repeat: repeat;
     background-position: 0% 0%;
 }
 
@@ -100,6 +101,7 @@ li.scrollable {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: rgb(224, 224, 224);
+    background-color: white;
 }
 
 .label_template {
@@ -429,7 +431,9 @@ background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e),
 /*ASSIGNMENT DETAIL PAGE*/
 .detailContent {
 	margin-top: 5px;
+	-webkit-user-select: none;
 }
+
 .detailTitleLabel {
     overflow: hidden;
     text-align: center;
@@ -456,6 +460,11 @@ span.detailText {
 	height: auto;
     color: black;
 	font: 17px Helvetica;
+	background: white;
+	-webkit-border-radius: 8px;
+	padding: 3px;
+	margin-right: 5px;
+	text-align: center;
 }
 
 .inlineButtonList li{
@@ -471,7 +480,7 @@ span.detailText {
 }
 
 #priority li{
-	margin-top: -10px;
+	/*margin-top: -10px;*/
 	padding-top: 5px;
 	padding-bottom: 5px;
 	padding-left: 12px;
@@ -513,52 +522,52 @@ span.detailText {
     -webkit-border-image: url(/finna/img/lowPriorityButton_clicked.png) 2 12 2 12 stretch stretch;
 }
 
-#status {
-	/*position: relative;
-	margin-top: 30px;
-	margin-bottom: 20px;
+#statusForm{
+	margin-top: 40px;
+	margin-left: 5px;
 	margin-right: 5px;
-	margin-left: 5px;*/
+	/*padding: 3px;*/
+	/*text-align: center;*/
+	/*vertical-align: middle;*/
+	/*-webkit-border-radius: 10px;
+	border: 1px solid #c0c0c0;*/
+	background: white;
+	-webkit-border-radius: 8px;
+	padding: 5px;
+	padding-left: 10px;
+    height: auto;
+    width: 160px;	
 }
-#status li{
-	/*padding-top: 3px;
-	padding-bottom: 3px;*/
-	margin-top: 30px;
-	/*padding-left: 12px;
-	padding-right: 12px;*/
+#statusCheckbox{
+	height: 30px;
+	width: 30px;
+	background-color: #004476;
 }
-#completeButton {
+#statusText{
 	position: absolute;
-	width: 115px;
-	left: 5px;
-	border-left-width: 20px;
-    border-right-width: 20px;
-    border-top-width: 12px;
-    border-bottom-width: 12px;
-    -webkit-border-image: url(/finna/img/completeButton.png) 12 20 12 20 stretch stretch;
-}
-#completeButton:active {
-	-webkit-border-image: url(/finna/img/completeButton_clicked.png) 12 20 12 20 stretch stretch;
+	margin-top: 5px;
+	margin-left: 10px;
+	/*text-align: center;*/
+	font: bold 17px Helvetica;
+	
+	
+	/*-webkit-border-top-left-radius: 8px 8px;
+    -webkit-border-top-right-radius: 8px 8px;
+    -webkit-border-bottom-left-radius: 8px 8px;
+    -webkit-border-bottom-right-radius: 8px 8px;
+    cursor: default;
+    background-color: rgba(0, 0, 0, 0.445312);
+	padding: 3px;*/
 }
 
-#incompleteButton {
-	position: absolute;
-	right: 5px;
-	width: 115px;
-	border-left-width: 20px;
-    border-right-width: 20px;
-    border-top-width: 12px;
-    border-bottom-width: 12px;
-    -webkit-border-image: url(/finna/img/incompleteButton.png) 12 20 12 20 stretch stretch;
+#tabBarAssignBottomWindow{
+	margin-top: 10px;
+	margin-left: 5px;
 }
-#incompleteButton:active {
-	-webkit-border-image: url(/finna/img/incompleteButton_clicked.png) 12 20 12 20 stretch stretch;
-}
-
 #tabBarAssignBottomWindow li{
-	position: absolute;
+	/*position: absolute;*/
+	height: 30px;
 	width: 130px;
-	margin-top: 80px;
 	border-left-width: 12px;
     border-right-width: 12px;
     border-top-width: 0px;
@@ -575,25 +584,28 @@ span.detailText {
 #announceButton{
 	left: 5px;
 }
-
 #courseInfoButton{
 	right: 5px;
 }
+#tabBarAssignBottomWindow a{
+	vertical-align: middle;
+}
 
 #assignBottomWindow{
-	position: absolute;
-	margin-top: 105px;
+	/*position: absolute;*/
+	/*margin-top: 115px;*/
 	margin-left: 5px;
 	margin-right: 5px;
-	width: 306px;
-	height: 160px;
+	width: 300px;
+	height: auto;
+	min-height: 100px;
+	padding: 3px;
 	-webkit-border-bottom-left-radius: 10px;
 	-webkit-border-bottom-right-radius: 10px;
     -webkit-border-top-left-radius: 0;
    	-webkit-border-top-right-radius: 0;
-	border-left: 2px solid #797979;
-	border-right: 2px solid #797979;
-	border-bottom: 2px solid #797979;
+	border: 2px solid #797979;
+	background: white;
 }
 
 /*COURSE DETAIL*/
@@ -755,8 +767,6 @@ ul.roundRectangleListType
 .roundRectangleListType li 
 {	
 	list-style-type: none;
-	
-
 	padding-top:10px;		  
 	padding-right:10px;		 
 	padding-bottom:14px;	 /* Indent the cell content 14 pixels from the bottom edge of a cell */
@@ -764,6 +774,16 @@ ul.roundRectangleListType
 	border-top: 1px solid #c0c0c0;
 }
 
+.roundRectangleListType li:active{
+	background-image: url(/finna/img/selectedRowiPhone.png);
+    background-repeat: initial;
+    background-attachment: initial;
+    -webkit-background-clip: initial;
+    -webkit-background-origin: initial;
+    background-color: rgb(38, 127, 239);
+    -webkit-background-size: 100% 100%;
+    -webkit-border-radius: 8px;
+}
 
 .roundRectangleListType li:first-child 
 {
