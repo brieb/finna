@@ -131,13 +131,20 @@
 						<li id="priorityNormal">Normal</li>
 						<li id="priorityLow">Low</li>
 					</ul>
-					<ul id="status" class="inlineButtonList">
-						<li id="completeButton">Complete</li>
-						<li id="incompleteButton">Incomplete</li>
-					</ul>
+<!--					<ul id="status" class="inlineButtonList">-->
+<!--						<li id="completeButton">Complete</li>-->
+<!--						<li id="incompleteButton">Incomplete</li>-->
+<!--					</ul>-->
+					<form id="statusForm">
+						
+						<input id="statusCheckbox" type="checkbox" name="status" value="complete" />
+						<a id="statusText">Completed</a>
+						
+					</form> 
+
 					<ul id="tabBarAssignBottomWindow" class="inlineButtonList">
-						<li id="announceButton">Announcements</li>
-						<li id="courseInfoButton">Course Info</li>
+						<li id="announceButton"><a>Announcements</a></li>
+						<li id="courseInfoButton"><a>Course Info</a></li>
 					</ul>
 					<div id="assignBottomWindow">
 						<div id="announcePane" style="display:block;">
@@ -172,7 +179,7 @@
 	        	     <span class="detailTitleLabel">Title:</span><span class="detailText"><?= $course['title'] ?></span><br/><br/>
                      
                      <ul id="tabBarCourseBottomWindow" class="roundRectangleListType">
-						<li id="descriptionButton" class="active"><a class="showArrow" loc="description">Description</a></li>
+						<li id="descriptionButton" class="active"><a class="showArrow" loc="">Description</a></li>
 						<li id="officeHoursButton"><a class="showArrow">Office Hours</a></li>
 						<li id="handoutsButton"><a class="showArrow">Handouts</a></li>
 						<li id="announcementsButton"<a class="showArrow">Announcements</a></li>
