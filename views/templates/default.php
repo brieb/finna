@@ -1,6 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
+<?php 
+    $priorityImages = array("", "low-priority.png", "normal-priority.png", "high-priority.png");
+    $priorityPositions = array("", "top:12px; left:6px; height:23px;", "top: 15px; left: 8px;", "top:8px; left:12px; height:33px;")
+?>
+
+
 <head>
 <style type="text/css">
 
@@ -78,26 +84,47 @@
 
 <body style="margin:0px; width:320px;" onorientationchange="updateOrientation()" onload="load();">
 	
-	<div id="header" class="parent-page">
+	<div id="header" style="background-color:#ccc">
 	
-    	<div id="columnLayout">
-            <div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 51%; ">
-    			<div id="assign_col">
-                    <div id="assignmentsNavTab" class="navTab">
-                        <div class="title">Assignments</div>
+		<div id="main-header" class="parent-page">
+        	<div id="columnLayout">
+                <div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 51%; ">
+        			<div id="assign_col">
+                        <div id="assignmentsNavTab" class="navTab">
+                            <div class="title">Assignments</div>
+                        </div>
                     </div>
-                </div>
-    		</div>
-
-    		<div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 49%; ">
-    			<div id="courses_col">
-                    <div id="coursesNavTab" class="navTab">
-                        <div class="main-header-tab"></div>
-                    </div>
-               </div>
-    		</div>
+        		</div>
+        	</div>
+        	<div id="first_button" class="navbutton">Add</div>
     	</div>
-    	<div id="first_button" class="navbutton">Add</div>
+    	
+    	<div id="assignment-header" class="child-page hidden">
+        	<div id="first_button" class="navbutton">Back</div>
+        	<div id="columnLayout">
+                <div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 51%; ">
+        			<div id="assign_col">
+                        <div id="assignmentsNavTab" class="navTab">
+                            <div class="title">My Assignment</div>
+                        </div>
+                    </div>
+        		</div>
+        	</div>
+        	<div id="first_button" class="navbutton">Delete</div>
+    	</div>
+    	
+    	<div id="course-header" class="child-page hidden">
+        	<div id="columnLayout">
+                <div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 51%; ">
+        			<div id="assign_col">
+                        <div id="assignmentsNavTab" class="navTab">
+                            <div class="title">Course Edit</div>
+                        </div>
+                    </div>
+        		</div>
+        	</div>
+        	<div id="first_button" class="navbutton">Drop</div>
+    	</div>
     	
 	</div> 
 
@@ -107,28 +134,22 @@
 		       
 			<div id="due-content" class="parent-page" style="display:block;">
                 <ul>
-                <?php 
-                $priorityImages = array("", "low-priority.png", "normal-priority.png", "high-priority.png");
-                $priorityPositions = array("", "top:12px; left:6px; height:23px;", "top: 15px; left: 8px;", "top:8px; left:12px; height:33px;")
-                ?>
                     <?php foreach ($assignmentsByDue as $assignment): ?>
-                <li loc="assignment-info-<?= $assignment['id'] ?>" class="assignDetail_template" style="font-family:Helvetica">
-                	<div class="row-selection-BG" style="position: absolute; right: 0pt; left: 0pt; top: 0pt; bottom: 0pt; opacity: 1; display:none;">
-                	</div>
-                    <img src="/finna/img/<?= $priorityImages[$assignment['priority']] ?>" style="position:absolute; <?= $priorityPositions[$assignment['priority']] ?>"/>
-                    <div style="position:absolute; top:6px; left:35px; font-weight:bold; font-size:16px; text-overflow:ellipsis;">
-                        <?= $assignment['title'] ?>
-                    </div>
-    				<div style="position:absolute; top:26px; left:35px; font-size:15px; color:#444">
-    					<?= $assignment['course_number'] ?>
-    				</div>
-    				<div style="position:absolute; top:26px; right:35px; font-size:15px; color:#444">
-    					Tue Apr 31
-    				</div>
-                    <div class="arrow_template"></div>
-                    
-                   
-                </li>
+                        <li loc="assignment-info-<?= $assignment['id'] ?>" header="assignment-header" class="assignDetail_template" style="font-family:Helvetica">
+                        	<div class="row-selection-BG">
+                        	</div>
+                            <img src="/finna/img/<?= $priorityImages[$assignment['priority']] ?>" style="position:absolute; <?= $priorityPositions[$assignment['priority']] ?>"/>
+                            <div style="position:absolute; top:6px; left:35px; font-weight:bold; font-size:16px; text-overflow:ellipsis;">
+                                <?= $assignment['title'] ?>
+                            </div>
+            				<div style="position:absolute; top:26px; left:35px; font-size:15px; color:#444">
+            					<?= $assignment['course_number'] ?>
+            				</div>
+            				<div style="position:absolute; top:26px; right:35px; font-size:15px; color:#444">
+            					Tue Apr 31
+            				</div>
+                            <div class="li-arrow-template"></div>
+                        </li>
                     <?php endforeach; ?>
                 </ul>
 			</div>
@@ -169,7 +190,7 @@
     		<div id="course-list" class="parent-page" style="display:none">
     		    <ul>
     		        <?php foreach ($userCourses as $course): ?>
-        			    <li loc="course-info-<?= $course['id'] ?>" id="course-li-<?= $course['id'] ?>" class="assignDetail_template">
+        			    <li loc="course-info-<?= $course['id'] ?>" header="course-header" id="course-li-<?= $course['id'] ?>" class="assignDetail_template">
             			    <div class="row-selection-BG" style="position: absolute; right: 0pt; left: 0pt; top: 0pt; bottom: 0pt; opacity: 1; display:none;"></div>
                             <div class="label_template">
                                 <?= $course['number'] ?>

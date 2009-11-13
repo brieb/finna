@@ -6,6 +6,8 @@ var currentPage;
 var prevPage;
 var scrolling = false;
 var gotoPage;
+var currentHeader;
+var prevHeader;
 //var assignmentsViewPage;
 //
 //function switchToAssignmentsView (){
@@ -169,6 +171,7 @@ var gotoPage;
 			window.addEventListener("orientationchange", $i.utils.updateOrientation, false);
 
 			currentPage = $('#due-content');
+			currentHeader = $('#main-header');
         
 			var onTouchEnd = function(){
 			  if (this.tagName.toLowerCase()=='li'){
@@ -177,7 +180,8 @@ var gotoPage;
 			  }
 			  if (scrolling) return;
 			  var loc = this.getAttribute('loc');
-			  $i.gotoPage(loc);
+			  var header = this.getAttribute('header');
+			  $i.gotoPage(loc, header);
 			}
 
 //			document.getElementById('assignmentsNavTab').onclick = switchToAssignmentsView;
@@ -202,42 +206,48 @@ var gotoPage;
 	};
 	
 	
-	$i.gotoPage	= function (loc){
+	$i.gotoPage	= function (loc, header){
 	    if (loc=="BACK"){
 		    loc = prevPage;
+		    header = prevHeader;
 		} else {
 		    loc = $('#'+loc);
+		    header = $('#'+header);
 		}
-		
+
 	    loc.removeClass("hidden");
 	    currentPage.addClass("hidden");
+	    header.removeClass("hidden");
+	    currentHeader.addClass("hidden");
 	    if (currentPage.hasClass("parent-page")){
-			$('#header').addClass("hidden");
+			$('#main-header').addClass("hidden");
 			$('#footer').addClass("hidden");
-			var currentTop = currentPage.css('top');
-			currentTop = currentTop.substr(0, currentTop.length-2);
-			currentPage.css('top', currentTop+$('#header').height()+"px");
-			loc.css('top', "0px");
-			$("#container").css('top', "-"+$('#header').height()+"px");
-			$("#container").css('height', (window.innerHeight)+"px");
-			$("#content").css('min-height', (window.innerHeight)+"px");
+//			var currentTop = currentPage.css('top');
+//			currentTop = currentTop.substr(0, currentTop.length-2);
+//			currentPage.css('top', currentTop+$('#header').height()+"px");
+//			loc.css('top', "0px");
+//			$("#container").css('top', "-"+$('#header').height()+"px");
+//			$("#container").css('height', (window.innerHeight)+"px");
+//			$("#content").css('min-height', (window.innerHeight)+"px");
 		}
 		prevPage = currentPage;
 		currentPage = loc;
+		prevHeader = currentHeader;
+		currentHeader = header;
 	  
 		if (currentPage.hasClass("parent-page")){
-			$('#header').removeClass("hidden");
+			$('#main-header').removeClass("hidden");
 			$('#footer').removeClass("hidden");
-			var currentTop = currentPage.css('top');
-			currentTop = currentTop.substr(0, currentTop.length-2);
-			currentPage.css('top', (currentTop-$('#header').height())+"px");
-			
-			var prevTop = prevPage.css('top');
-			prevTop = prevTop.substr(0, prevTop.length-2);
-			prevPage.css('top', (prevTop-$('#header').height())+"px");
-			$("#container").css('top', "0px");
-			$("#container").css('height', (window.innerHeight-menuHeights)+"px");
-			$("#content").css('min-height', (window.innerHeight-menuHeights)+"px");
+//			var currentTop = currentPage.css('top');
+//			currentTop = currentTop.substr(0, currentTop.length-2);
+//			currentPage.css('top', (currentTop-$('#header').height())+"px");
+//			
+//			var prevTop = prevPage.css('top');
+//			prevTop = prevTop.substr(0, prevTop.length-2);
+//			prevPage.css('top', (prevTop-$('#header').height())+"px");
+//			$("#container").css('top', "0px");
+//			$("#container").css('height', (window.innerHeight-menuHeights)+"px");
+//			$("#content").css('min-height', (window.innerHeight-menuHeights)+"px");
 	    }
 	};
 	gotoPage = $i.gotoPage;
@@ -424,35 +434,29 @@ var gotoPage;
 						
 						// Add active to self
 						$i.utils.addClass(this, "active");
-							
+
+						$("#main-header div.title").html("Assignments");
+						$("#priority-content").css("display", "none");
+						$("#due-content").css("display", "none");
+						$("#course-list").css("display", "none");
+						$("#done-content").css("display", "none");
 						switch(this.id){
 							case "duedate-sort":
 							    currentPage = $("#due-content");
 								currentPage.css("display", "block");
-								$("#priority-content").css("display", "none");
-								$("#course-list").css("display", "none");
-								$("#done-content").css("display", "none");
 							break;
 							case "priority-sort":
 							    currentPage = $("#priority-content");
 								currentPage.css("display", "block");
-								$("#due-content").css("display", "none");
-								$("#course-list").css("display", "none");
-								$("#done-content").css("display", "none");
 							break;
 							case "course-sort":
+								$("#main-header div.title").html("My Courses");
 							    currentPage = $("#course-list");
 								currentPage.css("display", "block");
-								$("#due-content").css("display", "none");
-								$("#priority-content").css("display", "none");
-								$("#done-content").css("display", "none");
 							break;
 							case "done-sort":
 							    currentPage = $("#done-content");
 								currentPage.css("display", "block");
-								$("#due-content").css("display", "none");
-								$("#priority-content").css("display", "none");
-								$("#course-list").css("display", "none");
 							break;
 						}
 
