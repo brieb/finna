@@ -36,7 +36,7 @@
                     </div>
         		</div>
         	</div>
-        	<div id="first_button" class="navbutton">Add</div>
+        	<div id="addCourseButton" class="navbutton">Add</div>
     	</div>
     	
     	<div id="assignment-header" class="child-page hidden">
@@ -58,12 +58,13 @@
                 <div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 51%; ">
         			<div id="assign_col">
                         <div id="assignmentsNavTab" class="navTab">
-                            <div class="title">Course Edit</div>
+                            <div class="title">Course Details</div>
                         </div>
                     </div>
         		</div>
         	</div>
-        	<div id="first_button" class="navbutton">Drop</div>
+        	<a loc="BACK" class="backButton" >Back</a>        	
+        	<div id="dropCourseButton" class="navbutton" onclick="dropUserCourse(<?= $course['id'] ?>)">Drop</div>
     	</div>
     	
 	</div> 
@@ -121,7 +122,7 @@
 			</div>
 			
 	        <?php foreach ($assignmentsByDue as $assignment): ?>
-	        	<div id="assignment-info-<?= $assignment['id'] ?>" class="hidden child-page detialContent">
+	        	<div id="assignment-info-<?= $assignment['id'] ?>" class="hidden child-page detailContent">
                      <span class="detailTitleLabel">Title:</span><span class="detailText"><?= $assignment['title'] ?></span><br/><br/>
                      <span class="detailTitleLabel">Due:</span><span class="detailText"><?= $assignment['due_date'] ?></span><br/><br/>
                      <span class="detailTitleLabel">Course:</span><span class="detailText"><?= $assignment['course_number'] ?></span><br/><br/>
@@ -166,16 +167,30 @@
     		</div>
     		
 	        <?php foreach ($userCourses as $course): ?>
-	        	<div id="course-info-<?= $course['id'] ?>" class="hidden child-page">
-	        	     <a loc="BACK" style="display:block; background:#248; color:white;">
-	        	     	Return to course list
-	        	     </a><br/>
-                     Number: <?= $course['number'] ?><br/><br/>
-                     Title: <?= $course['title'] ?><br/><br/>
-                     Description: <?= $course['description'] ?><br/><br/>
-                     <a onclick="dropUserCourse(<?= $course['id'] ?>)" style="display:block; background:#842; color:white;">
-	        	     	Drop course
-	        	     </a><br/>
+	        	<div id="course-info-<?= $course['id'] ?>" class="hidden child-page detailContent">
+	        	     <span class="detailTitleLabel">Course:</span><span class="detailText"><?= $course['number'] ?></span><br/><br/>
+	        	     <span class="detailTitleLabel">Title:</span><span class="detailText"><?= $course['title'] ?></span><br/><br/>
+                     
+                     <ul id="tabBarCourseBottomWindow" class="roundRectangleListType">
+						<li id="descriptionButton" class="active"><a class="showArrow" loc="description">Description</a></li>
+						<li id="officeHoursButton"><a class="showArrow">Office Hours</a></li>
+						<li id="handoutsButton"><a class="showArrow">Handouts</a></li>
+						<li id="announcementsButton"<a class="showArrow">Announcements</a></li>
+					</ul>
+					<div id="courseBottomWindow" style="display:none;">
+						<div id="description" style="display:none;">
+							<?= $course['description'] ?>
+						</div>
+						<div id="officeHours" style="display:none;">
+							officeHours Pane
+						</div>
+						<div id="handouts" style="display:none;">
+							handouts Pane
+						</div>
+						<div id="announcements" style="display:none;">
+							announcements Pane
+						</div>
+					</div>
                 </div>
 	        <?php endforeach; ?>
     
