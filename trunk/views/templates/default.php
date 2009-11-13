@@ -42,7 +42,7 @@
   color: white;
   text-shadow: rgba(0, 0, 0, .6) 0px -1px 0px;
   /* set up the chrome background */
-  -webkit-border-image : url(/finna/img/back_button.png) 0 4 0 13;
+  -webkit-border-image : url(/finna/img/navbutton.png) 0 4 0 13;
   border-width : 0 4px 0 13px;
   padding-top: 7px;
   padding-right: 4px;
@@ -58,7 +58,7 @@
 
 /* touched state for the buttons */
 .navbutton:active {
-  -webkit-border-image : url(/finna/img/back_button_touched.png) 0 4 0 13;
+  -webkit-border-image : url(/finna/img/navbutton_clicked.png) 0 4 0 13;
 }
 
 </style>
@@ -92,7 +92,7 @@
     		<div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 49%; ">
     			<div id="courses_col">
                     <div id="coursesNavTab" class="navTab">
-                        <div class="main-header-tab">Courses</div>
+                        <div class="main-header-tab"></div>
                     </div>
                </div>
     		</div>
