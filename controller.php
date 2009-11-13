@@ -31,13 +31,11 @@ class AppController
     {
         set('page_title','First Finna page');
     	set('userCourses', $this->User->getCourses(1));
-    	$assignments = $this->Assignment->getAssignments(1);
+    	$assignments = $this->User->getAssignments(1);
     	set('assignmentsByDue', $assignments);
     	$byPriority = Array( Array(), Array(), Array() );
     	foreach ($assignments as $assign){
             if ($assign['complete']==1) continue;
-            $assign['complete'] =  0 | $assign['complete'];
-            $assign['priority'] =  1 | $assign['priority'];
             $byPriority[$assign['priority']][] = $assign;
     	}
     	set('assignmentsByPriority', array_merge($byPriority[2],$byPriority[1],$byPriority[0]));

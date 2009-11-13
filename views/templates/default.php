@@ -88,10 +88,11 @@
                     </div>
                 </div>
     		</div>
+
     		<div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 49%; ">
     			<div id="courses_col">
                     <div id="coursesNavTab" class="navTab">
-                        <div class="main-header-tab"></div>
+                        <div class="main-header-tab">Courses</div>
                     </div>
                </div>
     		</div>
@@ -102,114 +103,107 @@
 
 	<div id="container">
 		<div id="content" style="margin:0px;">
-		      <!-- <?php require_once $view ?> -->
-		
-		    <div id="assignments">
+		    <!-- <?php require_once $view ?> -->
 		       
-    			<div id="due-content" class="parent-page" style="display:block;">
-                    <ul>
-                        <?php foreach ($assignmentsByDue as $assignment): ?>
-                    <li loc="task-info" class="assignDetail_template">
-                    <div class="row-selection-BG" style="position: absolute; right: 0pt; left: 0pt; top: 0pt; bottom: 0pt; opacity: 1; display:none;"></div>
-                        <div class="label_template"><a><?= $assignment['title'] ?></a></div>
-                        <div class="arrow_template"></div>
-                    </li>
-                        <?php endforeach; ?>
-                    </ul>
-    			</div>
-    			
-    			<div id="priority-content" class="parent-page" style="display:none;">
-    			    <ul>
-    			        <?php foreach ($assignmentsByPriority as $assignment): ?>
-            			    <li loc="task-info" class="assignDetail_template">
-            			        <div class="row-selection-BG" style="position: absolute; right: 0pt; left: 0pt; top: 0pt; bottom: 0pt; opacity: 1; display:none;"></div>
-                                <div class="label_template">
-                                    <a>
-                                        <?= $assignment['title'] ?>
-                                    </a>
-                                </div>
-                                <div class="arrow_template"></div>
-                            </li>
-    			        <?php endforeach; ?>
-    			    </ul>
-    			</div>
-    			
-    			<div id="course-content" class="parent-page" style="display:none; background-color:#dfd;">
-    			    <?php print_array($assignmentsByPriority) ?>
-    			</div>
-    			
-    			<div id="done-content" class="parent-page" style="display:none; background-color:#dff;">
-    			    <?php print_array($assignmentsByPriority) ?>
-    			</div>
-    			
-    			<div id="task-info" class="hidden child-page" style="background-color:#ddf;">
-    				<a loc="BACK">My task information</a>
-    				<br/>
-    				<span>Title: Assignment Title </span><br/>
-    				<span>Due Date: Jan 1, 2010</span><br/>
-					<ul id="priority">
-						<li style="background-color:red;">High</li>
-						<li style="background-color:blue;">Normal</li>
-						<li style="background-color:green;">Low</li>
-					</ul>
-					<ul id="status">
-						<li>Complete</li>
-						<li>Incomplete</li>
-					</ul>
-					<ul id="tabBarAssignBottomWindow">
-						<li>Announcements</li>
-						<li>Course Info</li>
-					</ul>
-					<div id="assignInfoBottomWindow">
-						<div id="announcePane" style="display:block;">
-							Announcements Pane
-						</div>
-						<div id="coursePane" style="display:none;">
-							Course Info Pane
-						</div>
-					</div>
-    			
-    		</div>
-	
-            <div id="courses" class="hidden">
-        		<div id="course-list" class="parent-page">
-        		    <ul>
-        		        <?php foreach ($userCourses as $course): ?>
-            			    <li loc="course-info-<?= $course['id'] ?>" id="course-li-<?= $course['id'] ?>" class="assignDetail_template">
-                			    <div class="row-selection-BG" style="position: absolute; right: 0pt; left: 0pt; top: 0pt; bottom: 0pt; opacity: 1; display:none;"></div>
-                                <div class="label_template">
-                                    <?= $course['number'] ?>
-                                </div>
-                                <div class="arrow_template"></div>
-                            </li>
-        		        <?php endforeach; ?>
-        		    </ul>
-        		</div>
-        		
-		        <?php foreach ($userCourses as $course): ?>
-		        	<div id="course-info-<?= $course['id'] ?>" class="hidden child-page">
-		        	     <a loc="BACK" style="display:block; background:#248; color:white;">
-		        	     	Return to course list
-		        	     </a><br/>
-                         Number: <?= $course['number'] ?><br/><br/>
-                         Title: <?= $course['title'] ?><br/><br/>
-                         Description: <?= $course['description'] ?><br/><br/>
-                         <a onclick="dropUserCourse(<?= $course['id'] ?>)" style="display:block; background:#842; color:white;">
-		        	     	Drop course
-		        	     </a><br/>
+			<div id="due-content" class="parent-page" style="display:block;">
+                <ul>
+                <?php 
+                $priorityImages = array("", "low-priority.png", "normal-priority.png", "high-priority.png");
+                $priorityPositions = array("", "top:12px; left:6px; height:23px;", "top: 15px; left: 8px;", "top:8px; left:12px; height:33px;")
+                ?>
+                    <?php foreach ($assignmentsByDue as $assignment): ?>
+                <li loc="assignment-info-<?= $assignment['id'] ?>" class="assignDetail_template" style="font-family:Helvetica">
+                	<div class="row-selection-BG" style="position: absolute; right: 0pt; left: 0pt; top: 0pt; bottom: 0pt; opacity: 1; display:none;">
+                	</div>
+                    <img src="/finna/img/<?= $priorityImages[$assignment['priority']] ?>" style="position:absolute; <?= $priorityPositions[$assignment['priority']] ?>"/>
+                    <div style="position:absolute; top:6px; left:35px; font-weight:bold; font-size:16px; text-overflow:ellipsis;">
+                        <?= $assignment['title'] ?>
                     </div>
-		        <?php endforeach; ?>
-        
-        		<div id="add-course" class="hidden child-page">
-        			<a loc="BACK">Back</a>
-        	        <br/><br/>
-        	        Enter the course number:<br/><input type=text id="course-number" style="font-family: Lucida Grande; font-size:15px;" onKeyUp="getCoursesByNumber()"/>
-        	        <br/>
-        	        <input type=button value="add course" onClick="getCoursesByNumber(true)"/>
-        	        <br/>
-        	        <div id="add-course-results"></div>
-        		</div>
-        	</div>
+    				<div style="position:absolute; top:26px; left:35px; font-size:15px; color:#444">
+    					<?= $assignment['course_number'] ?>
+    				</div>
+    				<div style="position:absolute; top:26px; right:35px; font-size:15px; color:#444">
+    					Tue Apr 31
+    				</div>
+                    <div class="arrow_template"></div>
+                    
+                   
+                </li>
+                    <?php endforeach; ?>
+                </ul>
+			</div>
+			
+			<div id="priority-content" class="parent-page" style="display:none;">
+			    <ul>
+			        <?php foreach ($assignmentsByPriority as $assignment): ?>
+        			    <li loc="assignment-info-<?= $assignment['id'] ?>" class="assignDetail_template">
+        			        <div class="row-selection-BG" style="position: absolute; right: 0pt; left: 0pt; top: 0pt; bottom: 0pt; opacity: 1; display:none;"></div>
+                            <div class="label_template">
+                                <a>
+                                    <?= $assignment['title'] ?>
+                                </a>
+                            </div>
+                            <div class="arrow_template"></div>
+                        </li>
+			        <?php endforeach; ?>
+			    </ul>
+			</div>
+			
+			<div id="done-content" class="parent-page hidden" style="display:none; background-color:#dff;">
+			    <?php print_array($assignmentsByPriority) ?>
+			</div>
+			
+	        <?php foreach ($assignmentsByDue as $assignment): ?>
+	        	<div id="assignment-info-<?= $assignment['id'] ?>" class="hidden child-page">
+	        	     <a loc="BACK" style="display:block; background:#248; color:white;">
+	        	     	Return to assignments list
+	        	     </a><br/>
+                     Title: <?= $assignment['title'] ?><br/><br/>
+                     Due: <?= $assignment['due_date'] ?><br/><br/>
+                     Course: <?= $assignment['course_number'] ?><br/><br/>
+                </div>
+	        <?php endforeach; ?>
+			
+			
+			
+    		<div id="course-list" class="parent-page" style="display:none">
+    		    <ul>
+    		        <?php foreach ($userCourses as $course): ?>
+        			    <li loc="course-info-<?= $course['id'] ?>" id="course-li-<?= $course['id'] ?>" class="assignDetail_template">
+            			    <div class="row-selection-BG" style="position: absolute; right: 0pt; left: 0pt; top: 0pt; bottom: 0pt; opacity: 1; display:none;"></div>
+                            <div class="label_template">
+                                <?= $course['number'] ?>
+                            </div>
+                            <div class="arrow_template"></div>
+                        </li>
+    		        <?php endforeach; ?>
+    		    </ul>
+    		</div>
+    		
+	        <?php foreach ($userCourses as $course): ?>
+	        	<div id="course-info-<?= $course['id'] ?>" class="hidden child-page">
+	        	     <a loc="BACK" style="display:block; background:#248; color:white;">
+	        	     	Return to course list
+	        	     </a><br/>
+                     Number: <?= $course['number'] ?><br/><br/>
+                     Title: <?= $course['title'] ?><br/><br/>
+                     Description: <?= $course['description'] ?><br/><br/>
+                     <a onclick="dropUserCourse(<?= $course['id'] ?>)" style="display:block; background:#842; color:white;">
+	        	     	Drop course
+	        	     </a><br/>
+                </div>
+	        <?php endforeach; ?>
+    
+    		<div id="add-course" class="hidden child-page">
+    			<a loc="BACK">Back</a>
+    	        <br/><br/>
+    	        Enter the course number:<br/><input type=text id="course-number" style="font-family: Lucida Grande; font-size:15px;" onKeyUp="getCoursesByNumber()"/>
+    	        <br/>
+    	        <input type=button value="add course" onClick="getCoursesByNumber(true)"/>
+    	        <br/>
+    	        <div id="add-course-results"></div>
+    		</div>
+    		
     	</div>
 	</div>
 
@@ -263,13 +257,13 @@
 
 	<div id="footer"  class="parent-page">
 	    <div id="assignment-sort-buttons">
-		<ul>
-			<li class="due active" id="duedate-sort"><span>Due Date</span></li>
-			<li class="priority" id="priority-sort"><span>Priority</span></li>
-			<li class="courses" id="course-sort"><span>Courses</span></li>
-			<li class="trash" id="done-sort"><span>Trash</span></li>
-		</ul>
-            </div>
+    		<ul>
+    			<li class="due active" id="duedate-sort"><span>Sort by Due</span></li>
+    			<li class="priority" id="priority-sort"><span>Priority Sort</span></li>
+    			<li class="trash" id="done-sort"><span>Completed</span></li>
+    			<li class="courses" id="course-sort"><span>My Courses</span></li>
+    		</ul>
+        </div>
 	    <div id="add-course-button" class="hidden">
 	      <div style="text-align:center;">
 	        <a loc="add-course" style="color:white; font-size:24px; font-weight:bold; text-align:center; display:block; margin:auto; margin-top:14px;">+ Add New Course</a>
