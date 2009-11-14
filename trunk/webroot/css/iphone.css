@@ -430,14 +430,13 @@ background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e),
 
 /*ASSIGNMENT DETAIL PAGE*/
 .detailContent {
-	margin-top: 5px;
+	margin-top: 10px;
 	-webkit-user-select: none;
 }
 
 .detailTitleLabel {
     overflow: hidden;
     text-align: center;
-    opacity: 1;
     -webkit-border-top-left-radius: 8px 8px;
     -webkit-border-top-right-radius: 8px 8px;
     -webkit-border-bottom-left-radius: 8px 8px;
@@ -446,24 +445,20 @@ background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e),
     cursor: default;
     -webkit-user-select: none;
     text-shadow: none;
-    width: auto;
-    height: auto;
     background-color: rgba(0, 0, 0, 0.445312);
 	padding: 3px;
-	margin-right: 5px;
 	margin-left: 5px;
+	margin-right: 5px;
 	font: bold 17px Helvetica;
+	height: 30px;
 }
 
 span.detailText {
-	position: absolute;
-	height: auto;
     color: black;
 	font: 17px Helvetica;
 	background: white;
 	-webkit-border-radius: 8px;
-	padding: 3px;
-	margin-right: 5px;
+	padding: 5px;
 	text-align: center;
 }
 
@@ -849,3 +844,28 @@ ul.roundRectangleListType
 	color: #324F85;		 /* sets the color of the link */
 }
 
+#assignTitleField, #assignCourseSelection
+{
+	font-size: 17px;
+	height: 30px;
+}
+
+#assignDescriptionTextArea
+{
+	margin-top: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
+	height: 130px;
+	width: 310px;
+	font-size: 17px;
+}
+
+#assignSubmit
+{
+	margin: 5px;
+	font: bold 17px Helvetica;
+	color: white;
+	background-color: black;
+	height: 40px;
+	width: 100px;
+}
