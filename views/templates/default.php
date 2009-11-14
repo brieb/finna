@@ -18,7 +18,50 @@
 <script type="text/javascript"> google.load("jquery", "1.3.2"); </script>
 <script src="js/fixed.js" type="text/javascript" charset="utf-8"></script>
 
+<link rel="stylesheet" href="css/spinningwheel.css" type="text/css" media="all" />
+<script type="text/javascript" src="js/spinningwheel-min.js?v=1.4"></script>
+
 <link rel="stylesheet" type="text/css" href="css/iphone.css">
+
+<script type="text/javascript">
+function openDatePicker() {
+	var now = new Date();
+	var days = { };
+	var years = { };
+	var months = { 1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec' };
+	
+	for( var i = 1; i < 32; i += 1 ) {
+		days[i] = i;
+	}
+
+	for( i = now.getFullYear()-5; i <= now.getFullYear()+5; i += 1 ) {
+		years[i] = i;
+	}
+
+	SpinningWheel.addSlot(months, '', 1);
+	SpinningWheel.addSlot(days, 'right', 1);
+	SpinningWheel.addSlot(years, 'right', 2009);
+	
+	SpinningWheel.setCancelAction(cancel);
+	SpinningWheel.setDoneAction(done);
+	
+	SpinningWheel.open();
+}
+
+function done() {
+	var results = SpinningWheel.getSelectedValues();
+	document.getElementById('result').innerHTML = results.values.join(' ');/* + '<br />keys: ' + results.keys.join(', ');*/
+}
+
+function cancel() {
+	document.getElementById('result').innerHTML = 'cancelled!';
+}
+
+
+window.addEventListener('load', function(){ setTimeout(function(){ window.scrollTo(0,0); }, 100); }, true);
+
+</script>
+
 </head>
 
 
@@ -73,7 +116,7 @@
 		<div id="content" style="margin:0px;">
 		    <!-- <?php require_once $view ?> -->
 		       
-			<div id="due-content" class="parent-page" style="display:block;">
+			<div id="due-content" class="parent-page">
                 <ul>
                     <?php foreach ($assignmentsByDue as $assignment): ?>
                         <li loc="assignment-info-<?= $assignment['id'] ?>" header="assignment-header" class="scrollable" style="font-family:Helvetica">
@@ -95,7 +138,7 @@
                 </ul>
 			</div>
 			
-			<div id="priority-content" class="parent-page" style="display:none;">
+			<div id="priority-content" class="hidden parent-page">
 			    <ul>
 			        <?php foreach ($assignmentsByPriority as $assignment): ?>
                         <li loc="assignment-info-<?= $assignment['id'] ?>" header="assignment-header" class="scrollable" style="font-family:Helvetica">
@@ -117,7 +160,7 @@
 			    </ul>
 			</div>
 			
-			<div id="done-content" class="parent-page hidden" style="display:none; background-color:#dff;">
+			<div id="done-content" class="parent-page hidden">
 			    <?php print_array($assignmentsByPriority) ?>
 			</div>
 			
@@ -131,33 +174,45 @@
 						<li id="priorityNormal">Normal</li>
 						<li id="priorityLow">Low</li>
 					</ul>
-<!--					<ul id="status" class="inlineButtonList">-->
-<!--						<li id="completeButton">Complete</li>-->
-<!--						<li id="incompleteButton">Incomplete</li>-->
-<!--					</ul>-->
 					<form id="statusForm">
-						
 						<input id="statusCheckbox" type="checkbox" name="status" value="complete" />
-						<a id="statusText">Completed</a>
-						
+						<a id="statusText">Completed</a>					
 					</form> 
 
 					<ul id="tabBarAssignBottomWindow" class="inlineButtonList">
 						<li id="announceButton"><a>Announcements</a></li>
-						<li id="courseInfoButton"><a>Course Info</a></li>
+						<li id="courseInfoButton"><a>Description</a></li>
 					</ul>
 					<div id="assignBottomWindow">
 						<div id="announcePane" style="display:block;">
 							Announcements Pane
 						</div>
 						<div id="coursePane" style="display:none;">
-							Course Info Pane
+							Description Pane
 						</div>
 					</div>
                 </div>
-	        <?php endforeach; ?>
+	       <?php endforeach; ?>
 			
+			<div id="assignment-add" class="hidden child-page detailContent">
 			
+				<form>
+	                <span class="detailTitleLabel">Title:</span><input type="text" id="assignTitleField" name="assignTitle" class="detailText"/><br/><br/>
+	                <span class="detailTitleLabel">Due:</span><span id="assignDueDate" class="detailText" onclick="openDatePicker()"><a id="result">Choose date...</a></span><br/><br/>
+	                <span class="detailTitleLabel">Course:</span>
+	                <select id="assignCourseSelection">
+	                	<option value ="course1">course 1</option>
+                        <option value ="course2">course 2</option>
+                        <option value ="course3">course 3</option>
+                        <option value ="<?= $assignment['course_number'] ?>"><?= $assignment['course_number'] ?></option>
+                    </select>	                
+	                <br/><br/>	                
+	                <span class="detailTitleLabel">Description:</span><br/>
+	                <textarea id="assignDescriptionTextArea" placeholder="Textarea" ></textarea><br/>
+	                <input id="assignSubmit" type="submit" value="Submit" />
+					</form>
+					
+                </div>
 			
     		<div id="course-list" class="parent-page" style="display:none">
     		    <ul>
