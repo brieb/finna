@@ -38,9 +38,9 @@ function openDatePicker() {
 		years[i] = i;
 	}
 
-	SpinningWheel.addSlot(months, '', 1);
-	SpinningWheel.addSlot(days, 'right', 1);
-	SpinningWheel.addSlot(years, 'right', 2009);
+	SpinningWheel.addSlot(months, '', now.getMonth()+1);
+	SpinningWheel.addSlot(days, 'right', now.getDate());
+	SpinningWheel.addSlot(years, 'right', now.getFullYear());
 	
 	SpinningWheel.setCancelAction(cancel);
 	SpinningWheel.setDoneAction(done);
@@ -50,11 +50,16 @@ function openDatePicker() {
 
 function done() {
 	var results = SpinningWheel.getSelectedValues();
-	document.getElementById('result').innerHTML = results.values.join(' ');/* + '<br />keys: ' + results.keys.join(', ');*/
+	document.getElementById('result').innerHTML = results.values.join(' ');
 }
 
 function cancel() {
-	document.getElementById('result').innerHTML = 'cancelled!';
+	/*
+var curDateDef = new Date();
+	var months = { 1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec' };
+	document.getElementById('result').innerHTML = months[curDateDef.getMonth()+1] +' '+curDateDef.getDate()+' '+curDateDef.getFullYear();
+*/
+	document.getElementById('result').innerHTML = 'Choose date...';
 }
 
 
@@ -119,7 +124,7 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 			<div id="due-content" class="parent-page">
                 <ul>
                     <?php foreach ($assignmentsByDue as $assignment): ?>
-                        <li loc="assignment-info-<?= $assignment['id'] ?>" header="assignment-header" class="scrollable" style="font-family:Helvetica">
+                        <li loc="assignment-info-<?= $assignment['id'] ?>" header="assignment-header" class="hidden scrollable" style="font-family:Helvetica">
                         	<div class="row-selection-BG">
                         	</div>
                             <img src="/finna/img/<?= $priorityImages[$assignment['priority']] ?>" style="position:absolute; <?= $priorityPositions[$assignment['priority']] ?>"/>
@@ -194,7 +199,7 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
                 </div>
 	       <?php endforeach; ?>
 			
-			<div id="assignment-add" class="hidden child-page detailContent">
+			<div id="assignment-add" class=" child-page detailContent">
 			
 				<form>
 	                <span class="detailTitleLabel">Title:</span><input type="text" id="assignTitleField" name="assignTitle" class="detailText"/><br/><br/>
