@@ -197,6 +197,11 @@ var prevHeader;
 			  listEntries[i].addEventListener("touchend", onTouchEnd, true); 
 			}
 
+			var listEntries = $('div[loc]');
+			for(var i = 0; i < listEntries.length; i++){
+			  listEntries[i].addEventListener("touchend", onTouchEnd, true); 
+			}
+
 			var listEntries = $('li[loc]');
 			for(var i = 0; i < listEntries.length; i++){
 			  listEntries[i].addEventListener("touchend", onTouchEnd, true);
@@ -436,6 +441,9 @@ var prevHeader;
 						$i.utils.addClass(this, "active");
 
 						$("#main-header div.title").html("Assignments");
+						var addBtn = $("#addObjectButton");
+						addBtn.attr('loc',"add-assignment");
+						addBtn.attr('header',"add-assignment-header");
 						$("#priority-content").css("display", "none");
 						$("#due-content").css("display", "none");
 						$("#course-list").css("display", "none");
@@ -451,6 +459,8 @@ var prevHeader;
 							break;
 							case "course-sort":
 								$("#main-header div.title").html("My Courses");
+								addBtn.attr('loc',"add-course");
+								addBtn.attr('header',"add-course-header");
 							    currentPage = $("#course-list");
 								currentPage.css("display", "block");
 							break;

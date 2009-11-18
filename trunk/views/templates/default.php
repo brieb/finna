@@ -84,7 +84,9 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
                     </div>
         		</div>
         	</div>
-        	<div id="addCourseButton" class="navbutton">Add</div>
+        	<div loc="add-assignment" header="add-assignment-header" id="addObjectButton" class="navbutton">
+        		Add
+	        </div>
     	</div>
     	
     	<div id="assignment-header" class="child-page hidden">
@@ -102,6 +104,7 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
     	</div>
     	
     	<div id="course-header" class="child-page hidden">
+        	<a loc="BACK" class="backButton" >Back</a>
         	<div id="columnLayout">
                 <div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 51%; ">
         			<div id="assign_col">
@@ -110,9 +113,35 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
                         </div>
                     </div>
         		</div>
-        	</div>
-        	<a loc="BACK" class="backButton" >Back</a>        	
+        	</div>       	
         	<div id="dropCourseButton" class="navbutton" onclick="dropUserCourse(<?= $course['id'] ?>)">Drop</div>
+    	</div>
+    	
+    	<div id="add-course-header" class="child-page hidden">
+        	<a loc="BACK" class="backButton">Cancel</a>
+        	<div id="columnLayout">
+                <div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 51%; ">
+        			<div id="assign_col">
+                        <div id="assignmentsNavTab" class="navTab">
+                            <div class="title">Add Course</div>
+                        </div>
+                    </div>
+        		</div>
+        	</div>	
+    	</div>
+    	
+    	<div id="add-assignment-header" class="child-page hidden">
+        	<a loc="BACK" class="backButton">Cancel</a>
+        	<div id="columnLayout">
+                <div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 51%; ">
+        			<div id="assign_col">
+                        <div id="assignmentsNavTab" class="navTab">
+                            <div class="title">Add Assignment</div>
+                        </div>
+                    </div>
+        		</div>
+        	</div>	
+        	<div id="first_button" class="navbutton">Save</div>
     	</div>
     	
 	</div> 
@@ -122,47 +151,12 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 		    <!-- <?php require_once $view ?> -->
 		       
 			<div id="due-content" class="parent-page">
-                <ul>
-                    <?php foreach ($assignmentsByDue as $assignment): ?>
-                        <li loc="assignment-info-<?= $assignment['id'] ?>" header="assignment-header" class="hidden scrollable" style="font-family:Helvetica">
-                        	<div class="row-selection-BG">
-                        	</div>
-                            <img src="/finna/img/<?= $priorityImages[$assignment['priority']] ?>" style="position:absolute; <?= $priorityPositions[$assignment['priority']] ?>"/>
-                            <div class="li-assignment-name">
-                                <?= $assignment['title'] ?>
-                            </div>
-            				<div class="li-course-number">
-            					<?= $assignment['course_number'] ?>
-            				</div>
-            				<div class="li-due-date">
-            					Tue Apr 31
-            				</div>
-                            <div class="li-arrow-template"></div>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
+				<?php require_once "../views/elements/dueSort.php" ?>
 			</div>
 			
-			<div id="priority-content" class="hidden parent-page">
-			    <ul>
-			        <?php foreach ($assignmentsByPriority as $assignment): ?>
-                        <li loc="assignment-info-<?= $assignment['id'] ?>" header="assignment-header" class="scrollable" style="font-family:Helvetica">
-                        	<div class="row-selection-BG">
-                        	</div>
-                            <img src="/finna/img/<?= $priorityImages[$assignment['priority']] ?>" style="position:absolute; <?= $priorityPositions[$assignment['priority']] ?>"/>
-                            <div class="li-assignment-name">
-                                <?= $assignment['title'] ?>
-                            </div>
-            				<div class="li-course-number">
-            					<?= $assignment['course_number'] ?>
-            				</div>
-            				<div class="li-due-date">
-            					Tue Apr 31
-            				</div>
-                            <div class="li-arrow-template"></div>
-                        </li>
-                    <?php endforeach; ?>
-			    </ul>
+			<div id="priority-content" class="parent-page">
+				testing
+				<?php require_once "../views/elements/prioritySort.php" ?>
 			</div>
 			
 			<div id="done-content" class="parent-page hidden">
@@ -199,7 +193,7 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
                 </div>
 	       <?php endforeach; ?>
 			
-			<div id="assignment-add" class=" child-page detailContent">
+			<div id="add-assignment" class=" child-page hidden detailContent">
 			
 				<form>
 	                <span class="detailTitleLabel">Title:</span><input type="text" id="assignTitleField" name="assignTitle" class="detailText"/><br/><br/>
@@ -215,9 +209,9 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 	                <span class="detailTitleLabel">Description:</span><br/>
 	                <textarea id="assignDescriptionTextArea" placeholder="Textarea" ></textarea><br/>
 	                <input id="assignSubmit" type="submit" value="Submit" />
-					</form>
-					
-                </div>
+				</form>
+				
+            </div>
 			
     		<div id="course-list" class="parent-page" style="display:none">
     		    <ul>
@@ -234,7 +228,7 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
     		</div>
     		
 	        <?php foreach ($userCourses as $course): ?>
-	        	<div id="course-info-<?= $course['id'] ?>" class="hidden child-page detailContent">
+	        	<div id="course-info-<?= $course['id'] ?>" courseId="<?= $course['id'] ?>" class="hidden child-page detailContent">
 	        	     <span class="detailTitleLabel">Course:</span><span class="detailText"><?= $course['number'] ?></span><br/><br/>
 	        	     <span class="detailTitleLabel">Title:</span><span class="detailText"><?= $course['title'] ?></span><br/><br/>
                      
@@ -275,8 +269,8 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 	</div>
 
     <script type="text/javascript">
-    function dropUserCourse(id){
-    	$.getJSON("dropUserCourse", { cid: id }, function(json){
+    function dropUserCourse(){
+    	$.getJSON("dropUserCourse", { cid: currentPage.attr('courseId') }, function(json){
         	if (json.result == "success"){
                 $("#course-li-"+json.courseId).remove();
         	    gotoPage("BACK");
