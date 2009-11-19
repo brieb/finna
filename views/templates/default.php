@@ -71,7 +71,6 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 	<div id="header" style="background-color:#ccc">
 	
 		<div id="main-header" class="parent-page">
-        	<a class="backButton" onclick="refreshAssignments()">refresh</a>
         	<div id="columnLayout">
                 <div style="position: relative; display: table-cell; vertical-align: top; height: auto; width: 51%; ">
         			<div id="assign_col">
@@ -221,6 +220,19 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
     	$.get("userAddAssignment", { uid: 1 }, function(data){
         	$('#add-assignment').html(data);
         });
+    }
+
+    function toggleAssignmentDescription(header, aid){
+    	$(header).parent().children().removeClass('active');
+    	$(header).addClass('active');
+        if ($(header).attr('id')!="descriptionButton"){
+        	$("#assignment-description-"+aid).css("display","none");
+        	$("#assignment-announcements-"+aid).css("display","block");
+        } else {
+        	$("#assignment-description-"+aid).css("display","block");
+        	$("#assignment-announcements-"+aid).css("display","none");
+        }
+            
     }
 
 
