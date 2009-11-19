@@ -5,35 +5,12 @@ window.iPhone = window.iPhone || {};
 var currentPage;
 var prevPage;
 var scrolling = false;
-var gotoPage;
 var currentHeader;
 var prevHeader;
-//var assignmentsViewPage;
-//
-//function switchToAssignmentsView (){
-//    $('#assignments').removeClass('hidden');
-//    $('#courses').addClass('hidden');
-//    $('#add-course-button').addClass('hidden');
-//    $('#assignment-sort-buttons').removeClass('hidden');
-//    $('#coursesNavTab').css('opacity','0.5');
-//    $('#assignmentsNavTab').css('opacity','1');
-//    prevPage = currentPage;
-//    currentPage = assignmentsViewPage;
-//}
-//
-//function switchToCoursesView (){
-//    $('#assignments').addClass('hidden');
-//    $('#courses').removeClass('hidden');
-//    $('#add-course-button').removeClass('hidden');
-//    $('#assignment-sort-buttons').addClass('hidden');
-//    $('#coursesNavTab').css('opacity','1');
-//    $('#assignmentsNavTab').css('opacity','0.5');
-//    prevPage = currentPage;
-//    assignmentsViewPage = currentPage;
-//    currentPage = $('#course-list');
-//}
 
-
+/* FUNCTIONS */
+var gotoPage;
+var addLITouchListeners;
 
 
 (function() {
@@ -139,6 +116,21 @@ var prevHeader;
 		}
 		
 	};
+
+	var onTouchEnd = function(){
+	  if (this.tagName.toLowerCase()=='li'){
+	     $(this).removeClass('selected');
+	     $(this).children('.row-selection-BG').css('display','none');
+	  }
+	  if (scrolling) return;
+	  var loc = this.getAttribute('loc');
+	  var header = this.getAttribute('header');
+	  $i.gotoPage(loc, header);
+	}
+	var onTouchStart = function(){
+	  $(this).addClass('selected');
+	  $(this).children('.row-selection-BG').css('display','block');
+	}
 	
 	// Initialize
 	$i.init = function() {
@@ -172,25 +164,6 @@ var prevHeader;
 
 			currentPage = $('#due-content');
 			currentHeader = $('#main-header');
-        
-			var onTouchEnd = function(){
-			  if (this.tagName.toLowerCase()=='li'){
-			     $(this).removeClass('selected');
-			     $(this).children('.row-selection-BG').css('display','none');
-			  }
-			  if (scrolling) return;
-			  var loc = this.getAttribute('loc');
-			  var header = this.getAttribute('header');
-			  $i.gotoPage(loc, header);
-			}
-
-//			document.getElementById('assignmentsNavTab').onclick = switchToAssignmentsView;
-//			document.getElementById('coursesNavTab').onclick = switchToCoursesView;
-
-			var onTouchStart = function(){
-			  $(this).addClass('selected');
-			  $(this).children('.row-selection-BG').css('display','block');
-			}
 
 			var listEntries = $('a[loc]');
 			for(var i = 0; i < listEntries.length; i++){
@@ -209,6 +182,15 @@ var prevHeader;
 			}
 		}
 	};
+	
+	$i.addLITouchListeners = function(id){
+		var listEntries = $('#'+id+' li[loc]');
+		for(var i = 0; i < listEntries.length; i++){
+		  listEntries[i].addEventListener("touchend", onTouchEnd, true);
+		  listEntries[i].addEventListener("touchstart", onTouchStart, true); 
+		}
+	};
+	addLITouchListeners = $i.addLITouchListeners;
 	
 	
 	$i.gotoPage	= function (loc, header){
