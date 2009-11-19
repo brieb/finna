@@ -10,7 +10,7 @@ class Assignment extends Model
         return $this->query("INSERT INTO assignments (title, due_date, course_id, description) VALUES(:title, :due_date, :course_id, :desc)", 
                         array(':title' => $title, ':due_date'=>$dueDate, 'course_id'=>$courseId, ':desc' => $description));
     }
-    
+
     public function setPriority($aid, $uid, $priority)
     {   
         $result = $this->query("SELECT * FROM user_assignments WHERE user_id=:uid AND assignment_id=:aid",
@@ -21,6 +21,20 @@ class Assignment extends Model
         } else {
             $this->query("UPDATE user_assignments SET priority=:priority WHERE user_id=:uid AND assignment_id=:aid",
                             array(':uid' => $uid, ':aid'=> $aid, ':priority'=>$priority));
+        }
+    }
+
+    public function setComplete($aid, $uid, $complete)
+    {   
+        $result = $this->query("SELECT * FROM user_assignments WHERE user_id=:uid AND assignment_id=:aid",
+                            array(':uid' => $uid, ':aid'=> $aid));
+        if (empty($result)){
+            $this->query("INSERT INTO user_assignments VALUES(:uid,:aid,2,:complete)",
+                            array(':uid' => $uid, ':aid'=> $aid, ':complete'=>$complete));
+        } else {
+            echo 'exists: '.$complete;
+            $this->query("UPDATE user_assignments SET complete=:complete WHERE user_id=:uid AND assignment_id=:aid",
+                            array(':uid' => $uid, ':aid'=> $aid, ':complete'=>$complete));
         }
     }
 }

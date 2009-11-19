@@ -35,19 +35,8 @@ class AppController
     	$assignments = $this->User->getAssignments(1);
     	set('allAssignments', $assignments);
     	
-    	
     	$assignmentsByDue = $this->User->getAssignmentsByDue(1);
     	set('assignmentsByDue', $assignmentsByDue);
-    	
-//    	$byPriority = Array( Array(), Array(), Array(), Array() );
-//    	$completed = Array();
-//    	foreach ($assignments as $assign){
-//            if ($assign['complete']==1){
-//                $completed[] = $assign;
-//            }
-//            $byPriority[$assign['priority']][] = $assign;
-//    	}
-//    	$byPriority = array_merge($byPriority[3], $byPriority[2], $byPriority[1]);
 
         $byPriority = $this->User->getAssignmentsByPriority(1);
     	set('assignmentsByPriority', $byPriority);
@@ -79,17 +68,29 @@ class AppController
     	$allAssignments = $this->User->getAssignments($_REQUEST['uid']);
     	require_once "../views/elements/assignmentInfo.php";
 	}
-	
+
 	public function setUserAssignPriority()
 	{
 	    // no feedback for this function
 	    $this->Assignment->setPriority($_REQUEST['aid'], $_REQUEST['uid'], $_REQUEST['priority']);
 	}
 
+	public function setUserAssignComplete()
+	{
+	    // no feedback for this function
+	    $this->Assignment->setComplete($_REQUEST['aid'], $_REQUEST['uid'], $_REQUEST['complete']);
+	}
+
     public function userCourseList()
     {
     	$userCourses = $this->User->getCourses($_REQUEST['uid']);
     	require_once "../views/elements/courseList.php";
+    }
+
+    public function userAddAssignment()
+    {
+    	$userCourses = $this->User->getCourses($_REQUEST['uid']);
+    	require_once "../views/elements/addAssignment.php";
     }
 
     public function userCourseInfo()
