@@ -1,4 +1,11 @@
 
+<?php 
+    $priorityImages = array("", "low-priority.png", "normal-priority.png", "high-priority.png");
+    $priorityPositions = array("", "top:12px; left:6px; height:23px;", "top: 15px; left: 8px;", "top:8px; left:12px; height:33px;")
+?>
+            <?php if (empty($assignmentsByPriority)):?>
+            	Add a course to view your assignments.
+            <?php else: ?>
 			    <ul>
 			        <?php foreach ($assignmentsByPriority as $assignment): ?>
                         <li loc="assignment-info-<?= $assignment['id'] ?>" header="assignment-header" class="scrollable" style="font-family:Helvetica">
@@ -18,3 +25,4 @@
                         </li>
                     <?php endforeach; ?>
 			    </ul>
+			<?php endif; ?>
