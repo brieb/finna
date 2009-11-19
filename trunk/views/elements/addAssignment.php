@@ -2,7 +2,7 @@
 
 				<form>
 	                <span class="detailTitleLabel">Title:</span><input type="text" id="assignTitleField" name="assignTitle" class="detailText textInput"/><br/><br/>
-	                <span class="detailTitleLabel">Due:</span><span id="assignDueDate" class="detailText" onclick="openDatePicker()"><a id="add-assignment-date">Choose date...</a></span><br/><br/>
+	                <span class="detailTitleLabel">Due:</span><span id="assignDueDate" class="detailText" onclick="openDatePicker()"><a id="add-assignment-date"><?= date("M j Y",time()) ?></a></span><br/><br/>
 	                <span class="detailTitleLabel">Course:</span>
 	                <select id="assignCourseSelection">
         		        <?php foreach ($userCourses as $course): ?>
