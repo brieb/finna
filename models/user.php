@@ -4,7 +4,17 @@ class User extends Model
 {
     protected $database = 'naturesa_finna';
 
+
+
     private function formatDates($aList)
+    {
+        for ($i=0; $i<count($aList); $i++){
+            $aList[$i]['due_date'] = date("D M j",strtotime($aList[$i]['due_date']));
+        }
+        return $aList;
+    }
+
+    private function formatLongDates($aList)
     {
         for ($i=0; $i<count($aList); $i++){
             $aList[$i]['due_date'] = date("D M j",strtotime($aList[$i]['due_date']));
@@ -14,23 +24,24 @@ class User extends Model
 
     public function getAssignments($uid)
     {
-        return formatDates($this->query("SELECT c.number course_number, a.*, IF(ua.priority, ua.priority, 2) priority, IF(ua.complete, 1, 0) complete FROM courses c, user_courses uc, assignments a LEFT JOIN user_assignments ua ON ua.assignment_id=a.id WHERE c.id=uc.course_id AND a.course_id=c.id AND uc.user_id=:uid ORDER BY due_date, priority DESC", array(':uid' => $uid)));
+        return $this->formatLongDates($this->query("SELECT c.number course_number, a.*, IF(ua.priority, ua.priority, 2) priority, IF(ua.complete, 1, 0) complete FROM courses c, user_courses uc, assignments a LEFT JOIN user_assignments ua ON ua.assignment_id=a.id WHERE c.id=uc.course_id AND a.course_id=c.id AND uc.user_id=:uid ORDER BY due_date, priority DESC", array(':uid' => $uid)));
     }
 
     public function getCompletedAssignments($uid)
     {
-        return formatDates($this->query("SELECT c.number course_number, a.*, IF(ua.priority, ua.priority, 2) priority, IF(ua.complete, 1, 0) complete FROM courses c, user_courses uc, assignments a LEFT JOIN user_assignments ua ON ua.assignment_id=a.id WHERE c.id=uc.course_id AND a.course_id=c.id AND complete=1 AND uc.user_id=:uid ORDER BY due_date, priority DESC", array(':uid' => $uid)));
+        return $this->formatDates($this->query("SELECT c.number course_number, a.*, IF(ua.priority, ua.priority, 2) priority, IF(ua.complete, 1, 0) complete FROM courses c, user_courses uc, assignments a LEFT JOIN user_assignments ua ON ua.assignment_id=a.id WHERE c.id=uc.course_id AND a.course_id=c.id AND complete=1 AND uc.user_id=:uid ORDER BY due_date, priority DESC", array(':uid' => $uid)));
     }
 
     public function getAssignmentsByPriority($uid)
     {
-        return formatDates($this->query("SELECT c.number course_number, a.*, IF(ua.priority, ua.priority, 2) priority, IF(ua.complete, 1, 0) complete FROM courses c, user_courses uc, assignments a LEFT JOIN user_assignments ua ON ua.assignment_id=a.id WHERE c.id=uc.course_id AND a.course_id=c.id AND uc.user_id=:uid AND !(a.id IN (SELECT assignment_id FROM user_assignments WHERE user_id=:uid AND complete=1)) ORDER BY priority DESC, due_date", array(':uid' => $uid)));
+        return $this->formatDates($this->query("SELECT c.number course_number, a.*, IF(ua.priority, ua.priority, 2) priority, IF(ua.complete, 1, 0) complete FROM courses c, user_courses uc, assignments a LEFT JOIN user_assignments ua ON ua.assignment_id=a.id WHERE c.id=uc.course_id AND a.course_id=c.id AND uc.user_id=:uid AND !(a.id IN (SELECT assignment_id FROM user_assignments WHERE user_id=:uid AND complete=1)) ORDER BY priority DESC, due_date", array(':uid' => $uid)));
     }
 
     public function getAssignmentsByDue($uid)
     {
-        return formatDates($this->query("SELECT c.number course_number, a.*, IF(ua.priority, ua.priority, 2) priority, IF(ua.complete, 1, 0) complete FROM courses c, user_courses uc, assignments a LEFT JOIN user_assignments ua ON ua.assignment_id=a.id WHERE c.id=uc.course_id AND a.course_id=c.id AND uc.user_id=:uid AND !(a.id IN (SELECT assignment_id FROM user_assignments WHERE user_id=:uid AND complete=1)) ORDER BY due_date, priority DESC;", array(':uid' => $uid)));
+        return $this->formatDates($this->query("SELECT c.number course_number, a.*, IF(ua.priority, ua.priority, 2) priority, IF(ua.complete, 1, 0) complete FROM courses c, user_courses uc, assignments a LEFT JOIN user_assignments ua ON ua.assignment_id=a.id WHERE c.id=uc.course_id AND a.course_id=c.id AND uc.user_id=:uid AND !(a.id IN (SELECT assignment_id FROM user_assignments WHERE user_id=:uid AND complete=1)) ORDER BY due_date, priority DESC;", array(':uid' => $uid)));
     }
+
     
     public function getCourses($uid)
     {
