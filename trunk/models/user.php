@@ -17,7 +17,7 @@ class User extends Model
     private function formatLongDates($aList)
     {
         for ($i=0; $i<count($aList); $i++){
-            $aList[$i]['due_date'] = date("D M j",strtotime($aList[$i]['due_date']));
+            $aList[$i]['due_date'] = date("l M j, Y",strtotime($aList[$i]['due_date']));
         }
         return $aList;
     }

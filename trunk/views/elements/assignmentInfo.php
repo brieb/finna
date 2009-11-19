@@ -15,17 +15,18 @@
     					</form> 
     
     					<ul id="tabBarAssignBottomWindow" class="inlineButtonList">
-    						<li id="courseInfoButton"><a>Description</a></li>
-    						<li id="announceButton"><a>Announcements</a></li>
+    						<li id="descriptionButton" class="active" onclick="toggleAssignmentDescription(this,<?= $assignment['id'] ?>);"><a>Description</a></li>
+    						<li id="announceButton" onclick="toggleAssignmentDescription(this,<?= $assignment['id'] ?>);"><a>Announcements</a></li>
     					</ul>
     					<div id="assignBottomWindow">
-    						<div class="coursePane" style="display:block;">
+    						<div id="assignment-description-<?= $assignment['id'] ?>" class="coursePane" style="display:block;">
     							<?= $assignment['description'] ?>
     						</div>
-    						<div class="announcePane" style="display:none;">
+    						<div id="assignment-announcements-<?= $assignment['id'] ?>" class="announcePane" style="display:none;">
     							There are currently no announcements for this assignment.
     						</div>
     					</div>
                     </div>
     	       <?php endforeach; ?>
+    	       
     	       
