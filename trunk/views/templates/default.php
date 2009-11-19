@@ -171,22 +171,7 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 	        </div>
 			
 			<div id="add-assignment" class=" child-page hidden detailContent">
-			
-				<form>
-	                <span class="detailTitleLabel">Title:</span><input type="text" id="assignTitleField" name="assignTitle" class="detailText textInput"/><br/><br/>
-	                <span class="detailTitleLabel">Due:</span><span id="assignDueDate" class="detailText" onclick="openDatePicker()"><a id="add-assignment-date">Choose date...</a></span><br/><br/>
-	                <span class="detailTitleLabel">Course:</span>
-	                <select id="assignCourseSelection">
-        		        <?php foreach ($userCourses as $course): ?>
-    	                	<option value ="<?= $course['id'] ?>"><?= $course['number'] ?></option>
-        		        <?php endforeach; ?>
-	                </select>	                
-	                <br/><br/>	                
-	                <span class="detailTitleLabel">Description:</span><br/>
-	                <textarea id="assignDescriptionTextArea" placeholder="Textarea" ></textarea><br/>
-	                <input id="assignSubmit" type="button" onclick="addAssignment()" value="Submit" />
-				</form>
-				<div id="add-feedback"></div>
+				<?php require_once "../views/elements/addAssignment.php" ?>
             </div>
     
     		<div id="add-course" class="hidden child-page">
@@ -234,6 +219,9 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
     	$.get("userCourseInfo", { uid: 1 }, function(data){
         	$('#course-info-container').html(data);
         });
+    	$.get("userAddAssignment", { uid: 1 }, function(data){
+        	$('#add-assignment').html(data);
+        });
     }
 
 
@@ -245,8 +233,8 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
     	});
     }
 
-    function updateCompleted(elem, assignId){
-    	$.get("setUserAssignComplete", { uid: 1, aid: assignId, completed: $(elem).attr('priority') }, function(data){ 
+    function updateComplete(elem, assignId){
+    	$.get("setUserAssignComplete", { uid: 1, aid: assignId, complete: elem.checked?1:0 }, function(data){ 
 			refreshAssignments();
     	});
     }

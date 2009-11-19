@@ -10,7 +10,7 @@
     						<li id="priorityLow" priority="1" <?= $assignment['priority']==1?'class="active"':'' ?> onclick="updatePriority(this,<?= $assignment['id'] ?>);">Low</li>
     					</ul>
     					<form id="statusForm">
-    						<input id="statusCheckbox" type="checkbox" name="status" value="complete" <?= $assignment['complete']?'checked':'' ?>/>
+    						<input id="statusCheckbox" onclick="updateComplete(this,<?= $assignment['id'] ?>);" type="checkbox" name="status" value="complete" <?= $assignment['complete']?'checked':'' ?>/>
     						<a id="statusText">Completed</a>					
     					</form> 
     

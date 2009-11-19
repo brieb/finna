@@ -19,7 +19,7 @@
             					<?= $assignment['course_number'] ?>
             				</div>
             				<div class="li-due-date">
-            					Tue Apr 31
+            					<?= $assignment['due_date'] ?>
             				</div>
                             <div class="li-arrow-template"></div>
                         </li>
