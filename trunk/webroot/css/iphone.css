@@ -448,13 +448,10 @@ background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e),
     text-shadow: none;
     background-color: rgba(0, 0, 0, 0.445312);
 	padding: 3px;
-	margin-left: 5px;
-	margin-right: 5px;
 	font: bold 17px Helvetica;
-	height: 30px;
 }
 
-span.detailText {
+.detailText {
     color: black;
 	font: 17px Helvetica;
 	background: white;
@@ -462,7 +459,6 @@ span.detailText {
 	padding: 5px;
 	text-align: center;
 }
-
 .inlineButtonList li{
 	display: inline;
 	list-style-type: none;
@@ -492,9 +488,12 @@ span.detailText {
 	left: 5px;
 	width: 60px;
     -webkit-border-image: url(/finna/img/highPriorityButton.png) 2 12 2 12 stretch stretch;
+    opacity: .8;
+    
 }
 #priorityHigh.active {
     -webkit-border-image: url(/finna/img/highPriorityButton_clicked.png) 2 12 2 12 stretch stretch;
+    opacity: 1;
 }
 
 #priorityNormal {
@@ -502,9 +501,11 @@ span.detailText {
 	left: 109px;
 	width: 60px;
     -webkit-border-image: url(/finna/img/normalPriorityButton.png) 2 12 2 12 stretch stretch;
+    opacity: .8;
 }
 #priorityNormal.active {
     -webkit-border-image: url(/finna/img/normalPriorityButton_clicked.png) 2 12 2 12 stretch stretch;
+    opacity: 1;
 }
 
 #priorityLow {
@@ -512,10 +513,12 @@ span.detailText {
 	left: 213px;
 	width: 60px;
     -webkit-border-image: url(/finna/img/lowPriorityButton.png) 2 12 2 12 stretch stretch;
+    opacity: .8;
 	
 }
 #priorityLow.active {
     -webkit-border-image: url(/finna/img/lowPriorityButton_clicked.png) 2 12 2 12 stretch stretch;
+    opacity: 1;
 }
 
 #statusForm{
