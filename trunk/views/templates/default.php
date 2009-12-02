@@ -240,12 +240,18 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
     	$(elem).addClass('active');
     	$.get("setUserAssignPriority", { uid: 1, aid: assignId, priority: $(elem).attr('priority') }, function(data){ 
 			refreshAssignments();
+			$('#saveFlash-'+assignId).css('display','block');
+			setTimeout("$('#saveFlash-"+assignId+"').css('display','none');",2000);
     	});
     }
 
-    function updateComplete(elem, assignId){
-    	$.get("setUserAssignComplete", { uid: 1, aid: assignId, complete: elem.checked?1:0 }, function(data){ 
+    function updateComplete(assignId){
+        var qelem = $("#statusCheckbox-"+assignId);
+        qelem.attr('checked', !qelem.attr('checked'));
+    	$.get("setUserAssignComplete", { uid: 1, aid: assignId, complete: qelem.attr('checked')?1:0 }, function(data){ 
 			refreshAssignments();
+			$('#saveFlash-'+assignId).css('display','block');
+			setTimeout("$('#saveFlash-"+assignId+"').css('display','none');",2000);
     	});
     }
 
@@ -299,11 +305,12 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
         	}
         });
     }
-    var onCourseChoiceEnd = function(){
-        	$("#course-number").val($(this).html());
-        }
 
     function getCoursesByNumber(add){
+        var onCourseChoiceEnd = function(){
+        	$("#course-number").val($(this).html());
+        }
+        
     	add = add==null ? false:true;
     	var text = $("#course-number").val();
     	if (text.length < 2) return;
@@ -317,14 +324,11 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
     	    } else {
     	        $("#course-number").css('background-color','white');
     	    }
-            //$.each(json.results, function(i,item){
-            	for (var i=0; i<3; i++){
-            		var elem = $("<li id='courseOption"+i+"'>"+json.results[i].number+"</li>");
-            		elem.appendTo("#add-course-results");
-            		elem.click(onCourseChoiceEnd);
-            	}
-                
-            //});
+        	for (var i=0; i<3; i++){
+        		var elem = $("<li id='courseOption"+i+"'>"+json.results[i].number+"</li>");
+        		elem.appendTo("#add-course-results");
+        		elem.click(onCourseChoiceEnd);
+        	}
         });
         
         

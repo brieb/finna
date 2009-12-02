@@ -7,16 +7,18 @@ class Course extends Model
     public function findCoursesByNumber($search, $limit=10)
     {
         // add a space to the search string if not already exists
-//        for ($i=0; i<strlen($search); $i++){
-//            $char = substr($search, $i, 1);
-//            if ($char == " ") break;
-//            if (intval($char)!=0){
-//                $search = substr($search, 0, $i)+" "+substr($search, $i);
-//                break;
-//            }
-//        }
+        $len = strlen($search);
+        for ($i=0; $i<$len; $i++){
+            $char = substr($search, $i, 1);
+            if ($char == " ") break;
+            if (intval($char)!=0){
+                $search = substr($search, 0, $i)." ".substr($search, $i);
+                break;
+            }
+        }
         
         return $this->query("SELECT * FROM courses WHERE number LIKE :search LIMIT $limit", array(':search'=>$search));
+        //return Array(Array("number"=>$search.strlen($search)));
     }
 
     public function getCourse($id)
