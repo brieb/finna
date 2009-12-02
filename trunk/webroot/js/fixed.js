@@ -19,8 +19,6 @@ var addLITouchListeners;
 	var $i = this;
 
 	var menuHeights = 102;
-	
-	$i.testit = "hello world";
 
 	// Shared variables
 	$i.vars = {};

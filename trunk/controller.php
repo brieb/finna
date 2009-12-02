@@ -30,72 +30,72 @@ class AppController
     public function index()
     {
         set('page_title','Finna - Get it done.');
-    	set('userCourses', $this->User->getCourses(1));
+    	set('userCourses', $this->User->getCourses(2));
     	
-    	$assignments = $this->User->getAssignments(1);
+    	$assignments = $this->User->getAssignments(2);
     	set('allAssignments', $assignments);
     	
-    	$assignmentsByDue = $this->User->getAssignmentsByDue(1);
+    	$assignmentsByDue = $this->User->getAssignmentsByDue(2);
     	set('assignmentsByDue', $assignmentsByDue);
 
-        $byPriority = $this->User->getAssignmentsByPriority(1);
+        $byPriority = $this->User->getAssignmentsByPriority(2);
     	set('assignmentsByPriority', $byPriority);
     	
-        $completed = $this->User->getCompletedAssignments(1);
+        $completed = $this->User->getCompletedAssignments(2);
     	set('completedAssignments', $completed);
 	}
 
 	public function priorityAssignments()
 	{
-    	$assignmentsByPriority = $this->User->getAssignmentsByPriority($_REQUEST['uid']);
+    	$assignmentsByPriority = $this->User->getAssignmentsByPriority(2);
     	require_once "../views/elements/prioritySort.php";
 	}
 
 	public function dueAssignments()
 	{
-    	$assignmentsByDue = $this->User->getAssignmentsByDue($_REQUEST['uid']);
+    	$assignmentsByDue = $this->User->getAssignmentsByDue(2);
     	require "../views/elements/dueSort.php";
 	}
 
 	public function completedAssignments()
 	{
-    	$completedAssignments = $this->User->getCompletedAssignments($_REQUEST['uid']);
+    	$completedAssignments = $this->User->getCompletedAssignments(2);
     	require_once "../views/elements/completedSort.php";
 	}
 
 	public function assignmentInfo()
 	{
-    	$allAssignments = $this->User->getAssignments($_REQUEST['uid']);
+    	$allAssignments = $this->User->getAssignments(2);
     	require_once "../views/elements/assignmentInfo.php";
 	}
 
 	public function setUserAssignPriority()
 	{
 	    // no feedback for this function
-	    $this->Assignment->setPriority($_REQUEST['aid'], $_REQUEST['uid'], $_REQUEST['priority']);
+	    $this->Assignment->setPriority($_REQUEST['aid'], 2, $_REQUEST['priority']);
 	}
 
 	public function setUserAssignComplete()
 	{
 	    // no feedback for this function
-	    $this->Assignment->setComplete($_REQUEST['aid'], $_REQUEST['uid'], $_REQUEST['complete']);
+	    $this->Assignment->setComplete($_REQUEST['aid'], 2, $_REQUEST['complete']);
 	}
 
     public function userCourseList()
     {
-    	$userCourses = $this->User->getCourses($_REQUEST['uid']);
+    	$userCourses = $this->User->getCourses(2);
     	require_once "../views/elements/courseList.php";
     }
 
     public function userAddAssignment()
     {
-    	$userCourses = $this->User->getCourses($_REQUEST['uid']);
+    	$userCourses = $this->User->getCourses(2);
     	require_once "../views/elements/addAssignment.php";
     }
 
     public function userCourseInfo()
     {
-    	$userCourses = $this->User->getCourses($_REQUEST['uid']);
+    	$userCourses = $this->User->getCourses(2);
     	require_once "../views/elements/courseInfo.php";
     }
     
@@ -126,14 +126,14 @@ class AppController
     public function addUserCourse()
     {
         $result = "success";
-        $this->User->addCourse(1, $_REQUEST['cid']);
+        $this->User->addCourse(2, $_REQUEST['cid']);
         echo json_encode( array("result"=>$result, "course"=>$this->Course->getCourse($_REQUEST['cid']) ) );
     }
 
     public function dropUserCourse()
     {
         $result = "success";
-        $this->User->dropCourse(1, $_REQUEST['cid']);
+        $this->User->dropCourse(2, $_REQUEST['cid']);
         echo json_encode( array("result"=>$result, "courseId"=>$_REQUEST['cid'] ) );
     }
 
