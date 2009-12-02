@@ -537,7 +537,7 @@ background-image: -webkit-gradient(linear, left top, left bottom, from(#2e2e2e),
     height: auto;
     width: 160px;	
 }
-#statusCheckbox{
+.statusCheckbox{
 	height: 30px;
 	width: 30px;
 	background-color: #004476;

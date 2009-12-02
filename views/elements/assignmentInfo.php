@@ -9,10 +9,13 @@
     						<li id="priorityNormal" priority="2" <?= $assignment['priority']==2?'class="active"':'' ?> onclick="updatePriority(this,<?= $assignment['id'] ?>);">Normal</li>
     						<li id="priorityLow" priority="1" <?= $assignment['priority']==1?'class="active"':'' ?> onclick="updatePriority(this,<?= $assignment['id'] ?>);">Low</li>
     					</ul>
-    					<form id="statusForm">
-    						<input id="statusCheckbox" onclick="updateComplete(this,<?= $assignment['id'] ?>);" type="checkbox" name="status" value="complete" <?= $assignment['complete']?'checked':'' ?>/>
-    						<a id="statusText">Completed</a>					
-    					</form> 
+    					<div style="height:90px">
+        					<form id="statusForm" style="float:left;" onclick="updateComplete(<?= $assignment['id'] ?>);">
+        						<input id="statusCheckbox-<?= $assignment['id'] ?>" onclick="this.checked = !this.checked;" class="statusCheckbox" type="checkbox" name="status" value="complete" <?= $assignment['complete']?'checked':'' ?>/>
+        						<a id="statusText">Completed</a>					
+        					</form> 
+    						<div id="saveFlash-<?= $assignment['id'] ?>" style="display:none; font-style:italic; font-weight:bold; float:left; position:relative; top:50px; left:15px; font-size:20px; color:#124">Saved</div>
+    					</div>
     
     					<ul id="tabBarAssignBottomWindow" class="inlineButtonList">
     						<li id="descriptionButton" class="active" onclick="toggleAssignmentDescription(this,<?= $assignment['id'] ?>);"><a>Description</a></li>
