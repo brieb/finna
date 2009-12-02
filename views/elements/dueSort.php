@@ -1,10 +1,9 @@
 
 <?php 
-    $priorityImages = array("", "low-priority.png", "normal-priority.png", "high-priority.png");
-    $priorityPositions = array("", "top:12px; left:6px; height:23px;", "top: 15px; left: 8px;", "top:8px; left:12px; height:33px;")
+    $priorityImages = array("", "priority_green.png", "priority_yellow.png", "priority_red.png");
+    $priorityPositions = array("", "top:12px; left:6px; height:20px;", "top:12px; left:6px; height:20px;", "top:12px; left:6px; height:20px;");
 ?>
             <?php if (empty($assignmentsByDue)):?>
-            	Add a course to view your assignments.
             <?php else: ?>
                 <ul>
                     <?php foreach ($assignmentsByDue as $assignment): ?>
