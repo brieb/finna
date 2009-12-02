@@ -144,7 +144,7 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 		<div id="content" style="margin:0px;">
 		    <!-- <?php require_once $view ?> -->
 		       
-			<div id="due-content" class="parent-page">
+			<div id="due-content" class="parent-page hidden">
 				<?php require_once "../views/elements/dueSort.php" ?>
 			</div>
 			
@@ -172,13 +172,12 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 				<?php require_once "../views/elements/addAssignment.php" ?>
             </div>
     
-    		<div id="add-course" class="hidden child-page">
+    		<div id="add-course" class=" child-page">
+    	        <span>Enter the course: (ex CS147)</span>
+    	        <input type=text id="course-number" class="textInput" onKeyUp="getCoursesByNumber()" style="width:180px;"/>
+    	        <input type=button value="add course" onClick="getCoursesByNumber(true)" style="float:right; width: 120px; height:40px; margin-right: 5px; font: bold 17px Helvetica;"/>
     	        <br/>
-    	        Enter the course number:<br/><input type=text id="course-number" class="detailText textInput" onKeyUp="getCoursesByNumber()"/>
-    	        <br/>
-    	        <input type=button value="add course" onClick="getCoursesByNumber(true)"/>
-    	        <br/>
-    	        <div id="add-course-results"></div>
+    	        <ul id="add-course-results" class="inlineButtonList"></ul>
     		</div>
     		
     	</div>
@@ -297,6 +296,9 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
         	}
         });
     }
+    var onCourseChoiceEnd = function(){
+        	$("#course-number").val($(this).html());
+        }
 
     function getCoursesByNumber(add){
     	add = add==null ? false:true;
@@ -312,10 +314,17 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
     	    } else {
     	        $("#course-number").css('background-color','white');
     	    }
-            $.each(json.results, function(i,item){
-                $("<div>"+item.number+"</div>").appendTo("#add-course-results");
-            });
+            //$.each(json.results, function(i,item){
+            	for (var i=0; i<3; i++){
+            		var elem = $("<li id='courseOption"+i+"'>"+json.results[i].number+"</li>");
+            		elem.appendTo("#add-course-results");
+            		elem.click(onCourseChoiceEnd);
+            	}
+                
+            //});
         });
+        
+        
      }
      </script>
 
