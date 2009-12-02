@@ -20,10 +20,10 @@
     					</ul>
     					<div id="assignBottomWindow">
     						<div id="assignment-description-<?= $assignment['id'] ?>" class="coursePane" style="display:block;">
-    							<?= $assignment['description'] ?>
+    							<?= trim($assignment['description'])==""?"<i>No description given.</i>":$assignment['description'] ?>
     						</div>
     						<div id="assignment-announcements-<?= $assignment['id'] ?>" class="announcePane" style="display:none;">
-    							There are currently no announcements for this assignment.
+    							<i>There are currently no announcements for this assignment.</i>
     						</div>
     					</div>
                     </div>

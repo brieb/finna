@@ -14,16 +14,6 @@
 	        	     		</tr>
 	        	     	</tbody>
 	        	     </table>
-	        	     <table style="margin-top: 8px;">
-	        	     	<tbody>
-	        	     		<tr>
-	        	     			<td colspan="2">
-    	        	     			<span class="detailTitleLabel">Description:</span><br/>
-    	        	     			<div style="margin-top:5px;" class="detailText"><?= $course['description'] ?></div>
-	        	     			</td>
-	        	     		</tr>
-	        	     	</tbody>
-	        	     </table>
 	        	     <table style="margin-top: 5px;">
 	        	     	<tbody>
 	        	     		<tr>
@@ -33,6 +23,16 @@
 	        	     		<tr>
 	        	     			<td><span class="detailTitleLabel">Announcements:</span></td>
 	        	     			<td><div class="detailText">None</div></td>
+	        	     		</tr>
+	        	     	</tbody>
+	        	     </table>
+	        	     <table style="margin-top: 8px;">
+	        	     	<tbody>
+	        	     		<tr>
+	        	     			<td colspan="2">
+    	        	     			<span class="detailTitleLabel">Description:</span><br/>
+    	        	     			<div style="margin-top:5px;" class="detailText"><?= $course['description'] ?></div>
+	        	     			</td>
 	        	     		</tr>
 	        	     	</tbody>
 	        	     </table>
