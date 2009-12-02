@@ -144,7 +144,7 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 		<div id="content" style="margin:0px;">
 		    <!-- <?php require_once $view ?> -->
 		       
-			<div id="due-content" class="parent-page hidden">
+			<div id="due-content" class="parent-page">
 				<?php require_once "../views/elements/dueSort.php" ?>
 			</div>
 			
@@ -172,7 +172,7 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 				<?php require_once "../views/elements/addAssignment.php" ?>
             </div>
     
-    		<div id="add-course" class=" child-page">
+    		<div id="add-course" class="hidden child-page">
     	        <span>Enter the course: (ex CS147)</span>
     	        <input type=text id="course-number" class="textInput" onKeyUp="getCoursesByNumber()" style="width:180px;"/>
     	        <input type=button value="add course" onClick="getCoursesByNumber(true)" style="float:right; width: 120px; height:40px; margin-right: 5px; font: bold 17px Helvetica;"/>
@@ -251,7 +251,6 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 
 	function addAssignment(){
 		var date = $('#add-assignment-date').html();
-		$('#add-feedback').html(date);
 
     	$.getJSON("addAssignment", { 
         		cid: $('#assignCourseSelection').val(),
@@ -263,6 +262,10 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
             	refreshAssignments();
             	refreshAssignInfo();
         	    gotoPage("BACK");
+        	    
+        		$('#assignCourseSelection').val("");
+        		$('#assignTitleField').val("");
+                $('#assignDescriptionTextArea').val("");
         	} else {
         	    $("#add-course-results").html("failed to add course");
         	}
