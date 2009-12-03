@@ -849,7 +849,7 @@ ul.roundRectangleListType
     height: 40px;
 	vertical-align: middle;
     
-    -webkit-border-image: url(/finna/img/navButton.png) 2 12 2 12 stretch stretch;
+    -webkit-border-image: url(/finna/img/navbutton.png) 2 12 2 12 stretch stretch;
     opacity: .8;
 }
 
