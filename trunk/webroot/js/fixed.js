@@ -192,6 +192,7 @@ var addLITouchListeners;
 	
 	
 	$i.gotoPage	= function (loc, header){
+	    alert('chagin page:'+loc);
 	    if (loc=="BACK"){
 		    loc = prevPage;
 		    header = prevHeader;
@@ -246,22 +247,22 @@ var addLITouchListeners;
 		},
 
 		scrollToTop : function() {
-			// Header
-			var header = document.querySelector("#header");
-			if (header) {
-				
-				// Cancel event if user drags finger off
-				header.addEventListener("touchmove", function() {
-					this.cancel = true;
-				}, false);
-			}
+//			// Header
+//			var header = document.querySelector("#header");
+//			if (header) {
+//				
+//				// Cancel event if user drags finger off
+//				header.addEventListener("touchmove", function() {
+//					this.cancel = true;
+//				}, false);
+//			}
 		},
 		
 		// Enable area for scrolling
 		enableScrollOnContent : function() {
 			
 			// Grab elements
-			var content = document.querySelector("#content");
+			var content = false;//document.querySelector("#content");
 			var container = document.querySelector("#container");
 			
 			if (content) {
@@ -426,7 +427,7 @@ var addLITouchListeners;
 						addBtn.attr('header',"add-assignment-header");
 						$("#priority-content").css("display", "none");
 						$("#due-content").css("display", "none");
-						$("#course-list").css("display", "none");
+						//$("#course-list").css("display", "none");
 						$("#done-content").css("display", "none");
 						switch(this.id){
 							case "duedate-sort":

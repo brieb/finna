@@ -32,11 +32,21 @@ class AppController
         set('page_title','Finna - Get it done.');
     	set('userCourses', $this->User->getCourses(2));
     	
+    	
     	$assignments = $this->User->getAssignments(2);
     	set('allAssignments', $assignments);
     	
     	$assignmentsByDue = $this->User->getAssignmentsByDue(2);
-    	set('assignmentsByDue', $assignmentsByDue);
+    	
+    	$AssignmentsPerPage = 6;
+    	$grouped = array();
+    	for ($i=0; $i<count($assignmentsByDue); $i++){
+    	    if (empty($grouped[(int)($i/$AssignmentsPerPage)])) 
+    	        $grouped[(int)($i/$AssignmentsPerPage)] = array();
+    	    $grouped[(int)($i/$AssignmentsPerPage)][] = $assignmentsByDue[$i];
+    	}
+    	
+    	set('assignmentsByDue', $grouped);
 
         $byPriority = $this->User->getAssignmentsByPriority(2);
     	set('assignmentsByPriority', $byPriority);
@@ -54,6 +64,14 @@ class AppController
 	public function dueAssignments()
 	{
     	$assignmentsByDue = $this->User->getAssignmentsByDue(2);
+    	$AssignmentsPerPage = 6;
+    	$grouped = array();
+    	for ($i=0; $i<count($assignmentsByDue); $i++){
+    	    if (empty($grouped[(int)($i/$AssignmentsPerPage)])) 
+    	        $grouped[(int)($i/$AssignmentsPerPage)] = array();
+    	    $grouped[(int)($i/$AssignmentsPerPage)][] = $assignmentsByDue[$i];
+    	}
+    	$assignmentsByDue = $grouped;
     	require "../views/elements/dueSort.php";
 	}
 
@@ -99,7 +117,6 @@ class AppController
     	require_once "../views/elements/courseInfo.php";
     }
     
-
     public function getCourses()
     {
         $results = $this->Course->findCoursesByNumber($_REQUEST['search'].'%');
@@ -107,7 +124,6 @@ class AppController
         $match = count($match)==1;
         echo json_encode( Array("match"=>$match, "results"=>$results) );
     }
-    
     
     
     public function addAssignment()
