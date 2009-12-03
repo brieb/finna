@@ -427,7 +427,7 @@ var addLITouchListeners;
 						addBtn.attr('header',"add-assignment-header");
 						$("#priority-content").css("display", "none");
 						$("#due-content").css("display", "none");
-						//$("#course-list").css("display", "none");
+						$("#course-list").css("display", "none");
 						$("#done-content").css("display", "none");
 						switch(this.id){
 							case "duedate-sort":

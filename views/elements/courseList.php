@@ -1,8 +1,12 @@
 
 
     		    <ul>
-    		        <?php foreach ($userCourses as $course): ?>
-        			    <li loc="course-info-<?= $course['id'] ?>" header="course-header" id="course-li-<?= $course['id'] ?>" class="scrollable">
+    		        <?php if (empty($userCourses)):	?>
+					    <li>Press 'ADD' for your first course.</li>
+					<?php endif; ?>
+					
+					<?php foreach ($userCourses as $course): ?>	         
+					   <li loc="course-info-<?= $course['id'] ?>" header="course-header" id="course-li-<?= $course['id'] ?>" class="scrollable">
             			    <div class="row-selection-BG" style="position: absolute; right: 0pt; left: 0pt; top: 0pt; bottom: 0pt; opacity: 1; display:none;"></div>
                             <div class="label_template">
                                 <?= $course['number'] ?>
