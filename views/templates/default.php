@@ -333,6 +333,35 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
         
         
      }
+     
+     function showAssignSortButtons(){
+     	$("#main-header div.title").html("Assignments");
+		var addBtn = $("#addObjectButton");
+		addBtn.attr('loc',"add-assignment");
+		addBtn.attr('header',"add-assignment-header");
+     	$("#due-content").css("display", "block");
+     	//$("#course-list").css("display", "none");
+     	
+     	$("#assignment-sort-buttons").css("display", "block");
+		$("#view-assignments-button").css("display", "none");
+     
+     }
+     
+/*
+     function hideAssignSortButtons(){
+     	$("#main-header div.title").html("My Courses");
+		addBtn.attr('loc',"add-course");
+		addBtn.attr('header',"add-course-header");
+		$("#course-list").css("display", "block");
+     	
+		$("#priority-content").css("display", "none");
+		$("#due-content").css("display", "none");
+		$("#done-content").css("display", "none");
+     	
+     	$("#assignment-sort-buttons").css("display", "none");
+		$("#view-assignments-button").css("display", "block");
+     }
+*/
      </script>
 
 	<div id="footer"  class="parent-page">
@@ -344,13 +373,14 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
     			<li class="courses" id="course-sort"><span>My Courses</span></li>
     		</ul>
         </div>
-	    <div id="add-course-button" class="hidden">
-	      <div style="text-align:center;">
-	        <a loc="add-course" style="color:white; font-size:24px; font-weight:bold; text-align:center; display:block; margin:auto; margin-top:14px;">+ Add New Course</a>
-	      </div>
-	    </div>
-	</div>
+        <div id="view-assignments-button" style="text-align:center;">
+	        <a loc="due-content" ontouchend="showAssignSortButtons()" style="color:white; font-size:24px; font-weight:bold; text-align:center; display:block; margin:auto; margin-top:14px;">View/Add Assignments</a>
+		</div>
+     <div>
 
 	
+	      
+	    </div>
+	</div>	
 </body>
 </html>
