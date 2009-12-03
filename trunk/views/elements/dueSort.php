@@ -1,10 +1,4 @@
 
-
-			<script type="text/javascript">
-			switchAssignmentPage(){
-				alert('testing');
-			}
-			</script>
 			
 <?php 
     $priorityImages = array("", "priority_green.png", "priority_yellow.png", "priority_red.png");
@@ -51,7 +45,7 @@
                     <li class="scrollable" ontouchend="$('#dueSortPage-<?= $i ?>').css('display','none'); $('#dueSortPage-<?= $i+1 ?>').css('display','block');" style="font-family:Helvetica; height:35px;">
                     	<div class="row-selection-BG">
                     	</div>
-                    	<div style="text-align:center; font-size:20px; font-weight:bold; vertical-align:middle; padding-top:7px; color:#124;">
+                    	<div class="pageButton" style="text-align:center; font-size:20px; font-weight:bold; vertical-align:middle; padding-top:7px; color:#124;">
                     		Next
                     	</div>
                         <div class="li-arrow-template" style="top:12px; left:187px;"></div>

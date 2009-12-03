@@ -27,6 +27,18 @@ class AppController
     }
 
 
+    public function split_array($aray){
+        $split = 6;
+    	$grouped = array();
+    	for ($i=0; $i<count($aray); $i++){
+    	    if (empty($grouped[(int)($i/$split)])) 
+    	        $grouped[(int)($i/$split)] = array();
+    	    $grouped[(int)($i/$split)][] = $aray[$i];
+    	}
+    	return $grouped;
+    }
+    
+    
     public function index()
     {
         set('page_title','Finna - Get it done.');
@@ -37,53 +49,38 @@ class AppController
     	set('allAssignments', $assignments);
     	
     	$assignmentsByDue = $this->User->getAssignmentsByDue(2);
-    	
-    	$AssignmentsPerPage = 6;
-    	$grouped = array();
-    	for ($i=0; $i<count($assignmentsByDue); $i++){
-    	    if (empty($grouped[(int)($i/$AssignmentsPerPage)])) 
-    	        $grouped[(int)($i/$AssignmentsPerPage)] = array();
-    	    $grouped[(int)($i/$AssignmentsPerPage)][] = $assignmentsByDue[$i];
-    	}
+    	$grouped = $this->split_array($assignmentsByDue);
     	
     	set('assignmentsByDue', $grouped);
 
-        $byPriority = $this->User->getAssignmentsByPriority(2);
+        $byPriority = $this->split_array($this->User->getAssignmentsByPriority(2));
     	set('assignmentsByPriority', $byPriority);
     	
-        $completed = $this->User->getCompletedAssignments(2);
+        $completed = $this->split_array($this->User->getCompletedAssignments(2));
     	set('completedAssignments', $completed);
 	}
 
 	public function priorityAssignments()
 	{
-    	$assignmentsByPriority = $this->User->getAssignmentsByPriority(2);
+    	$assignmentsByPriority = $this->split_array($this->User->getAssignmentsByPriority(2));
     	require_once "../views/elements/prioritySort.php";
 	}
 
 	public function dueAssignments()
 	{
-    	$assignmentsByDue = $this->User->getAssignmentsByDue(2);
-    	$AssignmentsPerPage = 6;
-    	$grouped = array();
-    	for ($i=0; $i<count($assignmentsByDue); $i++){
-    	    if (empty($grouped[(int)($i/$AssignmentsPerPage)])) 
-    	        $grouped[(int)($i/$AssignmentsPerPage)] = array();
-    	    $grouped[(int)($i/$AssignmentsPerPage)][] = $assignmentsByDue[$i];
-    	}
-    	$assignmentsByDue = $grouped;
+    	$assignmentsByDue = $this->split_array($this->User->getAssignmentsByDue(2));
     	require "../views/elements/dueSort.php";
 	}
 
 	public function completedAssignments()
 	{
-    	$completedAssignments = $this->User->getCompletedAssignments(2);
+    	$completedAssignments = $this->split_array($this->User->getCompletedAssignments(2));
     	require_once "../views/elements/completedSort.php";
 	}
 
 	public function assignmentInfo()
 	{
-    	$allAssignments = $this->User->getAssignments(2);
+    	$allAssignments = $this->split_array($this->User->getAssignments(2));
     	require_once "../views/elements/assignmentInfo.php";
 	}
 
