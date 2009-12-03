@@ -19,6 +19,7 @@
 
 <link rel="stylesheet" type="text/css" href="css/iphone.css">
 
+			
 <script type="text/javascript">
 
 function openDatePicker() {
@@ -279,6 +280,7 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 	}
     
     function dropUserCourse(){
+        if (!confirm("Are you sure you want to drop this course from Finna?")) return;
     	$.getJSON("dropUserCourse", { cid: currentPage.attr('courseId') }, function(json){
         	if (json.result == "success"){
                 $("#course-li-"+json.courseId).remove();
@@ -340,28 +342,12 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 		addBtn.attr('loc',"add-assignment");
 		addBtn.attr('header',"add-assignment-header");
      	$("#due-content").css("display", "block");
-     	//$("#course-list").css("display", "none");
+     	$("#course-list").css("display", "none");
      	
      	$("#assignment-sort-buttons").css("display", "block");
 		$("#view-assignments-button").css("display", "none");
      
      }
-     
-/*
-     function hideAssignSortButtons(){
-     	$("#main-header div.title").html("My Courses");
-		addBtn.attr('loc',"add-course");
-		addBtn.attr('header',"add-course-header");
-		$("#course-list").css("display", "block");
-     	
-		$("#priority-content").css("display", "none");
-		$("#due-content").css("display", "none");
-		$("#done-content").css("display", "none");
-     	
-     	$("#assignment-sort-buttons").css("display", "none");
-		$("#view-assignments-button").css("display", "block");
-     }
-*/
      </script>
 
 	<div id="footer"  class="parent-page">
@@ -374,7 +360,7 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
     		</ul>
         </div>
         <div id="view-assignments-button" style="text-align:center;">
-	        <a loc="due-content" ontouchend="showAssignSortButtons()" style="color:white; font-size:24px; font-weight:bold; text-align:center; display:block; margin:auto; margin-top:14px;">View/Add Assignments</a>
+	        <a ontouchend="showAssignSortButtons()" style="color:white; font-size:24px; font-weight:bold; text-align:center; display:block; margin:auto; margin-top:14px;">View/Add Assignments</a>
 		</div>
      <div>
 
