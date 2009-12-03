@@ -369,16 +369,18 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 		var addBtn = $("#addObjectButton");
 		addBtn.attr('loc',"add-assignment");
 		addBtn.attr('header',"add-assignment-header");
-     	$("#due-content").css("display", "block");
      	$("#course-list").css("display", "none");
+	    currentPage = $("#due-content");
+		currentPage.css("display", "block");
+		$("#duedate-sort").addClass('active');
+		$("#course-sort").removeClass('active');
      	
      	$("#assignment-sort-buttons").css("display", "block");
 		$("#view-assignments-button").css("display", "none");
-     
      }
      </script>
 
-	<div id="footer"  class="parent-page">
+	<div id="footer" class="parent-page">
 	    <div id="assignment-sort-buttons">
     		<ul>
     			<li class="due active" id="duedate-sort"><span>Sort by Due</span></li>

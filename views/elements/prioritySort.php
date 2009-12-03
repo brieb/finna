@@ -4,10 +4,10 @@
     $priorityPositions = array("", "top:12px; left:6px; height:20px;", "top:12px; left:6px; height:20px;", "top:12px; left:6px; height:20px;");
 ?>
             <?php if (empty($assignmentsByPriority)):?>
-            <?php else:    
-            	$i = 0;
-            	$pages = count($assignmentsByPriority)-1;
-            	foreach ($assignmentsByPriority as $page):
+            <?php else:
+            $i = 0;
+            $pages = count($assignmentsByPriority)-1;
+            foreach ($assignmentsByPriority as $page):
             ?>
             
                 <ul id="prioritySortPage-<?= $i ?>"<?= $i!=0?' style="display:none;"':'' ?>>
@@ -23,7 +23,7 @@
                         </li>
                     <?php endif; ?>
                     
-			        <?php foreach ($page as $assignment): ?>
+                    <?php foreach ($page as $assignment): ?>
                         <li loc="assignment-info-<?= $assignment['id'] ?>" header="assignment-header" class="scrollable" style="font-family:Helvetica">
                         	<div class="row-selection-BG">
                         	</div>
@@ -40,12 +40,11 @@
                             <div class="li-arrow-template"></div>
                         </li>
                     <?php endforeach; ?>
-                    
-			    <?php if ($i!=$pages): ?>
+                	<?php if ($i!=$pages): ?>
                     <li class="scrollable" ontouchend="$('#prioritySortPage-<?= $i ?>').css('display','none'); $('#prioritySortPage-<?= $i+1 ?>').css('display','block');" style="font-family:Helvetica; height:35px;">
                     	<div class="row-selection-BG">
                     	</div>
-                    	<div style="text-align:center; font-size:20px; font-weight:bold; vertical-align:middle; padding-top:7px; color:#124;">
+                    	<div class="pageButton" style="text-align:center; font-size:20px; font-weight:bold; vertical-align:middle; padding-top:7px; color:#124;">
                     		Next
                     	</div>
                         <div class="li-arrow-template" style="top:12px; left:187px;"></div>

@@ -118,7 +118,6 @@ var addLITouchListeners;
 	var onTouchEnd = function(){
 	  if (this.tagName.toLowerCase()=='li'){
 	     $(this).removeClass('selected');
-	     $(this).children('.row-selection-BG').css('display','none');
 	  }
 	  if (scrolling) return;
 	  var loc = this.getAttribute('loc');
@@ -127,7 +126,6 @@ var addLITouchListeners;
 	}
 	var onTouchStart = function(){
 	  $(this).addClass('selected');
-	  $(this).children('.row-selection-BG').css('display','block');
 	}
 	
 	// Initialize
@@ -192,7 +190,6 @@ var addLITouchListeners;
 	
 	
 	$i.gotoPage	= function (loc, header){
-	    alert('chagin page:'+loc);
 	    if (loc=="BACK"){
 		    loc = prevPage;
 		    header = prevHeader;
@@ -207,14 +204,7 @@ var addLITouchListeners;
 	    currentHeader.addClass("hidden");
 	    if (currentPage.hasClass("parent-page")){
 			$('#main-header').addClass("hidden");
-			$('#footer').css("display", "none");
-//			var currentTop = currentPage.css('top');
-//			currentTop = currentTop.substr(0, currentTop.length-2);
-//			currentPage.css('top', currentTop+$('#header').height()+"px");
-//			loc.css('top', "0px");
-//			$("#container").css('top', "-"+$('#header').height()+"px");
-//			$("#container").css('height', (window.innerHeight)+"px");
-//			$("#content").css('min-height', (window.innerHeight)+"px");
+			$('#footer').addClass("hidden");
 		}
 		prevPage = currentPage;
 		currentPage = loc;
@@ -223,17 +213,7 @@ var addLITouchListeners;
 	  
 		if (currentPage.hasClass("parent-page")){
 			$('#main-header').removeClass("hidden");
-			$('#footer').css("display", "block");
-//			var currentTop = currentPage.css('top');
-//			currentTop = currentTop.substr(0, currentTop.length-2);
-//			currentPage.css('top', (currentTop-$('#header').height())+"px");
-//			
-//			var prevTop = prevPage.css('top');
-//			prevTop = prevTop.substr(0, prevTop.length-2);
-//			prevPage.css('top', (prevTop-$('#header').height())+"px");
-//			$("#container").css('top', "0px");
-//			$("#container").css('height', (window.innerHeight-menuHeights)+"px");
-//			$("#content").css('min-height', (window.innerHeight-menuHeights)+"px");
+			$('#footer').removeClass("hidden");
 	    }
 	};
 	gotoPage = $i.gotoPage;

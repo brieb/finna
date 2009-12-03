@@ -132,8 +132,7 @@ li.scrollable {
     background-image: url(/finna/img/chevron.png);
     background-repeat: no-repeat;
 }
-
-
+	  
 li.scrollable .row-selection-BG {
     background-image: url(/finna/img/selectedRowiPhone.png);
     background-repeat: initial;
@@ -167,13 +166,15 @@ li.scrollable .row-selection-BG {
 li.scrollable.selected {
     color: white;
 }
-
 li.scrollable.selected .arrow_template {
     background-image: url(/finna/img/chevron_white.png);
 }
+li.scrollable.selected .row-selection-BG {
+	display:block;
+}
 
-li.scrollable.selected .li-course-number, li.scrollable.selected .li-due-date {
-	color:white;
+li.scrollable.selected .pageButton, li.scrollable.selected .li-course-number, li.scrollable.selected .li-due-date {
+	color:white !important;
 }
 
 
