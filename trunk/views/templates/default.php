@@ -142,13 +142,23 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 	</div> 
 
 	<div id="container">
+<!--
+	
+		<script type="text/javascript">
+			$("#due-content").css("display", "none");
+			$("#course-list").css("display", "block");
+		</script>
+
+-->
 		<div id="content" style="margin:0px;">
 		    <!-- <?php require_once $view ?> -->
-		       
+		    
+		    
+
 			<div id="due-content" class="parent-page">
 				<?php require_once "../views/elements/dueSort.php" ?>
 			</div>
-			
+		
 			<div id="priority-content" class="parent-page" style="display:none;">
 				<?php require_once "../views/elements/prioritySort.php" ?>
 			</div>
@@ -157,7 +167,7 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 				<?php require_once "../views/elements/completedSort.php" ?>
 			</div>
 			
-    		<div id="course-list" class="parent-page" style="display:none">
+    		<div id="course-list" class="parent-page" style="display:none;">
     			<?php require_once "../views/elements/courseList.php" ?>
     		</div>
 			
@@ -175,12 +185,16 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
     
     		<div id="add-course" class="hidden child-page">
     	        <span>Enter the course: (ex CS147)</span>
-    	        <input type=text id="course-number" class="textInput" onKeyUp="getCoursesByNumber()" style="width:180px;"/>
+    	        <form name="addCourseForm">
+    	        <input name="addCourseText" type=text id="course-number" class="textInput" onKeyUp="getCoursesByNumber()" style="width:180px;"/>
     	        <input type=button value="add course" onClick="getCoursesByNumber(true)" style="float:right; width: 120px; height:40px; margin-right: 5px; font: bold 17px Helvetica;"/>
+    	        </form>
     	        <br/>
     	        <ul id="add-course-results" class="inlineButtonList"></ul>
     		</div>
     		
+    		
+
     	</div>
 	</div>
 
@@ -296,12 +310,27 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 
     function addUserCourse(id){
     	$.getJSON("addUserCourse", { cid: id }, function(json){
+		<?php    
+			//$i = 0;
+           // $myCourses = count($userCourses)-1;
+            foreach ($userCourses as $myCourse):
+        ?>
+    	<?php if (json.result == $myCourse):
+    	?>
+    		alert("YAY");
+    	<?php endif; ?>
+    	<?php endforeach; ?>
+    	
+    	
         	if (json.result == "success"){
                 $("#add-course-results").html("course added");
             	refreshAssignments();
             	refreshAssignInfo();
             	refreshCourses();
+            	document.addCourseForm.addCourseText.value='';
+            	$("#course-number").css('background-color','white');
         	    gotoPage("BACK");
+        	    $("#add-course-results").html("");
         	} else {
         	    $("#add-course-results").html("failed to add course");
         	}
@@ -331,8 +360,7 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
         		elem.appendTo("#add-course-results");
         		elem.click(onCourseChoiceEnd);
         	}
-        });
-        
+        }); 
         
      }
      
@@ -359,8 +387,10 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
     			<li class="courses" id="course-sort"><span>My Courses</span></li>
     		</ul>
         </div>
-        <div id="view-assignments-button" style="text-align:center;">
+
+        <div id="view-assignments-button" style="text-align:center; display:none;">
 	        <a ontouchend="showAssignSortButtons()" style="color:white; font-size:24px; font-weight:bold; text-align:center; display:block; margin:auto; margin-top:14px;">View/Add Assignments</a>
+
 		</div>
      <div>
 
@@ -368,5 +398,22 @@ window.addEventListener('load', function(){ setTimeout(function(){ window.scroll
 	      
 	    </div>
 	</div>	
+	
+			<?php if (empty($userCourses)):	?>
+    			<script type="text/javascript">
+					$("#main-header div.title").html("My Courses");
+					var addBtn = $("#addObjectButton");
+					addBtn.attr('loc',"add-course");
+					addBtn.attr('header',"add-course-header");
+					
+					$("#due-content").css("display", "none");
+					$("#course-list").css("display", "block");
+					
+					$("#assignment-sort-buttons").css("display", "none");
+					$("#view-assignments-button").css("display", "block");
+				</script>
+			<?php endif; ?>
+	
 </body>
+
 </html>
