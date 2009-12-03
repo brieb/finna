@@ -51,18 +51,7 @@ class Config
                 $this->db = $this->dev;
                 break;
         }
-        
-        if(ENVIRONMENT == 'production') {
-            define('JS_URL','http://j.wig.stcdn.net/');
-            define('CSS_URL','http://c.wig.stcdn.net/');
-            define('IMG_URL','http://i.wig.stcdn.net/');
-            
-            define('IMG_FQDN','http://i.wig.stcdn.net/');
-        } else {
-            define('JS_URL','/js/');
-            define('CSS_URL','/css/');
-            define('IMG_URL','/img/');
-        }
+      
         
         ini_set('display_errors', DEBUG);
         
