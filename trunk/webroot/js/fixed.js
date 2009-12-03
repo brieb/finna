@@ -206,7 +206,7 @@ var addLITouchListeners;
 	    currentHeader.addClass("hidden");
 	    if (currentPage.hasClass("parent-page")){
 			$('#main-header').addClass("hidden");
-			$('#footer').addClass("hidden");
+			$('#footer').css("display", "none");
 //			var currentTop = currentPage.css('top');
 //			currentTop = currentTop.substr(0, currentTop.length-2);
 //			currentPage.css('top', currentTop+$('#header').height()+"px");
@@ -222,7 +222,7 @@ var addLITouchListeners;
 	  
 		if (currentPage.hasClass("parent-page")){
 			$('#main-header').removeClass("hidden");
-			$('#footer').removeClass("hidden");
+			$('#footer').css("display", "block");
 //			var currentTop = currentPage.css('top');
 //			currentTop = currentTop.substr(0, currentTop.length-2);
 //			currentPage.css('top', (currentTop-$('#header').height())+"px");
@@ -410,7 +410,7 @@ var addLITouchListeners;
 					var tab = tabs[i];
 					
 					// Add active class on touch
-					tab.addEventListener("touchstart", function() {
+					tab.addEventListener("touchend", function() {
 						
 						// Remove classes from other active nodes
 						for (var k = 0, l = tabs.length; k < l; k++) {
@@ -443,6 +443,8 @@ var addLITouchListeners;
 								addBtn.attr('header',"add-course-header");
 							    currentPage = $("#course-list");
 								currentPage.css("display", "block");
+								$("#assignment-sort-buttons").css("display", "none");
+								$("#view-assignments-button").css("display", "block");
 							break;
 							case "done-sort":
 							    currentPage = $("#done-content");
@@ -457,6 +459,7 @@ var addLITouchListeners;
 					}, false);
 				}
 			}
+			
 		}
 	};
 	
